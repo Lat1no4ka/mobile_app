@@ -7,9 +7,12 @@
  */
 
 import React, { useEffect } from 'react';
-import { Text } from 'react-native'
+import Navigation from './navigation';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Appbar } from 'react-native-paper';
+import Header from './header';
 
-
+const Tab = createBottomTabNavigator();
 
 const App = () => {
 
@@ -20,15 +23,20 @@ const App = () => {
    * const client = SqlClient();
    * const test = () => {client.get('*','USER')};
    */
-  
+
+  const _goBack = () => console.log('Went back');
+
+  const _handleSearch = () => console.log('Searching');
+
+  const _handleMore = () => console.log('Shown more');
+
   return (
     <>
-      <Text>
-      </Text>
-    </>
+    <Header/>
+   <Navigation/>
+   </>
   );
 };
-
 
 
 export default App;
