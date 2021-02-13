@@ -6,14 +6,25 @@
  * @flow strict-local
  */
 
-import React from 'react';
-import {Text} from 'react-native'
-const App: () => React$Node = () => {
+import React, { useEffect } from 'react';
+import { Text } from 'react-native'
+
+
+
+const App = () => {
+
+  /** 
+   * import SqlClient from './CommonClient/SqlClient/SqlClient'
+   * client вызывает автоматический коннект к бд, дельше через client вызываем нужный метод 
+   * 
+   * const client = SqlClient();
+   * const test = () => {client.get('*','USER')};
+   */
+  
   return (
     <>
-    <Text>
-      test
-     </Text>
+      <Text>
+      </Text>
     </>
   );
 };
