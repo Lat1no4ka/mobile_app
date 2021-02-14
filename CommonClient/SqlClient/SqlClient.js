@@ -1,15 +1,8 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import SQLite from 'react-native-sqlite-storage';
 
 
 const SqlClient = () => {
-    
-    const db = SQLite.openDatabase({
-        name: "DATA.db",
-        location: 'default',
-        createFromLocation: '~DATA.db',
-    }, success, error);
-
 
     const error = (error) => {
         console.log("ERROR: " + error);
@@ -19,6 +12,14 @@ const SqlClient = () => {
         console.log("SUCCESS");
     }
 
+    const db = SQLite.openDatabase({
+        name: "DATA.db",
+        location: 'default',
+        createFromLocation: '~DATA.db',
+    }, success, error);
+
+    
+ /*  SQLite.deleteDatabase ({name: 'DATA.db', location: 'default'});*/
 
     const ExecuteQuery = (sql, params = []) => new Promise((resolve, reject) => {
         db.transaction((trans) => {
@@ -26,28 +27,15 @@ const SqlClient = () => {
                 resolve(results);
             },
                 (error) => {
+                    console.log(error)
                     reject(error);
                 });
         });
     });
 
-     async function get(column,table) {
-        let data = [];  
-        let selectQuery = await ExecuteQuery(`SELECT ${column} FROM ${table}`, []);
-        var rows = selectQuery.rows;
 
-        for (let i = 0; i < rows.length; i++) {
-            data.push(rows.item(i));
-            
-        
-        }
-        console.log('data');
-        console.log(data);
-        return selectQuery;
-    }
-   
 
-    return {get};
+    return { ExecuteQuery };
 };
 
 

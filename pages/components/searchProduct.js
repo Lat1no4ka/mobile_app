@@ -1,51 +1,180 @@
-import React, { useState, useEffect } from 'react';
-import { SafeAreaView,StyleSheet, Dimensions,FlatList } from 'react-native';
-import { TextInput } from 'react-native-paper';
+import React, { useState, useEffect, useRef } from 'react';
+import { SafeAreaView, View, Text, StyleSheet, Dimensions, FlatList } from 'react-native';
+import { TextInput, List, Button } from 'react-native-paper';
 import SqlClient from '../../CommonClient/SqlClient/SqlClient';
-const SearchProduct = () => {
-    const [text, setSearch] = useState('');
-    const [data, setData] = useState();
 
-    const client = SqlClient();
-    const name = () => { client.get('*', 'USER') };
+const SearchProduct = ({ navigation }) => {
+    const [text, setSearch] = useState('');
+    const [data, setData] = useState([]);
+    const [client, setClient] = useState(SqlClient());
+    const [focus, setFocus] = useState(false);
+    const [price, setPrice] = useState();
+    const [weight, setWeight] = useState();
+    const [searchReady, setSearchReady] = useState(false);
+    const inputEl = useRef(null);
+
+    //const name = () => { client.getProduct('name', 'PRODUCT').finally((res)=>{console.log(res)}) };
 
     useEffect(() => {
-        console.log(name())
-    }, []);
+        searchList(text);
+    }, [text]);
+
+    const searchList = (search) => {
+
+        if (search.length > 0) {
+            getData(search);
+        } else {
+            setSearch('');
+            setData([]);
+        }
+    }
+
+    const getData = async (param) => {
+        let product = [];
+        let selectQuery = await client.ExecuteQuery(`SELECT name FROM PRODUCT WHERE name LIKE '%${param}%' LIMIT 10`, []);
+        var rows = selectQuery.rows;
+        for (let i = 0; i < rows.length; i++) {
+            let value = rows.item(i).name;
+            product.push({ id: i.toString(), 'name': value });
+        }
+        setData(product);
+    }
+
+    const onItemHendler = (name) => {
+        setSearch(name);
+        setFocus(false);
+        setSearchReady(true);
+        inputEl.current.blur();
+    }
+
+    const renderItem = ({ item }) => (
+
+        <List.Item
+            title={item.name}
+            onPress={() => onItemHendler(item.name)}
+        />
+
+    )
 
 
-   
+    if (data.length > 0 && focus) {
+        return (
+            <>
+                <TextInput
+                    label="Введите название продукта"
+                    mode='outlined'
+                    ref={inputEl}
+                    style={styles.container}
+                    onChangeText={text => setSearch(text)}
+                    onFocus={() => setFocus(true)}
+                    value={text}
+                    theme={{ colors: { primary: 'blue' } }}
+                />
+                <SafeAreaView style={styles.serachView} >
+                    <FlatList
+                        keyboardShouldPersistTaps='handled'
+                        data={data}
+                        renderItem={renderItem}
+                    />
 
-   
+                </SafeAreaView>
 
-    return (
-        <>
-        {console.log("test"+data)}
+            </>
+        );
+    } else if (searchReady) {
+        return (
+            <>
+                <TextInput
+                    label="Введите название продукта"
+                    value={text}
+                    mode='outlined'
+                    style={styles.container}
+                    onChangeText={text => setSearch(text)}
+                    onFocus={() => setFocus(true)}
+                    theme={{ colors: { primary: 'blue' } }}
+                />
+                <TextInput
+                    label="Введите цену продукта"
+                    value={price}
+                    keyboardType='numeric'
+                    mode='outlined'
+                    style={styles.textInput}
+                    onChangeText={price => setPrice(price)}
+                    theme={{ colors: { primary: 'blue' } }}
+                />
+                <TextInput
+                    label="Введите вес продукта"
+                    value={weight}
+                    keyboardType='numeric'
+                    mode='outlined'
+                    style={styles.textInput}
+                    onChangeText={weight => setWeight(weight)}
+                    theme={{ colors: { primary: 'blue' } }}
+                />
+                <View style={styles.containerWithBtn}>
+                    <Button
+                        mode="contained"
+                        style={styles.button}
+                        onPress={() => navigation.navigate('Detail',{text,price,weight})}>
+                        Дальше
+                </Button>
+                </View>
+            </>
+        )
+    } else if (data.length <= 0 || !focus) {
+        return (
             <TextInput
                 label="Введите название продукта"
                 value={text}
                 mode='outlined'
                 style={styles.container}
-                onChangeText={(text) => searchFilterFunction(text)}
+                onChangeText={text => setSearch(text)}
+                onFocus={() => setFocus(true)}
                 theme={{ colors: { primary: 'blue' } }}
             />
-            <SafeAreaView>
-            <FlatList
-                data={data}
-            />
-            </SafeAreaView>
-        </>
-    );
+
+        )
+
+    }
+
 };
 const { height } = Dimensions.get('window');
 const styles = StyleSheet.create({
     container: {
-        margin: 20,
-        marginTop: height * 0.15,
-        justifyContent: 'flex-start',
-        flex: 1,
+        marginRight: 20,
+        marginLeft: 20,
+        marginTop: height * 0.15
     },
+    textInput: {
+        marginRight: 20,
+        marginLeft: 20,
+        marginTop: 20
+    },
+    serachView: {
+        marginRight: 20,
+        marginLeft: 20,
+        maxHeight: height * 0.4
+    },
+    renderItem:
+    {
+        marginRight: 20,
+        marginLeft: 20,
+        color: 'black',
+        padding: 10,
+    },
+    button: {
+        width: 120,
+        height: 40,
+        margin: 20,
+
+    },
+    containerWithBtn: {
+        justifyContent: 'center',
+        alignItems: 'center'
+    }
+
 
 });
+
 
 export default SearchProduct;
