@@ -6,13 +6,8 @@
  * @flow strict-local
  */
 
-import React, { useEffect } from 'react';
-import Navigation from './navigation';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Appbar } from 'react-native-paper';
-import Header from './header';
-
-const Tab = createBottomTabNavigator();
+import React from 'react';
+import Navigation from './pages/navigation';
 
 const App = () => {
 
@@ -24,15 +19,10 @@ const App = () => {
    * const test = () => {client.get('*','USER')};
    */
 
-  const _goBack = () => console.log('Went back');
 
-  const _handleSearch = () => console.log('Searching');
-
-  const _handleMore = () => console.log('Shown more');
 
   return (
     <>
-    <Header/>
    <Navigation/>
    </>
   );

@@ -5,7 +5,7 @@ import SQLite from 'react-native-sqlite-storage';
 const SqlClient = () => {
     
     const db = SQLite.openDatabase({
-        name: "${DBname}",
+        name: "DATA.db",
         location: 'default',
         createFromLocation: '~DATA.db',
     }, success, error);
@@ -32,14 +32,17 @@ const SqlClient = () => {
     });
 
      async function get(column,table) {
-         
+        let data = [];  
         let selectQuery = await ExecuteQuery(`SELECT ${column} FROM ${table}`, []);
         var rows = selectQuery.rows;
+
         for (let i = 0; i < rows.length; i++) {
-            var item = rows.item(i);
-            console.log("item");
-            console.log(item);
+            data.push(rows.item(i));
+            
+        
         }
+        console.log('data');
+        console.log(data);
         return selectQuery;
     }
    

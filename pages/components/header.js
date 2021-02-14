@@ -1,7 +1,7 @@
 
 
 import React, { useEffect } from 'react';
-import Navigation from './navigation';
+import Navigation from '../navigation';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Appbar } from 'react-native-paper';
 
