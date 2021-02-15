@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { Button, View, Text } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import Detail from "./components/detail";
+import Composition from "./components/composition";
 import SearchProduct from './components/searchProduct';
+import Calculations from "./components/calculations";
 
 const Stack = createStackNavigator();
 
@@ -12,7 +11,8 @@ const CompareScreen = () => {
     return (
         <Stack.Navigator initialRouteName="Поиск">
             <Stack.Screen name="Поиск" component={SearchProduct} />
-            <Stack.Screen name="Detail" component={Detail} />
+            <Stack.Screen name="Нутриенты" component={Composition} />
+            <Stack.Screen name="Расчет" component={Calculations} />
         </Stack.Navigator>
     );
 };

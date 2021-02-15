@@ -10,9 +10,11 @@ const SearchProduct = ({ navigation }) => {
     const [focus, setFocus] = useState(false);
     const [price, setPrice] = useState();
     const [weight, setWeight] = useState();
+    const [portion, setPortion] = useState();
     const [searchReady, setSearchReady] = useState(false);
+   
     const inputEl = useRef(null);
-
+    
     //const name = () => { client.getProduct('name', 'PRODUCT').finally((res)=>{console.log(res)}) };
 
     useEffect(() => {
@@ -111,11 +113,20 @@ const SearchProduct = ({ navigation }) => {
                     onChangeText={weight => setWeight(weight)}
                     theme={{ colors: { primary: 'blue' } }}
                 />
+                 <TextInput
+                    label="Введите кол-во порций"
+                    value={portion}
+                    keyboardType='numeric'
+                    mode='outlined'
+                    style={styles.textInput}
+                    onChangeText={portion => setPortion(portion)}
+                    theme={{ colors: { primary: 'blue' } }}
+                />
                 <View style={styles.containerWithBtn}>
                     <Button
                         mode="contained"
                         style={styles.button}
-                        onPress={() => navigation.navigate('Detail',{text,price,weight})}>
+                        onPress={() => navigation.navigate('Нутриенты',{text,price,weight,portion})}>
                         Дальше
                 </Button>
                 </View>
