@@ -7,7 +7,7 @@
  */
 
 import React from 'react';
-import Navigation from './pages/navigation';
+import Navigation from './pages/Navigation';
 
 const App = () => {
 

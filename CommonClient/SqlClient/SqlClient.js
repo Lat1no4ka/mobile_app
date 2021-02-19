@@ -9,7 +9,7 @@ const SqlClient = () => {
     }
 
     const success = (success) => {
-        console.log("SUCCESS");
+        //console.log("SUCCESS");
     }
 
     const db = SQLite.openDatabase({

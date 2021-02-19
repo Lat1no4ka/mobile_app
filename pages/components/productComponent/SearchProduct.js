@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { SafeAreaView, View, Text, StyleSheet, Dimensions, FlatList } from 'react-native';
 import { TextInput, List, Button } from 'react-native-paper';
-import SqlClient from '../../CommonClient/SqlClient/SqlClient';
+import SqlClient from '../../../CommonClient/SqlClient/SqlClient';
 
-const SearchProduct = ({ navigation }) => {
+const SearchProduct = ({route, navigation }) => {
     const [text, setSearch] = useState('');
     const [data, setData] = useState([]);
     const [client, setClient] = useState(SqlClient());
@@ -12,6 +12,8 @@ const SearchProduct = ({ navigation }) => {
     const [weight, setWeight] = useState();
     const [portion, setPortion] = useState();
     const [searchReady, setSearchReady] = useState(false);
+    
+    const product = route.params.product;
    
     const inputEl = useRef(null);
     
@@ -42,6 +44,20 @@ const SearchProduct = ({ navigation }) => {
         setData(product);
     }
 
+    const sendAllData = () => {
+       
+        let data = {
+            "name":text,
+            "price":price,
+            "weight":weight,
+            "portion":portion
+        };
+
+        product.push(data);
+        console.log(product);
+        navigation.navigate('Продукты',{product});
+    }
+
     const onItemHendler = (name) => {
         setSearch(name);
         setFocus(false);
@@ -57,7 +73,6 @@ const SearchProduct = ({ navigation }) => {
         />
 
     )
-
 
     if (data.length > 0 && focus) {
         return (
@@ -126,7 +141,7 @@ const SearchProduct = ({ navigation }) => {
                     <Button
                         mode="contained"
                         style={styles.button}
-                        onPress={() => navigation.navigate('Нутриенты',{text,price,weight,portion})}>
+                        onPress={() => sendAllData()}>
                         Дальше
                 </Button>
                 </View>

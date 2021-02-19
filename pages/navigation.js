@@ -4,10 +4,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import ProducScreen from './product';
-import CompareScreen from './compare';
-import HistoryScreen from './history';
-import SettingScreen from './setting';
+import ProducScreen from './Product';
+import CompareScreen from './Compare';
+import HistoryScreen from './History';
+import SettingScreen from './Setting';
 
 const Tab = createBottomTabNavigator();
 

@@ -21,7 +21,7 @@ function Composition({ route, navigation }) {
     const [vit_c_mg, setVitC] = useState(false);
     const [vit_e_mg, setVitE] = useState(false);
     const [energy_value, setEnergy] = useState(false);
-    const [data, setParams] = useState(route.params);
+    const [data, setParams] = useState(route.params.product);
 
     const checkedItem = [
         protein ? 'Белки' : null,
