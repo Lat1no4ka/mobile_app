@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import SQLite from 'react-native-sqlite-storage';
 
 
-const SqlClient = () => {
+ const SqlClient = () => {
 
     const error = (error) => {
         console.log("ERROR: " + error);
@@ -19,7 +19,7 @@ const SqlClient = () => {
     }, success, error);
 
     
- /*  SQLite.deleteDatabase ({name: 'DATA.db', location: 'default'});*/
+   //SQLite.deleteDatabase ({name: 'DATA.db', location: 'default'});
 
     const ExecuteQuery = (sql, params = []) => new Promise((resolve, reject) => {
         db.transaction((trans) => {

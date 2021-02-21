@@ -4,6 +4,7 @@ import { TextInput, List, Button } from 'react-native-paper';
 import SqlClient from '../../../CommonClient/SqlClient/SqlClient';
 
 const SearchProduct = ({route, navigation }) => {
+    const [id, setId] = useState('');
     const [text, setSearch] = useState('');
     const [data, setData] = useState([]);
     const [client, setClient] = useState(SqlClient());
@@ -35,11 +36,13 @@ const SearchProduct = ({route, navigation }) => {
 
     const getData = async (param) => {
         let product = [];
-        let selectQuery = await client.ExecuteQuery(`SELECT name FROM PRODUCT WHERE name LIKE '%${param}%' LIMIT 10`, []);
+        let selectQuery = await client.ExecuteQuery(`SELECT id,product_name FROM PRODUCT 
+                                                    WHERE product_name LIKE '%${param}%' LIMIT 10`, []);
         var rows = selectQuery.rows;
         for (let i = 0; i < rows.length; i++) {
-            let value = rows.item(i).name;
-            product.push({ id: i.toString(), 'name': value });
+            let value = rows.item(i).product_name;
+            let id = rows.item(i).id;
+            product.push({ "id": id.toString(), 'name': value });
         }
         setData(product);
     }
@@ -47,6 +50,7 @@ const SearchProduct = ({route, navigation }) => {
     const sendAllData = () => {
        
         let data = {
+            "id":id,
             "name":text,
             "price":price,
             "weight":weight,
@@ -58,7 +62,8 @@ const SearchProduct = ({route, navigation }) => {
         navigation.navigate('Продукты',{product});
     }
 
-    const onItemHendler = (name) => {
+    const onItemHendler = (id,name) => {
+        setId(id);
         setSearch(name);
         setFocus(false);
         setSearchReady(true);
@@ -69,7 +74,7 @@ const SearchProduct = ({route, navigation }) => {
 
         <List.Item
             title={item.name}
-            onPress={() => onItemHendler(item.name)}
+            onPress={() => onItemHendler(item.id,item.name)}
         />
 
     )
