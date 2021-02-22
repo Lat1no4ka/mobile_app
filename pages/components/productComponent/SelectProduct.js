@@ -6,17 +6,20 @@ import CardItem from "./CardItem";
 
 
 const SelectProduct = ({ route, navigation }) => {
-    const [product, setProducts] = useState([]);
+    const [product, setProduct] = useState([]);
 
     useEffect(() => {
 
         if (route.params) {
-            setProducts(route.params.product)
+            setProduct(route.params.product)
         }
-    }, [route]);
+    }, []);
 
     const removeItem = (id) => {
-            setProducts(currentItems => currentItems.filter((item, index) => index !== id));
+        filtered =  (product.filter((item) => {
+            return (item ? item.id !== id : null) 
+        }));
+        setProduct(filtered)
     }
 
 
@@ -32,8 +35,8 @@ const SelectProduct = ({ route, navigation }) => {
                 />
                 <View>
                     {
-                        product.map((item, index) => {
-                            return <CardItem item={item} key={index} index={index} removeItem={removeItem}/>
+                        product.map((item) => {
+                            return <CardItem item={item} key={item.id} removeItem={removeItem} />
                         })}
                     <Button
                         mode="contained"

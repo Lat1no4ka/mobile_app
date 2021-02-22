@@ -22,7 +22,7 @@ const CardItem = (props) => {
             </Card.Content>
             <Card.Actions style={styles.delBtn}>
                 <Button
-                    onPress={() => props.removeItem(props.index)}
+                    onPress={() => props.removeItem(props.item.id)}
                 >
                     Удалить
             </Button>

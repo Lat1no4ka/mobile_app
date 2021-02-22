@@ -7,39 +7,39 @@ import { Checkbox, Button } from 'react-native-paper';
 function Composition({ route, navigation }) {
     const [protein, setProtein] = useState(false);
     const [fat, setFat] = useState(false);
-    const [carbohyd, setCarbohyd] = useState(false);
-    const [alim_fiber, setFiber] = useState(false);
-    const [k_mg, setK] = useState(false);
-    const [ca_mg, setCa] = useState(false);
-    const [mg_mg, setMg] = useState(false);
-    const [p_mg, setP] = useState(false);
-    const [fe_mg, setFe] = useState(false);
-    const [vit_a_mkg, setVitA] = useState(false);
-    const [vit_b1_mg, setVitB1] = useState(false);
-    const [vit_b2_mg, setVitB2] = useState(false);
-    const [vit_pp_mg, setVitPP] = useState(false);
-    const [vit_c_mg, setVitC] = useState(false);
-    const [vit_e_mg, setVitE] = useState(false);
-    const [energy_value, setEnergy] = useState(false);
+    const [carbohydrates, setCarbohydrates] = useState(false);
+    const [alimentaryFiber, setFiber] = useState(false);
+    const [potassium,setPotassium] = useState(false);
+    const [calcium, setCalcium] = useState(false);
+    const [magnesium, setMagnesium] = useState(false);
+    const [phosphorus, setPhosphorus] = useState(false);
+    const [iron, setIron] = useState(false);
+    const [vitaminA, setVitaminA] = useState(false);
+    const [vitaminB1, setVitaminB1] = useState(false);
+    const [vitaminB2, setVitaminB2] = useState(false);
+    const [vitaminPP, setVitaminPP] = useState(false);
+    const [vitaminC, setVitaminC] = useState(false);
+    const [vitaminE, setVitaminE] = useState(false);
+    const [energyValue, setEnergy] = useState(false);
     const [data, setParams] = useState(route.params.product);
 
     const checkedItem = [
         protein ? 'Белки' : null,
         fat ? 'Жиры' : null,
-        carbohyd ? 'Углеводы' : null,
-        alim_fiber ? 'Пищевые волокна' : null,
-        k_mg ? 'Калий' : null,
-        ca_mg ? 'Кальций' : null,
-        mg_mg ? 'Магний' : null,
-        p_mg ? 'Фосфор' : null,
-        fe_mg ? 'Железо' : null,
-        vit_a_mkg ? 'Витамин A' : null,
-        vit_b1_mg ? 'Витамин B1' : null,
-        vit_b2_mg ? 'Витамин B2' : null,
-        vit_pp_mg ? 'Витамин PP' : null,
-        vit_c_mg ? 'Витамин C' : null,
-        vit_e_mg ? 'Витамин Е' : null,
-        energy_value ? 'Энергетическая ценность' : null,
+        carbohydrates ? 'Углеводы' : null,
+        alimentaryFiber ? 'Пищевые волокна' : null,
+        potassium ? 'Калий' : null,
+        calcium ? 'Кальций' : null,
+        magnesium ? 'Магний' : null,
+        phosphorus ? 'Фосфор' : null,
+        iron ? 'Железо' : null,
+        vitaminA ? 'Витамин A' : null,
+        vitaminB1 ? 'Витамин B1' : null,
+        vitaminB2 ? 'Витамин B2' : null,
+        vitaminPP ? 'Витамин PP' : null,
+        vitaminC ? 'Витамин C' : null,
+        vitaminE ? 'Витамин Е' : null,
+        energyValue ? 'Энергетическая ценность' : null,
     ];
 
 
@@ -47,22 +47,22 @@ function Composition({ route, navigation }) {
     return (
         <ScrollView>
             <View style={styles.container}>
-                <Checkbox.Item label="Белки" status={protein ? 'checked' : 'unchecked'} onPress={() => setProtein(!protein)} style={styles.checkBox} />
-                <Checkbox.Item label="Жиры" status={fat ? 'checked' : 'unchecked'} onPress={() => setFat(!fat)} style={styles.checkBox} />
-                <Checkbox.Item label="Углеводы" status={carbohyd ? 'checked' : 'unchecked'} onPress={() => setCarbohyd(!carbohyd)} style={styles.checkBox} />
-                <Checkbox.Item label="Пищевые волокна" status={alim_fiber ? 'checked' : 'unchecked'} onPress={() => setFiber(!alim_fiber)} style={styles.checkBox} />
-                <Checkbox.Item label="Калий" status={k_mg ? 'checked' : 'unchecked'} onPress={() => setK(!k_mg)} style={styles.checkBox} />
-                <Checkbox.Item label="Кальций" status={ca_mg ? 'checked' : 'unchecked'} onPress={() => setCa(!ca_mg)} style={styles.checkBox} />
-                <Checkbox.Item label="Магний" status={mg_mg ? 'checked' : 'unchecked'} onPress={() => setMg(!mg_mg)} style={styles.checkBox} />
-                <Checkbox.Item label="Фосфор" status={p_mg ? 'checked' : 'unchecked'} onPress={() => setP(!p_mg)} style={styles.checkBox} />
-                <Checkbox.Item label="Железо" status={fe_mg ? 'checked' : 'unchecked'} onPress={() => setFe(!fe_mg)} style={styles.checkBox} />
-                <Checkbox.Item label="Витамин A" status={vit_a_mkg ? 'checked' : 'unchecked'} onPress={() => setVitA(!vit_a_mkg)} style={styles.checkBox} />
-                <Checkbox.Item label="Витамин B1" status={vit_b1_mg ? 'checked' : 'unchecked'} onPress={() => setVitB1(!vit_b1_mg)} style={styles.checkBox} />
-                <Checkbox.Item label="Витамин B2" status={vit_b2_mg ? 'checked' : 'unchecked'} onPress={() => setVitB2(!vit_b2_mg)} style={styles.checkBox} />
-                <Checkbox.Item label="Витамин PP" status={vit_pp_mg ? 'checked' : 'unchecked'} onPress={() => setVitPP(!vit_pp_mg)} style={styles.checkBox} />
-                <Checkbox.Item label="Витамин C" status={vit_c_mg ? 'checked' : 'unchecked'} onPress={() => setVitC(!vit_c_mg)} style={styles.checkBox} />
-                <Checkbox.Item label="Витамин Е" status={vit_e_mg ? 'checked' : 'unchecked'} onPress={() => setVitE(!vit_e_mg)} style={styles.checkBox} />
-                <Checkbox.Item label="Энергетическая ценность" status={energy_value ? 'checked' : 'unchecked'} onPress={() => setEnergy(!energy_value)} style={styles.checkBox} />
+                <Checkbox.Item label="Белки, г" status={protein ? 'checked' : 'unchecked'} onPress={() => setProtein(!protein)} style={styles.checkBox} />
+                <Checkbox.Item label="Жиры, г" status={fat ? 'checked' : 'unchecked'} onPress={() => setFat(!fat)} style={styles.checkBox} />
+                <Checkbox.Item label="Углеводы, г" status={carbohydrates ? 'checked' : 'unchecked'} onPress={() => setCarbohydrates(!carbohydrates)} style={styles.checkBox} />
+                <Checkbox.Item label="Пищевые волокна, г" status={alimentaryFiber ? 'checked' : 'unchecked'} onPress={() => setFiber(!alimentaryFiber)} style={styles.checkBox} />
+                <Checkbox.Item label="Калий, мг" status={potassium ? 'checked' : 'unchecked'} onPress={() =>setPotassium(!potassium)} style={styles.checkBox} />
+                <Checkbox.Item label="Кальций, мг" status={calcium ? 'checked' : 'unchecked'} onPress={() => setCalcium(!calcium)} style={styles.checkBox} />
+                <Checkbox.Item label="Магний, мг" status={magnesium ? 'checked' : 'unchecked'} onPress={() => setMagnesium(!magnesium)} style={styles.checkBox} />
+                <Checkbox.Item label="Фосфор, мг" status={phosphorus ? 'checked' : 'unchecked'} onPress={() => setPhosphorus(!phosphorus)} style={styles.checkBox} />
+                <Checkbox.Item label="Железо, мг" status={iron ? 'checked' : 'unchecked'} onPress={() => setIron(!iron)} style={styles.checkBox} />
+                <Checkbox.Item label="Витамин A, мкг" status={vitaminA ? 'checked' : 'unchecked'} onPress={() => setVitaminA(!vitaminA)} style={styles.checkBox} />
+                <Checkbox.Item label="Витамин B1, мг" status={vitaminB1 ? 'checked' : 'unchecked'} onPress={() => setVitaminB1(!vitaminB1)} style={styles.checkBox} />
+                <Checkbox.Item label="Витамин B2, мг" status={vitaminB2 ? 'checked' : 'unchecked'} onPress={() => setVitaminB2(!vitaminB2)} style={styles.checkBox} />
+                <Checkbox.Item label="Витамин PP, мг" status={vitaminPP ? 'checked' : 'unchecked'} onPress={() => setVitaminPP(!vitaminPP)} style={styles.checkBox} />
+                <Checkbox.Item label="Витамин C, мг" status={vitaminC ? 'checked' : 'unchecked'} onPress={() => setVitaminC(!vitaminC)} style={styles.checkBox} />
+                <Checkbox.Item label="Витамин Е, мг" status={vitaminE ? 'checked' : 'unchecked'} onPress={() => setVitaminE(!vitaminE)} style={styles.checkBox} />
+                <Checkbox.Item label="Энергетическая ценность, ккал" status={energyValue ? 'checked' : 'unchecked'} onPress={() => setEnergy(!energyValue)} style={styles.checkBox} />
             </View>
 
             <View style={styles.containerWithBtn}>
