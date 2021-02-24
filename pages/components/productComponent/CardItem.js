@@ -12,11 +12,13 @@ const CardItem = (props) => {
                         <DataTable.Title >Цена</DataTable.Title>
                         <DataTable.Title >Масса</DataTable.Title>
                         <DataTable.Title >Порция</DataTable.Title>
+                        <DataTable.Title >Одна порция</DataTable.Title>
                     </DataTable.Header>
                     <DataTable.Row>
                         <DataTable.Cell >{props.item.price}</DataTable.Cell>
                         <DataTable.Cell >{props.item.weight}</DataTable.Cell>
                         <DataTable.Cell >{props.item.portion}</DataTable.Cell>
+                        <DataTable.Cell >{props.item.onePortion}</DataTable.Cell>
                     </DataTable.Row>
                 </DataTable>
             </Card.Content>
