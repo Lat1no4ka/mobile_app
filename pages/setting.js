@@ -1,15 +1,28 @@
-import React from 'react';
-import {Text} from 'react-native'
+
+    import React from 'react';
+    import { createStackNavigator } from '@react-navigation/stack';
+import GetSettings from './components/productComponent/GetSettings';
+import ValueNutricial from './components/productComponent/ValueNutricial';
+import ConsumptionRates from './components/productComponent/ConsumptionRates';
 
 const SettingScreen = () => {
 
+      
+    const Stack = createStackNavigator();
   
-    return (
-      <>
-        <Text>Setting</Text>
-     </>
-    );
-  };
+   
+    
+        return (
+            <Stack.Navigator initialRouteName="Настройки">
+                <Stack.Screen name="Настройки" component={GetSettings} />
+                <Stack.Screen name="Ценность" component={ValueNutricial} />
+                <Stack.Screen name="Нормы" component={ConsumptionRates} />
+                { /*<Stack.Screen name="Расчет" component={Calculations} />*/}
+            </Stack.Navigator>
+        );
+    };
+    
+    
   
   
   export default SettingScreen;
