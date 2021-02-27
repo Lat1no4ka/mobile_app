@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { SafeAreaView, View, Text, StyleSheet, Dimensions, FlatList } from 'react-native';
+import { SafeAreaView, View, Text, StyleSheet, Dimensions, FlatList,ScrollView } from 'react-native';
 import { TextInput, List, Button } from 'react-native-paper';
 import SqlClient from '../../../CommonClient/SqlClient/SqlClient';
 
-const SearchProduct = ({route, navigation }) => {
+const SearchProduct = ({ route, navigation }) => {
     const [id, setId] = useState('');
     const [text, setSearch] = useState('');
     const [data, setData] = useState([]);
@@ -12,12 +12,13 @@ const SearchProduct = ({route, navigation }) => {
     const [price, setPrice] = useState();
     const [weight, setWeight] = useState();
     const [portion, setPortion] = useState();
+    const [onePortion, setOnePortion] = useState();
     const [searchReady, setSearchReady] = useState(false);
-    
+
     const product = route.params.product;
-   
+
     const inputEl = useRef(null);
-    
+
     //const name = () => { client.getProduct('name', 'PRODUCT').finally((res)=>{console.log(res)}) };
 
     useEffect(() => {
@@ -48,21 +49,22 @@ const SearchProduct = ({route, navigation }) => {
     }
 
     const sendAllData = () => {
-       
+
         let data = {
-            "id":id,
-            "name":text,
-            "price":price,
-            "weight":weight,
-            "portion":portion
+            "id": id,
+            "name": text,
+            "price": price,
+            "weight": weight,
+            "portion": portion,
+            "onePortion": onePortion
         };
 
         product.push(data);
         console.log(product);
-        navigation.navigate('Продукты',{product});
+        navigation.navigate('Продукты', { product });
     }
 
-    const onItemHendler = (id,name) => {
+    const onItemHendler = (id, name) => {
         setId(id);
         setSearch(name);
         setFocus(false);
@@ -74,7 +76,7 @@ const SearchProduct = ({route, navigation }) => {
 
         <List.Item
             title={item.name}
-            onPress={() => onItemHendler(item.id,item.name)}
+            onPress={() => onItemHendler(item.id, item.name)}
         />
 
     )
@@ -106,50 +108,61 @@ const SearchProduct = ({route, navigation }) => {
     } else if (searchReady) {
         return (
             <>
-                <TextInput
-                    label="Введите название продукта"
-                    value={text}
-                    mode='outlined'
-                    style={styles.container}
-                    onChangeText={text => setSearch(text)}
-                    onFocus={() => setFocus(true)}
-                    theme={{ colors: { primary: 'blue' } }}
-                />
-                <TextInput
-                    label="Введите цену продукта"
-                    value={price}
-                    keyboardType='numeric'
-                    mode='outlined'
-                    style={styles.textInput}
-                    onChangeText={price => setPrice(price)}
-                    theme={{ colors: { primary: 'blue' } }}
-                />
-                <TextInput
-                    label="Введите вес продукта"
-                    value={weight}
-                    keyboardType='numeric'
-                    mode='outlined'
-                    style={styles.textInput}
-                    onChangeText={weight => setWeight(weight)}
-                    theme={{ colors: { primary: 'blue' } }}
-                />
-                 <TextInput
-                    label="Введите кол-во порций"
-                    value={portion}
-                    keyboardType='numeric'
-                    mode='outlined'
-                    style={styles.textInput}
-                    onChangeText={portion => setPortion(portion)}
-                    theme={{ colors: { primary: 'blue' } }}
-                />
-                <View style={styles.containerWithBtn}>
-                    <Button
-                        mode="contained"
-                        style={styles.button}
-                        onPress={() => sendAllData()}>
-                        Дальше
+                <ScrollView>
+                    <TextInput
+                        label="Введите название продукта"
+                        value={text}
+                        mode='outlined'
+                        style={styles.container}
+                        onChangeText={text => setSearch(text)}
+                        onFocus={() => setFocus(true)}
+                        theme={{ colors: { primary: 'blue' } }}
+                    />
+                    <TextInput
+                        label="Введите цену продукта"
+                        value={price}
+                        keyboardType='numeric'
+                        mode='outlined'
+                        style={styles.textInput}
+                        onChangeText={price => setPrice(price)}
+                        theme={{ colors: { primary: 'blue' } }}
+                    />
+                    <TextInput
+                        label="Введите вес продукта"
+                        value={weight}
+                        keyboardType='numeric'
+                        mode='outlined'
+                        style={styles.textInput}
+                        onChangeText={weight => setWeight(weight)}
+                        theme={{ colors: { primary: 'blue' } }}
+                    />
+                    <TextInput
+                        label="Введите кол-во порций"
+                        value={portion}
+                        keyboardType='numeric'
+                        mode='outlined'
+                        style={styles.textInput}
+                        onChangeText={portion => setPortion(portion)}
+                        theme={{ colors: { primary: 'blue' } }}
+                    />
+                    <TextInput
+                        label="Введите массу одной порции"
+                        value={onePortion}
+                        keyboardType='numeric'
+                        mode='outlined'
+                        style={styles.textInput}
+                        onChangeText={onePortion => setOnePortion(onePortion)}
+                        theme={{ colors: { primary: 'blue' } }}
+                    />
+                    <View style={styles.containerWithBtn}>
+                        <Button
+                            mode="contained"
+                            style={styles.button}
+                            onPress={() => sendAllData()}>
+                            Дальше
                 </Button>
-                </View>
+                    </View>
+                </ScrollView>
             </>
         )
     } else if (data.length <= 0 || !focus) {

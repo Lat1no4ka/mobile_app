@@ -24,22 +24,22 @@ function Composition({ route, navigation }) {
     const [data, setParams] = useState(route.params.product);
 
     const checkedItem = [
-        protein ? 'Белки' : null,
-        fat ? 'Жиры' : null,
-        carbohydrates ? 'Углеводы' : null,
-        alimentaryFiber ? 'Пищевые волокна' : null,
-        potassium ? 'Калий' : null,
-        calcium ? 'Кальций' : null,
-        magnesium ? 'Магний' : null,
-        phosphorus ? 'Фосфор' : null,
-        iron ? 'Железо' : null,
-        vitaminA ? 'Витамин A' : null,
-        vitaminB1 ? 'Витамин B1' : null,
-        vitaminB2 ? 'Витамин B2' : null,
-        vitaminPP ? 'Витамин PP' : null,
-        vitaminC ? 'Витамин C' : null,
-        vitaminE ? 'Витамин Е' : null,
-        energyValue ? 'Энергетическая ценность' : null,
+        protein ? {"name":'Белки', "key":"protein"} : null,
+        fat ? {"name":'Жиры', "key":"fats"} : null,
+        carbohydrates ? {"name":'Углеводы', "key":"carbohydrates"} : null,
+        alimentaryFiber ? {"name":'Пищевые волокна', "key":"alimentary_fiber"} : null,
+        potassium ? {"name":'Калий', "key":"potassium"} : null,
+        calcium ? {"name":'Кальций', "key":"calcium"} : null,
+        magnesium ? {"name":'Магний', "key":"magnesium"} : null,
+        phosphorus ? {"name":'Фосфор', "key":"phosphorus"} : null,
+        iron ? {"name":'Железо', "key":"iron"} : null,
+        vitaminA ? {"name":'Витамин A', "key":"vitamin_a"} : null,
+        vitaminB1 ? {"name":'Витамин B1', "key":"vitamin_b1"} : null,
+        vitaminB2 ? {"name":'Витамин B2', "key":"vitamin_b2"} : null,
+        vitaminPP ? {"name":'Витамин PP', "key":"vitamin_pp"} : null,
+        vitaminC ? {"name":'Витамин C', "key":"vitamin_c"} : null,
+        vitaminE ? {"name":'Витамин Е', "key":"vitamin_e"} : null,
+        energyValue ? {"name":'Энергетическая ценность', "key":"energy_value"} : null,
     ];
 
 

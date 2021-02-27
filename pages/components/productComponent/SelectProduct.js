@@ -16,12 +16,11 @@ const SelectProduct = ({ route, navigation }) => {
     }, []);
 
     const removeItem = (id) => {
-        filtered =  (product.filter((item) => {
-            return (item ? item.id !== id : null) 
+        filtered = (product.filter((item) => {
+            return (item ? item.id !== id : null)
         }));
         setProduct(filtered)
     }
-
 
     if (product.length > 0) {
         return (
