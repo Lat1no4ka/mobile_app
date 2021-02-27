@@ -1,9 +1,10 @@
 
     import React from 'react';
     import { createStackNavigator } from '@react-navigation/stack';
-import GetSettings from './components/productComponent/GetSettings';
-import ValueNutricial from './components/productComponent/ValueNutricial';
-import ConsumptionRates from './components/productComponent/ConsumptionRates';
+import GetSettings from './components/settingComponent/GetSettings';
+import ValueNutricial from './components/settingComponent/ValueNutricial';
+import ConsumptionRates from './components/settingComponent/ConsumptionRates';
+
 
 const SettingScreen = () => {
 

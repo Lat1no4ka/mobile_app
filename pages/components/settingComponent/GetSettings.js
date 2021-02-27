@@ -13,7 +13,6 @@ const GetSettings = ({ navigation }) => {
             <Button
                 icon="open"
                 mode="contained"
-                
                 st={styles.Button}
                 onPress={() => navigation.navigate('Ценность',{})}>
                 Пищевая ценность продукта
@@ -38,6 +37,7 @@ const styles = StyleSheet.create({
        // paddingHorizontal: 10
       },
       Buttons: {
+          flexDirection:'row-reverse'
         //alignItems: "center",
         //backgroundColor: "#DDDDDD",
         //padding: 20,
