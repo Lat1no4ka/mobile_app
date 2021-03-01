@@ -9,20 +9,21 @@ const GetSettings = ({ navigation }) => {
     return(
 
     <View style={styles.Container}>
-        <View style={styles.Buttons}></View>
+        
             <Button
                 icon="open"
                 mode="contained"
-                st={styles.Button}
-                onPress={() => navigation.navigate('Ценность',{})}>
-                Пищевая ценность продукта
+                style={styles.Buttons}
+                onPress={() => navigation.navigate('Пищевая ценность продуктов',{})}>
+                Пищевая ценность продуктов
             </Button>
+            
             <Button
                 icon="open"
                 mode="contained"
                 
-                st={styles.Button}
-                onPress={() => navigation.navigate('Нормы',{})}>
+                style={styles.Buttons}
+                onPress={() => navigation.navigate('Нормы суточного потребления',{})}>
                 Нормы суточного потребления
             </Button>
         </View>
@@ -31,20 +32,13 @@ const GetSettings = ({ navigation }) => {
 }
 const styles = StyleSheet.create({
     Container: {
-        //flex: 1,
-        //justifyContent: "center",
+        flex: 0.13,
+        flexDirection: 'column',
+        justifyContent: 'space-between',
         
-       // paddingHorizontal: 10
       },
       Buttons: {
-          flexDirection:'row-reverse'
-        //alignItems: "center",
-        //backgroundColor: "#DDDDDD",
-        //padding: 20,
-
-        //fontSize: 40,
-        //fontWeight: '400',
-        //color: "#fff",
+    
       }
 });
 
