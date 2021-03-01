@@ -1,18 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import * as calculation from "../../../services/calculation/Calcualtion";
-import ListItem from "./ListItem";
+import Dropdown from "./Dropdown";
 import { List, ActivityIndicator, Colors } from 'react-native-paper';
 import { StyleSheet, Dimensions, View, Text, ScrollView } from 'react-native';
 
 
-const Calculations = ({ route, navigation }) => {
-    const product = route.params.data;
-    const [leftSelected, setLeftSelected] = useState(null);
-    const [rightSelected, setRightSelected] = useState(null);
-    const [focusL, setFocusL] = useState(false);
-    const [focusR, setFocusR] = useState(false);
+const Calculations = (props) => {
+    const product = props.params.data;
 
-    const checkedItem = route.params.checkedItem.filter((check) => {
+    const checkedItem = props.params.checkedItem.filter((check) => {
         return check != null ? check : null;
     })
 
@@ -20,8 +16,8 @@ const Calculations = ({ route, navigation }) => {
 
     useEffect(() => {
         if (product.length > 1) {
-            setLeftSelected(product[0]);
-            setRightSelected(product[1]);
+            props.setLeftSelected(product[0]);
+            props.setRightSelected(product[1]);
         }
     }, []);
 
@@ -38,6 +34,7 @@ const Calculations = ({ route, navigation }) => {
                 let sp = calculation.sp(pqb)
                 let scp = calculation.scp(sp, item)
                 result.push({
+                    "nutrient_name": nutrient.name,
                     "qb": qb,
                     "pqb": pqb,
                     "ccu": ccu,
@@ -55,7 +52,9 @@ const Calculations = ({ route, navigation }) => {
     }
 
     const CalResult = (props) => {
+        
         let result = calcOneItem(props.item);
+
         if (result) {
             return (
                 <View>
@@ -63,13 +62,19 @@ const Calculations = ({ route, navigation }) => {
                         result.map((info) => {
                             return (
                                 <View>
+                                    <Text>Расчет для {info.nutrient_name}</Text>
+                                    <Text>Содержание нутриента в продукции от суточной потребности в 100г, %</Text>
                                     <Text>{info.qb}</Text>
+                                    <Text>Содержание нутриента в продукции от суточной потребности в порции, %</Text>
                                     <Text>{info.pqb}</Text>
+                                    <Text>Ценовой коэффициент полезности, руб/%</Text>
                                     <Text>{info.ccu}</Text>
+                                    <Text>Обратный коэффициент, %/руб</Text>
                                     <Text>{info.ucc}</Text>
+                                    <Text>Кол-во порций, шт</Text>
                                     <Text>{info.sp}</Text>
+                                    <Text>Стоимость порций, руб.</Text>
                                     <Text>{info.scp}</Text>
-
                                 </View>
                             )
                         })
@@ -81,53 +86,30 @@ const Calculations = ({ route, navigation }) => {
         }
     }
 
-    if (product.length > 2) {
-        return (
-            <>
-                {calcOneItem()}
-                <List.Section style={styles.accord}>
-                    <List.Accordion
-                        title={leftSelected.name}
-                        style={styles.leftSelected}
-                        expanded={focusL}
-                        onPress={() => setFocusL(!focusL)}
-                    >
-                        {
-                            product.map((item) => {
-                                return <ListItem
-                                    item={item}
-                                    key={item.id}
-                                    setSelected={setLeftSelected}
-                                    setFocus={setFocusL}
-                                    focus={focusL}
-                                />
-                            })
-                        }
-                    </List.Accordion>
-
-                    <List.Accordion
-                        title={rightSelected.name}
-                        style={styles.rightSelected}
-                        expanded={focusR}
-                        onPress={() => setFocusR(!focusR)}
-                    >
-                        {
-                            product.map((item) => {
-                                return <ListItem
-                                    item={item}
-                                    key={item.id}
-                                    setSelected={setRightSelected}
-                                    setFocus={setFocusR}
-                                    focus={focusR} />
-                            })
-                        }
-                    </List.Accordion>
-                </List.Section>
-                <View>
-
-                </View>
-            </>
-        );
+    if (product.length > 1) {
+        if (props.leftSelected && props.rightSelected) {
+            return (
+                <>
+                    <Dropdown
+                        product={product}
+                        leftSelected={props.leftSelected}
+                        rightSelected={props.rightSelected}
+                        setR={props.setRightSelected}
+                        setL={props.setLeftSelected}
+                    />
+                    <ScrollView>
+                        <View>
+                            <CalResult item={props.leftSelected} />
+                            <CalResult item={props.rightSelected} />
+                        </View>
+                    </ScrollView>
+                </>
+            );
+        } else {
+            return (<>
+                <ActivityIndicator animating={true} color={Colors.blue800} />
+            </>)
+        }
     } else {
         return (
             <ScrollView>
