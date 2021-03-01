@@ -1,72 +1,96 @@
 import SqlClient from "../../CommonClient/SqlClient/SqlClient";
 import React, { useState, useEffect } from 'react';
+export const dataFromDB = (item) => {
 
-const calculation = (item) => {
-    const [client, setClient] = useState(SqlClient());
-    const [dayliRate, setDayliRate] = useState();
-    const [product, setProduct] = useState();
+    const [data, setdata] = useState(null);
+    const client = SqlClient();
 
     useEffect(() => {
-        if (item) {
-            getDailyRate();
-            nutrientFromProduct();
+        if (!data) {
+            getData(item).then((res) => {
+                setdata({ "dayliRate": res.dayliRateFromDB, "product": res.productFromDB });
+            });
         }
     }, []);
-
-    async function getDailyRate() {
-        let value;
+    async function getData() {
+        let dayliRateFromDB = null;
         let selectQuery = await client.ExecuteQuery(`SELECT * FROM DAILY_RATE`, []);
         let rows = selectQuery.rows;
         for (let i = 0; i < rows.length; i++) {
-            value = rows.item(i);
+            dayliRateFromDB = rows.item(i);
         }
-        setDayliRate(value);
-    }
-    async function nutrientFromProduct() {
-        let value = [];
-        let selectQuery = await client.ExecuteQuery(`SELECT * FROM PRODUCT WHERE PRODUCT_NAME = '${item.name}'`, []);
-        let rows = selectQuery.rows;
+
+        let productFromDB = null;
+        selectQuery = await client.ExecuteQuery(`SELECT * FROM PRODUCT WHERE PRODUCT_NAME = '${item.name}'`, []);
+        rows = selectQuery.rows;
         for (let i = 0; i < rows.length; i++) {
-            value = rows.item(i);
+            productFromDB = rows.item(i);
         }
-        setProduct(value);
-    }
 
-    const nutrientFromDailyRate = (nutKey) => {
-        console.log(item)
-        if (product && dayliRate) {
-            let mass = product[nutKey];
-            let dayliMass = dayliRate[nutKey];
-            return (mass * 100) / dayliMass;
-        }
+        return { dayliRateFromDB, productFromDB }
     }
-
-    const nutrientFromDailyRateInPortion = (nutrientFDR, item) => {
-        return (item.oneWeight * nutrientFDR) / 100;
+    if (data) {
+        return data;
     }
-
-    const priceCoef = (nutrientFDRinPortion, item) => {
-        return item / nutrientFDRinPortion;
-    }
-
-    const reverseCoef = (nutrientFDRinPortion, item) => {
-        let portionsPrice = (item.price * item.oneWeight) / item.weight;
-        return nutrientFDRinPortion / portionsPrice;
-    }
-
-    const portionsCount = (nutrientFDRinPortion) => {
-        return 100 / nutrientFDRinPortion;
-    }
-
-    const porionsPrice = (portionsCount, item) => {
-        let portionsPrice = (item.price * item.oneWeight) / item.weight;
-        return portionsCount * portionsPrice;
-    }
-
-    console.log(product);
-    console.log(dayliRate);
-    return { nutrientFromDailyRate }
 }
 
 
-export default calculation;
+
+/**
+ * Содержание нутриента в продукции от суточной потребности в 100г, % (qb)
+ * @param {*} nutrient
+ */
+export const qb = (dayliRate, item, nutrient) => {
+    let nutKey = nutrient.key;
+    let mass = item[nutKey];
+    let dayliMass = dayliRate[nutKey];
+    return ((mass * 100) / dayliMass);
+
+}
+
+/**
+ * Содержание нутриента в продукции от суточной потребности в порции, % (pqb)
+ * @param {*} nutrientFDR Содержание нутриента в продукции от суточной потребности в 100г, % (qb)
+ * @param {*} item информация о выбранном продукте
+ */
+export const pqb = (nutrientFDR, item) => {
+    return (item.onePortion * nutrientFDR / 100);
+}
+
+/**
+ * Ценовой коэффициент полезности, руб/% (ccu)
+ * @param {*} nutrientFDRinPortion  Содержание нутриента в продукции от суточной потребности в порции, % (pqb)
+ * @param {*} item  информация о выбранном продукте
+ */
+export const ccu = (nutrientFDRinPortion, item) => {
+    let portionsPrice = item.price * item.onePortion / item.weight;
+    return (portionsPrice / nutrientFDRinPortion);
+}
+
+/**
+ * Обратный коэффициент, %/руб (ucc)
+ * @param {*} nutrientFDRinPortion  Содержание нутриента в продукции от суточной потребности в порции, % (pqb)
+ * @param {*} item 
+ */
+export const ucc = (nutrientFDRinPortion, item) => {
+    let portionsPrice = item.price * item.onePortion / item.weight;
+    return (nutrientFDRinPortion / portionsPrice);
+}
+
+/**
+ * Кол-во порций, шт (sp)
+ * @param {*} nutrientFDRinPortion  Содержание нутриента в продукции от суточной потребности в порции, % (pqb)
+ */
+export const sp = (nutrientFDRinPortion) => {
+    return 100 / nutrientFDRinPortion;
+}
+
+/**
+ * Стоимость порций, руб. (scp)
+ * @param {*} portionsCount  Кол-во порций, шт (sp)
+ * @param {*} item  информация о выбранном продукте
+ */
+export const scp = (portionsCount, item) => {
+    let portionsPrice = (item.price * item.onePortion) / item.weight;
+    return portionsCount * portionsPrice;
+}

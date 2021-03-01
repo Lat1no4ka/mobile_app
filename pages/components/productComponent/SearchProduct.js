@@ -11,7 +11,6 @@ const SearchProduct = ({ route, navigation }) => {
     const [focus, setFocus] = useState(false);
     const [price, setPrice] = useState();
     const [weight, setWeight] = useState();
-    const [portion, setPortion] = useState();
     const [onePortion, setOnePortion] = useState();
     const [searchReady, setSearchReady] = useState(false);
 
@@ -55,12 +54,10 @@ const SearchProduct = ({ route, navigation }) => {
             "name": text,
             "price": price,
             "weight": weight,
-            "portion": portion,
             "onePortion": onePortion
         };
 
         product.push(data);
-        console.log(product);
         navigation.navigate('Продукты', { product });
     }
 
@@ -134,15 +131,6 @@ const SearchProduct = ({ route, navigation }) => {
                         mode='outlined'
                         style={styles.textInput}
                         onChangeText={weight => setWeight(weight)}
-                        theme={{ colors: { primary: 'blue' } }}
-                    />
-                    <TextInput
-                        label="Введите кол-во порций"
-                        value={portion}
-                        keyboardType='numeric'
-                        mode='outlined'
-                        style={styles.textInput}
-                        onChangeText={portion => setPortion(portion)}
                         theme={{ colors: { primary: 'blue' } }}
                     />
                     <TextInput
