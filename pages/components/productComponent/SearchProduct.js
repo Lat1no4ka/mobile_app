@@ -116,7 +116,7 @@ const SearchProduct = ({ route, navigation }) => {
                         theme={{ colors: { primary: 'blue' } }}
                     />
                     <TextInput
-                        label="Введите цену продукта"
+                        label="Введите цену продукта, руб."
                         value={price}
                         keyboardType='numeric'
                         mode='outlined'
@@ -125,7 +125,7 @@ const SearchProduct = ({ route, navigation }) => {
                         theme={{ colors: { primary: 'blue' } }}
                     />
                     <TextInput
-                        label="Введите вес продукта"
+                        label="Введите вес продукта, г."
                         value={weight}
                         keyboardType='numeric'
                         mode='outlined'
@@ -134,7 +134,7 @@ const SearchProduct = ({ route, navigation }) => {
                         theme={{ colors: { primary: 'blue' } }}
                     />
                     <TextInput
-                        label="Введите массу одной порции"
+                        label="Введите массу одной порции, г."
                         value={onePortion}
                         keyboardType='numeric'
                         mode='outlined'
