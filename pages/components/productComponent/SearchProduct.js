@@ -38,12 +38,14 @@ const SearchProduct = ({ route, navigation }) => {
         let product = [];
         let selectQuery = await client.ExecuteQuery(`SELECT id,product_name FROM PRODUCT 
                                                     WHERE product_name LIKE '%${param}%' LIMIT 10`, []);
+                                                    console.log("test");
         var rows = selectQuery.rows;
         for (let i = 0; i < rows.length; i++) {
             let value = rows.item(i).product_name;
             let id = rows.item(i).id;
             product.push({ "id": id.toString(), 'name': value });
         }
+        console.log(product);
         setData(product);
     }
 
