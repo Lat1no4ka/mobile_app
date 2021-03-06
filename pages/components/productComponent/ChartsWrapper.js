@@ -6,43 +6,30 @@ import { StyleSheet, Dimensions, View, processColor, ScrollView } from 'react-na
 import { BarChart } from 'react-native-charts-wrapper';
 
 const ChartsWrapper = (props) => {
-    const product = props.params.data;
-    console.log(props)
-    const leftSelected = (props.leftSelected);
-    const rightSelected = (props.rightSelected);
-
-    const checkedItem = props.params.checkedItem.filter((check) => {
-        return check != null ? check : null;
-    })
-
-
-
     useEffect(() => {
     }, []);
 
 
-    const calcOneItem = (item) => {
-        let result = [];
-        let data = calculation.dataFromDB(item);
+    const calcOneItem = (params) => {
+        let result = {};
+        let data = calculation.dataFromDB(params.item);
         if (data) {
-            checkedItem.forEach(nutrient => {
-                let qb = calculation.qb(data.dayliRate, data.product, nutrient);
-                let pqb = calculation.pqb(qb, item);
-                let ccu = calculation.ccu(pqb, item);
-                let ucc = calculation.ucc(pqb, item)
-                let sp = calculation.sp(pqb)
-                let scp = calculation.scp(sp, item)
-                result.push({
-                    "nutrient_name": nutrient.name,
-                    "qb": qb,
-                    "pqb": pqb,
-                    "ccu": ccu,
-                    "ucc": ucc,
-                    "sp": sp,
-                    "scp": scp,
-                })
-            });
-            if (result.length > 0) {
+            let qb = calculation.qb(data.dayliRate, data.product, params.nutrient);
+            let pqb = calculation.pqb(qb, params.item);
+            let ccu = calculation.ccu(pqb, params.item);
+            let ucc = calculation.ucc(pqb, params.item);
+            let sp = calculation.sp(pqb)
+            let scp = calculation.scp(sp, params.item)
+            result = {
+                "nutrient_name": params.nutrient.name,
+                "qb": qb,
+                "pqb": pqb,
+                "ccu": ccu,
+                "ucc": ucc,
+                "sp": sp,
+                "scp": scp,
+            }
+            if (result) {
                 return result;
             }
         }
@@ -50,82 +37,109 @@ const ChartsWrapper = (props) => {
 
     }
 
-    const CalResult = (props) => {
 
-        let result = calcOneItem(props.item);
+    const CalResult = (params) => {
+        if (Object.keys(params).length > 2) {
+            let Litem = { "item": params.Litem, "nutrient": params.nutrient };
+            let Ritem = { "item": params.Ritem, "nutrient": params.nutrient };
+            let Lresult = calcOneItem(Litem);
+            let Rresult = calcOneItem(Ritem);
 
-        if (result) {
-           let info = result[0];
-            return (
-                // {
-                //     result.map((info) => {
-                //         return (
-                //             <View>
-                //                 <Text>Расчет для {info.nutrient_name}</Text>
-
-                //                 <Text>{info.qb}</Text>
-                //                 <Text>{info.pqb}</Text>
-                //                 <Text>{info.ccu}</Text>
-                //                 <Text>{info.ucc}</Text>
-                //                 <Text>{info.sp}</Text>
-                //                 <Text>{info.scp}</Text>
-                //             </View>
-                //         )
-                //     })
-                // }
-                <View style={{ flex: 1 }}>
-                    <View style={styles.container}>
-                        <BarChart style={styles.chart}
-                            legend={{
-                                enabled: true,
-                                textSize: 14,
-                                form: "SQUARE",
-                                formSize: 20,
-                                xEntrySpace: 1,
-                                yEntrySpace: 1,
-                                wordWrapEnabled: true
-                            }}
-
-                            data={{
-                                dataSets: [{
-                                    values: [info.qb, info.pqb, info.ccu, info.sp, info.scp],
-                                    label: 'Продукт 1',
+            if (Rresult && Lresult) {
+                return (
+                    <View style={{ flex: 1 }}>
+                        <View style={styles.container}>
+                            <BarChart style={styles.chart}
+                                legend={{
+                                    enabled: true,
+                                    textSize: 12,
+                                    form: "SQUARE",
+                                    formSize: 14,
+                                    xEntrySpace: 1,
+                                    yEntrySpace: 1,
+                                    wordWrapEnabled: true
+                                }}
+                                data={{
+                                    dataSets: [{
+                                        values: [Lresult.qb, Lresult.pqb, Lresult.ccu, Lresult.sp, Lresult.scp],
+                                        label: 'Продукт 1',
+                                        config: {
+                                            drawValues: false,
+                                            colors: [processColor('blue')],
+                                        }
+                                    },
+                                    {
+                                        values: [Rresult.qb, Rresult.pqb, Rresult.ccu, Rresult.sp, Rresult.scp],
+                                        label: 'Company B',
+                                        config: {
+                                            drawValues: false,
+                                            colors: [processColor('red')],
+                                        }
+                                    }],
                                     config: {
-                                        drawValues: false,
-                                        colors: [processColor('blue')],
-                                    }
-                                }]
-                            }}
-                        />
+                                        barWidth: 0.2,
+                                        group: {
+                                            fromX: 0,
+                                            groupSpace: 0.1,
+                                            barSpace: 0.1,
+                                        },
+                                    },
+                                }}
+                            />
+                        </View>
                     </View>
-                </View>
-
-            )
+                )
+            } else {
+                return (<ActivityIndicator size="large" color="#0000ff" />)
+            }
         } else {
-            return (<ActivityIndicator animating={true} color={Colors.red800} />)
+            let item = { "item": params.item, "nutrient": params.nutrient };
+            let result = calcOneItem(item);
+            if (result) {
+                return (
+                    <View style={{ flex: 1 }}>
+                        <View style={styles.container}>
+                            <BarChart style={styles.chart}
+                                legend={{
+                                    enabled: true,
+                                    textSize: 14,
+                                    form: "SQUARE",
+                                    formSize: 20,
+                                    xEntrySpace: 1,
+                                    yEntrySpace: 1,
+                                    wordWrapEnabled: true
+                                }}
+
+                                data={{
+                                    dataSets: [{
+                                        values: [result.qb, result.pqb, result.ccu, result.sp, result.scp],
+                                        label: 'Продукт 1',
+                                        config: {
+                                            drawValues: false,
+                                            colors: [processColor('blue')],
+                                        }
+                                    }]
+                                }}
+                            />
+                        </View>
+                    </View>
+                )
+            } else {
+                return (<ActivityIndicator animating={true} color={Colors.red800} />)
+            }
         }
     }
 
-    if (product.length > 1) {
-        if (leftSelected && rightSelected) {
-            return (
-                <>
-                    <ScrollView>
-                        <View>
-                            <CalResult item={leftSelected} />
-                            <CalResult item={rightSelected} />
-                        </View>
-                    </ScrollView>
-                </>
-            );
-        } else {
-            return (<>
-                <ActivityIndicator animating={true} color={Colors.blue800} />
-            </>)
-        }
+    console.log(props)
+    if (props.product.length > 1) {
+        return (
+            <>
+                <CalResult Litem={props.leftSelected} Ritem={props.rightSelected} nutrient={props.nutrientSelected} />
+            </>
+        );
     } else {
         return (
-            <CalResult item={product[0]} />
+            <CalResult item={props.product[0]} nutrient={props.nutrientSelected} />
         )
     }
 };

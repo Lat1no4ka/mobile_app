@@ -1,31 +1,70 @@
 import React, { useState, useEffect } from 'react';
-import * as calculation from "../../../services/calculation/Calcualtion";
+import ModalWindow from "./ModalWindow";
 import Calcualtions from "./Calculations";
 import ChartsWrapper from "./ChartsWrapper";
+import { IconButton } from 'react-native-paper';
+import { StyleSheet } from "react-native";
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 const Tab = createMaterialTopTabNavigator();
 
 const Result = ({ route, navigation }) => {
+    const [visible, setVisible] = useState(false);
     const product = route.params.data;
     const [leftSelected, setLeftSelected] = useState(null);
     const [rightSelected, setRightSelected] = useState(null);
+    const [nutrientSelected, setNutrientSelected] = useState(null);
+
+    route.params.checkedItem = route.params.checkedItem.filter((check) => {
+        return check != null ? check : null;
+    })
+
+    React.useLayoutEffect(() => {
+        navigation.setOptions({
+            headerRight: () => (
+                <IconButton
+                    icon="reorder-three"
+                    size={35}
+                    onPress={() => setVisible(!visible)}
+                />
+            ),
+        });
+    }, [navigation]);
 
     if (product.length > 1) {
         return (
             <>
+                <ModalWindow
+                    setV={setVisible}
+                    visible={visible}
+                    style={styles.modalWindow}
+                    params={route.params}
+                    setLeftSelected={setLeftSelected}
+                    setRightSelected={setRightSelected}
+                    setNutrientSelected={setNutrientSelected}
+                    leftSelected={leftSelected ?? product[0]}
+                    rightSelected={rightSelected ?? product[1]}
+                    nutrientSelected={nutrientSelected ?? route.params.checkedItem[0]}
+                />
+
                 <Tab.Navigator>
                     <Tab.Screen name="Расчет" component={() => <Calcualtions
-                        params={route.params}
+                        product={product}
                         setLeftSelected={setLeftSelected}
                         setRightSelected={setRightSelected}
-                        leftSelected={leftSelected}
-                        rightSelected={rightSelected}
+                        setNutrientSelected={setNutrientSelected}
+                        leftSelected={leftSelected ?? product[0]}
+                        rightSelected={rightSelected ?? product[1]}
+                        nutrientSelected={nutrientSelected ?? route.params.checkedItem[0]}
                     />} />
                     <Tab.Screen name="График" component={() => <ChartsWrapper
-                        params={route.params}
-                        leftSelected={leftSelected}
-                        rightSelected={rightSelected}
+                        product={product}
+                        setLeftSelected={setLeftSelected}
+                        setRightSelected={setRightSelected}
+                        setNutrientSelected={setNutrientSelected}
+                        leftSelected={leftSelected ?? product[0]}
+                        rightSelected={rightSelected ?? product[1]}
+                        nutrientSelected={nutrientSelected ?? route.params.checkedItem[0]}
                     />} />
                 </Tab.Navigator>
             </>
@@ -33,13 +72,38 @@ const Result = ({ route, navigation }) => {
     } else {
         return (
             <>
+                <ModalWindow
+                    setV={setVisible}
+                    visible={visible}
+                    style={styles.modalWindow}
+                    params={route.params}
+                    setLeftSelected={setLeftSelected}
+                    setRightSelected={setRightSelected}
+                    setNutrientSelected={setNutrientSelected}
+                    leftSelected={leftSelected ?? product[0]}
+                    rightSelected={rightSelected ?? product[0]}
+                    nutrientSelected={nutrientSelected ?? route.params.checkedItem[0]}
+                />
                 <Tab.Navigator>
-                    <Tab.Screen name="Расчет" component={() => <Calcualtions params={route.params} />} />
-                    <Tab.Screen name="График" component={() => <ChartsWrapper params={route.params} />} />
+                    <Tab.Screen name="Расчет" component={() => <Calcualtions
+                        product={product}
+                        nutrientSelected={nutrientSelected ?? route.params.checkedItem[0]} />} />
+                    {<Tab.Screen name="График" component={() => <ChartsWrapper
+                        product={product}
+                        nutrientSelected={nutrientSelected ?? route.params.checkedItem[0]}
+                    />} />}
                 </Tab.Navigator>
             </>
         )
     }
 }
+
+const styles = StyleSheet.create({
+    modalWindow: {
+        position: 'absolute',
+        left: 0,
+        bottom: 0,
+    }
+});
 
 export default Result;
