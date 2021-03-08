@@ -7,8 +7,6 @@ const Dropdown = (props) => {
     const [focusL, setFocusL] = useState(false);
     const [focusR, setFocusR] = useState(false);
     const [focusN, setFocusN] = useState(false);
-    console.log("props")
-    console.log(props.product.length)
     if (props.product.length > 1) {
         return (
             <>

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import * as calculation from "../../../services/calculation/Calcualtion";
-import Dropdown from "./Dropdown";
 import { Table, Row, Rows } from 'react-native-table-component';
 import { ActivityIndicator } from "react-native";
 import { StyleSheet, Dimensions, View, Text, ScrollView } from 'react-native';
@@ -57,8 +56,8 @@ const Calculations = (props) => {
                 ];
                 return (
                     <Table borderStyle={{ borderWidth: 1, borderColor: '#0000ff' }}>
-                        <Row data={tableHead} flexArr={[1, 2, 1]} />
-                        <Rows data={tableData} flexArr={[1, 2, 1]} />
+                        <Row data={tableHead} flexArr={[1, 2, 1]} textStyle={styles.text}  />
+                        <Rows data={tableData} flexArr={[1, 2, 1]} textStyle={styles.text}  />
                     </Table>
                 )
             } else {
@@ -68,19 +67,19 @@ const Calculations = (props) => {
             let item = { "item": params.item, "nutrient": params.nutrient };
             let result = calcOneItem(item);
             if (result) {
-                let tableHead = [result.nutrient_name,params.item.name];
+                let tableHead = [result.nutrient_name, params.item.name];
                 let tableData = [
-                    [ "Содержание нутриента в продукции от суточной потребности в 100г, %", result.qb.toFixed(2)],
-                    [ "Содержание нутриента в продукции от суточной потребности в порции, %", result.pqb.toFixed(2)],
-                    [ "Ценовой коэффициент полезности, руб/%", result.ccu.toFixed(2)],
-                    [ "Обратный коэффициент, %/руб", result.ucc.toFixed(2)],
-                    [ "Кол-во порций, шт", result.sp.toFixed(2)],
-                    [ "Стоимость порций, руб.", result.scp.toFixed(2)]
+                    ["Содержание нутриента в продукции от суточной потребности в 100г, %", result.qb.toFixed(2)],
+                    ["Содержание нутриента в продукции от суточной потребности в порции, %", result.pqb.toFixed(2)],
+                    ["Ценовой коэффициент полезности, руб/%", result.ccu.toFixed(2)],
+                    ["Обратный коэффициент, %/руб", result.ucc.toFixed(2)],
+                    ["Кол-во порций, шт", result.sp.toFixed(2)],
+                    ["Стоимость порций, руб.", result.scp.toFixed(2)]
                 ];
                 return (
                     <Table borderStyle={{ borderWidth: 1, borderColor: '#0000ff' }}>
-                        <Row data={tableHead} flexArr={[2, 1]} />
-                        <Rows data={tableData} flexArr={[2, 1]} />
+                        <Row data={tableHead} flexArr={[2, 1]} textStyle={styles.text} />
+                        <Rows data={tableData} flexArr={[2, 1]} textStyle={styles.text} />
                     </Table>
                 )
             } else {
@@ -102,7 +101,7 @@ const Calculations = (props) => {
     } else {
         return (
             <ScrollView>
-                <CalResult  item={props.product[0]} nutrient={props.nutrientSelected} />
+                <CalResult item={props.product[0]} nutrient={props.nutrientSelected} />
             </ScrollView>
         )
     }
@@ -130,7 +129,10 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         width: width * 0.45
     },
-    tableCell: {
-        width: width * 0.30
-    }
+    table:{
+        paddingTop:5,
+        paddingBottom:5
+    },
+    text: { textAlign: 'center' },
+
 });

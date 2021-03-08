@@ -14,6 +14,8 @@ const Result = ({ route, navigation }) => {
     const [leftSelected, setLeftSelected] = useState(null);
     const [rightSelected, setRightSelected] = useState(null);
     const [nutrientSelected, setNutrientSelected] = useState(null);
+    const [screen, setScreen] = useState("calc");
+    const [resCalc, setResCalc] = useState({ "key": "qb" });
 
     route.params.checkedItem = route.params.checkedItem.filter((check) => {
         return check != null ? check : null;
@@ -42,30 +44,45 @@ const Result = ({ route, navigation }) => {
                     setLeftSelected={setLeftSelected}
                     setRightSelected={setRightSelected}
                     setNutrientSelected={setNutrientSelected}
+                    setResCalc={setResCalc}
                     leftSelected={leftSelected ?? product[0]}
                     rightSelected={rightSelected ?? product[1]}
                     nutrientSelected={nutrientSelected ?? route.params.checkedItem[0]}
+                    screen={screen}
                 />
 
                 <Tab.Navigator>
-                    <Tab.Screen name="Расчет" component={() => <Calcualtions
-                        product={product}
-                        setLeftSelected={setLeftSelected}
-                        setRightSelected={setRightSelected}
-                        setNutrientSelected={setNutrientSelected}
-                        leftSelected={leftSelected ?? product[0]}
-                        rightSelected={rightSelected ?? product[1]}
-                        nutrientSelected={nutrientSelected ?? route.params.checkedItem[0]}
-                    />} />
-                    <Tab.Screen name="График" component={() => <ChartsWrapper
-                        product={product}
-                        setLeftSelected={setLeftSelected}
-                        setRightSelected={setRightSelected}
-                        setNutrientSelected={setNutrientSelected}
-                        leftSelected={leftSelected ?? product[0]}
-                        rightSelected={rightSelected ?? product[1]}
-                        nutrientSelected={nutrientSelected ?? route.params.checkedItem[0]}
-                    />} />
+                    <Tab.Screen name="Расчет"
+                        listeners={{
+                            tabPress: e => {
+                                setScreen("calc")
+                            },
+                        }}
+                        component={() => <Calcualtions
+                            product={product}
+                            setLeftSelected={setLeftSelected}
+                            setRightSelected={setRightSelected}
+                            setNutrientSelected={setNutrientSelected}
+                            leftSelected={leftSelected ?? product[0]}
+                            rightSelected={rightSelected ?? product[1]}
+                            nutrientSelected={nutrientSelected ?? route.params.checkedItem[0]}
+                        />} />
+                    <Tab.Screen name="График"
+                        listeners={{
+                            tabPress: e => {
+                                setScreen("charts")
+                            },
+                        }}
+                        component={() => <ChartsWrapper
+                            product={product}
+                            setLeftSelected={setLeftSelected}
+                            setRightSelected={setRightSelected}
+                            setNutrientSelected={setNutrientSelected}
+                            leftSelected={leftSelected ?? product[0]}
+                            rightSelected={rightSelected ?? product[1]}
+                            nutrientSelected={nutrientSelected ?? route.params.checkedItem[0]}
+                            resCalc={resCalc}
+                        />} />
                 </Tab.Navigator>
             </>
         )
@@ -80,18 +97,34 @@ const Result = ({ route, navigation }) => {
                     setLeftSelected={setLeftSelected}
                     setRightSelected={setRightSelected}
                     setNutrientSelected={setNutrientSelected}
+                    setResCalc={setResCalc}
                     leftSelected={leftSelected ?? product[0]}
-                    rightSelected={rightSelected ?? product[0]}
+                    rightSelected={rightSelected ?? product[1]}
                     nutrientSelected={nutrientSelected ?? route.params.checkedItem[0]}
+                    screen={screen}
                 />
                 <Tab.Navigator>
-                    <Tab.Screen name="Расчет" component={() => <Calcualtions
-                        product={product}
-                        nutrientSelected={nutrientSelected ?? route.params.checkedItem[0]} />} />
-                    {<Tab.Screen name="График" component={() => <ChartsWrapper
-                        product={product}
-                        nutrientSelected={nutrientSelected ?? route.params.checkedItem[0]}
-                    />} />}
+                    <Tab.Screen name="Расчет"
+                        listeners={{
+                            tabPress: e => {
+                                setScreen("calc")
+                            },
+                        }}
+                        component={() => <Calcualtions
+                            product={product}
+                            nutrientSelected={nutrientSelected ?? route.params.checkedItem[0]}
+                            resCalc={resCalc} />} />
+                    {<Tab.Screen name="График"
+                        listeners={{
+                            tabPress: e => {
+                                setScreen("charts")
+                            },
+                        }}
+                        component={() => <ChartsWrapper
+                            product={product}
+                            nutrientSelected={nutrientSelected ?? route.params.checkedItem[0]}
+                            resCalc={resCalc}
+                        />} />}
                 </Tab.Navigator>
             </>
         )

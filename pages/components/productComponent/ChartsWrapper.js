@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import * as calculation from "../../../services/calculation/Calcualtion";
-import Dropdown from "./Dropdown";
 import { List, ActivityIndicator, Colors } from 'react-native-paper';
-import { StyleSheet, Dimensions, View, processColor, ScrollView } from 'react-native';
+import { StyleSheet, Dimensions, View, Text, processColor } from 'react-native';
 import { BarChart } from 'react-native-charts-wrapper';
 
 const ChartsWrapper = (props) => {
@@ -39,109 +38,55 @@ const ChartsWrapper = (props) => {
 
 
     const CalResult = (params) => {
-        if (Object.keys(params).length > 2) {
-            let Litem = { "item": params.Litem, "nutrient": params.nutrient };
-            let Ritem = { "item": params.Ritem, "nutrient": params.nutrient };
-            let Lresult = calcOneItem(Litem);
-            let Rresult = calcOneItem(Ritem);
+        console.log(params)
+        let items = params.items.map((item) => {
+            return calcOneItem({ "item": item, "nutrient": params.nutrient });
+        })
+        if (items.every(item => item)) {
+            let res = items.map((item) => {
+                return item[props.resCalc.key]
+            })
+            return (
+                <View style={{ flex: 1 }}>
+                    <View style={styles.container}>
+                        <BarChart style={styles.chart}
+                            legend={{
+                                enabled: true,
+                                textSize: 14,
+                                form: "SQUARE",
+                                formSize: 20,
+                                xEntrySpace: 1,
+                                yEntrySpace: 1,
+                                wordWrapEnabled: true
+                            }}
 
-            if (Rresult && Lresult) {
-                return (
-                    <View style={{ flex: 1 }}>
-                        <View style={styles.container}>
-                            <BarChart style={styles.chart}
-                                legend={{
-                                    enabled: true,
-                                    textSize: 12,
-                                    form: "SQUARE",
-                                    formSize: 14,
-                                    xEntrySpace: 1,
-                                    yEntrySpace: 1,
-                                    wordWrapEnabled: true
-                                }}
-                                data={{
-                                    dataSets: [{
-                                        values: [Lresult.qb, Lresult.pqb, Lresult.ccu, Lresult.sp, Lresult.scp],
-                                        label: 'Продукт 1',
-                                        config: {
-                                            drawValues: false,
-                                            colors: [processColor('blue')],
-                                        }
-                                    },
-                                    {
-                                        values: [Rresult.qb, Rresult.pqb, Rresult.ccu, Rresult.sp, Rresult.scp],
-                                        label: 'Company B',
-                                        config: {
-                                            drawValues: false,
-                                            colors: [processColor('red')],
-                                        }
-                                    }],
+                            data={{
+                                dataSets: [{
+                                    values: res,
+                                    label: props.resCalc.name,
                                     config: {
-                                        barWidth: 0.2,
-                                        group: {
-                                            fromX: 0,
-                                            groupSpace: 0.1,
-                                            barSpace: 0.1,
-                                        },
-                                    },
-                                }}
-                            />
-                        </View>
+                                        drawValues: false,
+                                        colors: [processColor('blue')],
+                                    }
+                                }],
+                                config: {
+                                    barWidth: 0.3,
+                                }
+                            }}
+                        />
                     </View>
-                )
-            } else {
-                return (<ActivityIndicator size="large" color="#0000ff" />)
-            }
+                </View>
+            )
         } else {
-            let item = { "item": params.item, "nutrient": params.nutrient };
-            let result = calcOneItem(item);
-            if (result) {
-                return (
-                    <View style={{ flex: 1 }}>
-                        <View style={styles.container}>
-                            <BarChart style={styles.chart}
-                                legend={{
-                                    enabled: true,
-                                    textSize: 14,
-                                    form: "SQUARE",
-                                    formSize: 20,
-                                    xEntrySpace: 1,
-                                    yEntrySpace: 1,
-                                    wordWrapEnabled: true
-                                }}
-
-                                data={{
-                                    dataSets: [{
-                                        values: [result.qb, result.pqb, result.ccu, result.sp, result.scp],
-                                        label: 'Продукт 1',
-                                        config: {
-                                            drawValues: false,
-                                            colors: [processColor('blue')],
-                                        }
-                                    }]
-                                }}
-                            />
-                        </View>
-                    </View>
-                )
-            } else {
-                return (<ActivityIndicator animating={true} color={Colors.red800} />)
-            }
+            return (<ActivityIndicator animating={true} color={Colors.red800} />)
         }
     }
 
-    console.log(props)
-    if (props.product.length > 1) {
-        return (
-            <>
-                <CalResult Litem={props.leftSelected} Ritem={props.rightSelected} nutrient={props.nutrientSelected} />
-            </>
-        );
-    } else {
-        return (
-            <CalResult item={props.product[0]} nutrient={props.nutrientSelected} />
-        )
-    }
+    return (
+        <>
+            <CalResult items={props.product} nutrient={props.nutrientSelected} />
+        </>
+    )
 };
 
 

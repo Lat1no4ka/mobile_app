@@ -1,59 +1,105 @@
 import React, { useState, useEffect } from 'react';
-import { Alert, Modal, StyleSheet, Text, View, TouchableOpacity, TouchableWithoutFeedback,Pressable } from "react-native";
+import { Alert, Modal, StyleSheet, Text, View, TouchableOpacity, TouchableWithoutFeedback, Pressable } from "react-native";
 import Dropdown from "./Dropdown";
+import DropdownCharts from "./DropdownCharts";
 
 const ModalWindow = (props) => {
 
     const [leftSelected, setLeftSelected] = useState(props.leftSelected);
     const [rightSelected, setRightSelected] = useState(props.rightSelected);
     const [nutrientSelected, setNutrientSelected] = useState(props.nutrientSelected);
+    const [resCalc, setResCalc] = useState({"key":"qb"});
     const closeModal = () => {
         props.setLeftSelected(leftSelected);
         props.setRightSelected(rightSelected);
         props.setNutrientSelected(nutrientSelected);
         props.setV(false);
+        props.setResCalc(resCalc)
     }
-
-    return (
-        <View style={styles.centeredView}>
-            <Modal
-                animationType="slide"
-                transparent={true}
-                presentationStyle={"overFullScreen"}
-                visible={props.visible}
-                onRequestClose={() => {
-                    props.setV(!props.visible);
-                }}
-            >
-                <TouchableOpacity
-                    style={styles.centeredView}
-                    activeOpacity={1}
-                    onPressOut={() => { props.setV(false) }}
+    if (props.screen == "calc") {
+        return (
+            <View style={styles.centeredView}>
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    presentationStyle={"overFullScreen"}
+                    visible={props.visible}
+                    onRequestClose={() => {
+                        props.setV(!props.visible);
+                    }}
                 >
-                    <TouchableWithoutFeedback>
-                        <View style={styles.modalView}>
-                            <Dropdown
-                                product={props.params.data}
-                                checkedItem={props.params.checkedItem}
-                                leftSelected={leftSelected}
-                                rightSelected={rightSelected}
-                                nutrientSelected={nutrientSelected}
-                                setRightSelected={setRightSelected}
-                                setLeftSelected={setLeftSelected}
-                                setNutrientSelected={setNutrientSelected}
-                            />
-                            <Pressable
-                                style={[styles.button, styles.buttonClose]}
-                                onPress={() => closeModal()}
-                            >
-                                <Text style={styles.textStyle}>Расчет</Text>
-                            </Pressable>
-                        </View>
-                    </TouchableWithoutFeedback>
-                </TouchableOpacity>
-            </Modal>
-        </View>
-    )
+                    <TouchableOpacity
+                        style={styles.centeredView}
+                        activeOpacity={1}
+                        onPressOut={() => { props.setV(false) }}
+                    >
+                        <TouchableWithoutFeedback>
+                            <View style={styles.modalView}>
+                                <Dropdown
+                                    product={props.params.data}
+                                    checkedItem={props.params.checkedItem}
+                                    leftSelected={leftSelected}
+                                    rightSelected={rightSelected}
+                                    nutrientSelected={nutrientSelected}
+                                    setRightSelected={setRightSelected}
+                                    setLeftSelected={setLeftSelected}
+                                    setNutrientSelected={setNutrientSelected}
+                                />
+                                <Pressable
+                                    style={[styles.button, styles.buttonClose]}
+                                    onPress={() => closeModal()}
+                                >
+                                    <Text style={styles.textStyle}>Расчет</Text>
+                                </Pressable>
+                            </View>
+                        </TouchableWithoutFeedback>
+                    </TouchableOpacity>
+                </Modal>
+            </View>
+        )
+    } else {
+        return (
+            <View style={styles.centeredView}>
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    presentationStyle={"overFullScreen"}
+                    visible={props.visible}
+                    onRequestClose={() => {
+                        props.setV(!props.visible);
+                    }}
+                >
+                    <TouchableOpacity
+                        style={styles.centeredView}
+                        activeOpacity={1}
+                        onPressOut={() => { props.setV(false) }}
+                    >
+                        <TouchableWithoutFeedback>
+                            <View style={styles.modalView}>
+                                <DropdownCharts
+                                    product={props.params.data}
+                                    checkedItem={props.params.checkedItem}
+                                    leftSelected={leftSelected}
+                                    rightSelected={rightSelected}
+                                    nutrientSelected={nutrientSelected}
+                                    setRightSelected={setRightSelected}
+                                    setLeftSelected={setLeftSelected}
+                                    setNutrientSelected={setNutrientSelected}
+                                    setResCalc={setResCalc}
+                                />
+                                <Pressable
+                                    style={[styles.button, styles.buttonClose]}
+                                    onPress={() => closeModal()}
+                                >
+                                    <Text style={styles.textStyle}>Расчет</Text>
+                                </Pressable>
+                            </View>
+                        </TouchableWithoutFeedback>
+                    </TouchableOpacity>
+                </Modal>
+            </View>
+        )
+    }
 }
 
 const styles = StyleSheet.create({
