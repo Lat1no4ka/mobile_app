@@ -21,7 +21,7 @@ export const dataFromDB = (item) => {
         }
 
         let productFromDB = null;
-        selectQuery = await client.ExecuteQuery(`SELECT * FROM PRODUCT WHERE PRODUCT_NAME = '${item.name}'`, []);
+        selectQuery = await client.ExecuteQuery(`SELECT * FROM PRODUCT WHERE PRODUCT_NAME = ?`, [item.name]);
         rows = selectQuery.rows;
         for (let i = 0; i < rows.length; i++) {
             productFromDB = rows.item(i);
