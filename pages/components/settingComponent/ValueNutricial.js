@@ -1,9 +1,21 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { Button } from 'react-native-paper';
+import React, {useState} from 'react';
+import {Text, View, StyleSheet} from 'react-native'
+import { TextInput, List, Button } from 'react-native-paper';
+import SqlClient from '../../../CommonClient/SqlClient/SqlClient';
 
 
 const ValueNutricial = ({navigation}) => {
+
+    const [client] = useState(SqlClient());
+   
+ 
+    const refreshData = async () => {
+      await client.ExecuteQuery(`DELETE FROM PRODUCT;`);  
+      //console.log("delete");
+      await client.ExecuteQuery(`INSERT INTO PRODUCT
+                                 SELECT * from PRODUCTBACKUP;`);
+                              // console.log("insert")
+    }
 
   
   return(
@@ -23,7 +35,7 @@ const ValueNutricial = ({navigation}) => {
                 mode="contained"
                 
                 style={styles.Buttons}
-                onPress={() => navigation.navigate('Сброс',{})}>
+                onPress={() => refreshData()}>
                 Сброс
             </Button>
         </View>

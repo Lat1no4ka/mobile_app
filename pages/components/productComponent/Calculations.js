@@ -69,6 +69,7 @@ const Calculations = (props) => {
             let result = calcOneItem(item);
             if (result) {
                 let tableHead = [result.nutrient_name,params.item.name];
+
                 let tableData = [
                     [ "Содержание нутриента в продукции от суточной потребности в 100г, %", result.qb.toFixed(2)],
                     [ "Содержание нутриента в продукции от суточной потребности в порции, %", result.pqb.toFixed(2)],
@@ -77,6 +78,7 @@ const Calculations = (props) => {
                     [ "Кол-во порций, шт", result.sp.toFixed(2)],
                     [ "Стоимость порций, руб.", result.scp.toFixed(2)]
                 ];
+                
                 return (
                     <Table borderStyle={{ borderWidth: 1, borderColor: '#0000ff' }}>
                         <Row data={tableHead} flexArr={[2, 1]} />
