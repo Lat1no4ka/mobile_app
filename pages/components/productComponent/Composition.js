@@ -2,14 +2,14 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import { Checkbox, Button } from 'react-native-paper';
-
+import SqlClient from '../../../CommonClient/SqlClient/SqlClient';
 
 function Composition({ route, navigation }) {
     const [protein, setProtein] = useState(false);
     const [fat, setFat] = useState(false);
     const [carbohydrates, setCarbohydrates] = useState(false);
     const [alimentaryFiber, setFiber] = useState(false);
-    const [potassium,setPotassium] = useState(false);
+    const [potassium, setPotassium] = useState(false);
     const [calcium, setCalcium] = useState(false);
     const [magnesium, setMagnesium] = useState(false);
     const [phosphorus, setPhosphorus] = useState(false);
@@ -24,25 +24,41 @@ function Composition({ route, navigation }) {
     const [data, setParams] = useState(route.params.product);
 
     const checkedItem = [
-        protein ? {"name":'Белки', "key":"protein"} : null,
-        fat ? {"name":'Жиры', "key":"fats"} : null,
-        carbohydrates ? {"name":'Углеводы', "key":"carbohydrates"} : null,
-        alimentaryFiber ? {"name":'Пищевые волокна', "key":"alimentary_fiber"} : null,
-        potassium ? {"name":'Калий', "key":"potassium"} : null,
-        calcium ? {"name":'Кальций', "key":"calcium"} : null,
-        magnesium ? {"name":'Магний', "key":"magnesium"} : null,
-        phosphorus ? {"name":'Фосфор', "key":"phosphorus"} : null,
-        iron ? {"name":'Железо', "key":"iron"} : null,
-        vitaminA ? {"name":'Витамин A', "key":"vitamin_a"} : null,
-        vitaminB1 ? {"name":'Витамин B1', "key":"vitamin_b1"} : null,
-        vitaminB2 ? {"name":'Витамин B2', "key":"vitamin_b2"} : null,
-        vitaminPP ? {"name":'Витамин PP', "key":"vitamin_pp"} : null,
-        vitaminC ? {"name":'Витамин C', "key":"vitamin_c"} : null,
-        vitaminE ? {"name":'Витамин Е', "key":"vitamin_e"} : null,
-        energyValue ? {"name":'Энергетическая ценность', "key":"energy_value"} : null,
+        protein ? { "name": 'Белки', "key": "protein" } : null,
+        fat ? { "name": 'Жиры', "key": "fats" } : null,
+        carbohydrates ? { "name": 'Углеводы', "key": "carbohydrates" } : null,
+        alimentaryFiber ? { "name": 'Пищевые волокна', "key": "alimentary_fiber" } : null,
+        potassium ? { "name": 'Калий', "key": "potassium" } : null,
+        calcium ? { "name": 'Кальций', "key": "calcium" } : null,
+        magnesium ? { "name": 'Магний', "key": "magnesium" } : null,
+        phosphorus ? { "name": 'Фосфор', "key": "phosphorus" } : null,
+        iron ? { "name": 'Железо', "key": "iron" } : null,
+        vitaminA ? { "name": 'Витамин A', "key": "vitamin_a" } : null,
+        vitaminB1 ? { "name": 'Витамин B1', "key": "vitamin_b1" } : null,
+        vitaminB2 ? { "name": 'Витамин B2', "key": "vitamin_b2" } : null,
+        vitaminPP ? { "name": 'Витамин PP', "key": "vitamin_pp" } : null,
+        vitaminC ? { "name": 'Витамин C', "key": "vitamin_c" } : null,
+        vitaminE ? { "name": 'Витамин Е', "key": "vitamin_e" } : null,
+        energyValue ? { "name": 'Энергетическая ценность', "key": "energy_value" } : null,
     ];
 
+    const nextPage = () => {
+        addIntoHystory();
+        navigation.navigate('Расчет', {
+            data, checkedItem
+        })
+    };
 
+    const addIntoHystory = async () => {
+       let client = SqlClient();
+       let selectQuery = await client.ExecuteQuery(`INSERT INTO HISTORY ( products, nutrient ) 
+                                                   VALUES ('${JSON.stringify(data)}','${JSON.stringify(checkedItem)}')`, []);
+        // selectQuery = await client.ExecuteQuery(`select * from HISTORY`, []);  
+        // var rows = selectQuery.rows;                                          
+        // for (let i = 0; i < rows.length; i++) {
+        //     console.log(JSON.parse(rows.item(i).products));
+        // }                                          
+    }
 
     return (
         <ScrollView>
@@ -51,7 +67,7 @@ function Composition({ route, navigation }) {
                 <Checkbox.Item label="Жиры, г" status={fat ? 'checked' : 'unchecked'} onPress={() => setFat(!fat)} style={styles.checkBox} />
                 <Checkbox.Item label="Углеводы, г" status={carbohydrates ? 'checked' : 'unchecked'} onPress={() => setCarbohydrates(!carbohydrates)} style={styles.checkBox} />
                 <Checkbox.Item label="Пищевые волокна, г" status={alimentaryFiber ? 'checked' : 'unchecked'} onPress={() => setFiber(!alimentaryFiber)} style={styles.checkBox} />
-                <Checkbox.Item label="Калий, мг" status={potassium ? 'checked' : 'unchecked'} onPress={() =>setPotassium(!potassium)} style={styles.checkBox} />
+                <Checkbox.Item label="Калий, мг" status={potassium ? 'checked' : 'unchecked'} onPress={() => setPotassium(!potassium)} style={styles.checkBox} />
                 <Checkbox.Item label="Кальций, мг" status={calcium ? 'checked' : 'unchecked'} onPress={() => setCalcium(!calcium)} style={styles.checkBox} />
                 <Checkbox.Item label="Магний, мг" status={magnesium ? 'checked' : 'unchecked'} onPress={() => setMagnesium(!magnesium)} style={styles.checkBox} />
                 <Checkbox.Item label="Фосфор, мг" status={phosphorus ? 'checked' : 'unchecked'} onPress={() => setPhosphorus(!phosphorus)} style={styles.checkBox} />
@@ -69,9 +85,7 @@ function Composition({ route, navigation }) {
                 <Button
                     mode="contained"
                     style={styles.button}
-                    onPress={() => navigation.navigate('Расчет', {
-                        data, checkedItem
-                    })}>
+                    onPress={() => nextPage()}>
                     Дальше
                 </Button>
             </View>

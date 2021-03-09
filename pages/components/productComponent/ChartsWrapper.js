@@ -1,48 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import * as calculation from "../../../services/calculation/Calcualtion";
-import Dropdown from "./Dropdown";
 import { List, ActivityIndicator, Colors } from 'react-native-paper';
-import { StyleSheet, Dimensions, View, processColor, ScrollView } from 'react-native';
+import { StyleSheet, Dimensions, View, Text, processColor } from 'react-native';
 import { BarChart } from 'react-native-charts-wrapper';
 
 const ChartsWrapper = (props) => {
-    const product = props.params.data;
-    console.log(props)
-    const leftSelected = (props.leftSelected);
-    const rightSelected = (props.rightSelected);
-
-    const checkedItem = props.params.checkedItem.filter((check) => {
-        return check != null ? check : null;
-    })
-
-
-
     useEffect(() => {
     }, []);
 
 
-    const calcOneItem = (item) => {
-        let result = [];
-        let data = calculation.dataFromDB(item);
+    const calcOneItem = (params) => {
+        let result = {};
+        let data = calculation.dataFromDB(params.item);
         if (data) {
-            checkedItem.forEach(nutrient => {
-                let qb = calculation.qb(data.dayliRate, data.product, nutrient);
-                let pqb = calculation.pqb(qb, item);
-                let ccu = calculation.ccu(pqb, item);
-                let ucc = calculation.ucc(pqb, item)
-                let sp = calculation.sp(pqb)
-                let scp = calculation.scp(sp, item)
-                result.push({
-                    "nutrient_name": nutrient.name,
-                    "qb": qb,
-                    "pqb": pqb,
-                    "ccu": ccu,
-                    "ucc": ucc,
-                    "sp": sp,
-                    "scp": scp,
-                })
-            });
-            if (result.length > 0) {
+            let qb = calculation.qb(data.dayliRate, data.product, params.nutrient);
+            let pqb = calculation.pqb(qb, params.item);
+            let ccu = calculation.ccu(pqb, params.item);
+            let ucc = calculation.ucc(pqb, params.item);
+            let sp = calculation.sp(pqb)
+            let scp = calculation.scp(sp, params.item)
+            result = {
+                "nutrient_name": params.nutrient.name,
+                "qb": qb,
+                "pqb": pqb,
+                "ccu": ccu,
+                "ucc": ucc,
+                "sp": sp,
+                "scp": scp,
+            }
+            if (result) {
                 return result;
             }
         }
@@ -50,29 +36,17 @@ const ChartsWrapper = (props) => {
 
     }
 
-    const CalResult = (props) => {
 
-        let result = calcOneItem(props.item);
-
-        if (result) {
-           let info = result[0];
+    const CalResult = (params) => {
+        console.log(params)
+        let items = params.items.map((item) => {
+            return calcOneItem({ "item": item, "nutrient": params.nutrient });
+        })
+        if (items.every(item => item)) {
+            let res = items.map((item) => {
+                return item[props.resCalc.key]
+            })
             return (
-                // {
-                //     result.map((info) => {
-                //         return (
-                //             <View>
-                //                 <Text>Расчет для {info.nutrient_name}</Text>
-
-                //                 <Text>{info.qb}</Text>
-                //                 <Text>{info.pqb}</Text>
-                //                 <Text>{info.ccu}</Text>
-                //                 <Text>{info.ucc}</Text>
-                //                 <Text>{info.sp}</Text>
-                //                 <Text>{info.scp}</Text>
-                //             </View>
-                //         )
-                //     })
-                // }
                 <View style={{ flex: 1 }}>
                     <View style={styles.container}>
                         <BarChart style={styles.chart}
@@ -88,46 +62,31 @@ const ChartsWrapper = (props) => {
 
                             data={{
                                 dataSets: [{
-                                    values: [info.qb, info.pqb, info.ccu, info.sp, info.scp],
-                                    label: 'Продукт 1',
+                                    values: res,
+                                    label: props.resCalc.name,
                                     config: {
                                         drawValues: false,
                                         colors: [processColor('blue')],
                                     }
-                                }]
+                                }],
+                                config: {
+                                    barWidth: 0.3,
+                                }
                             }}
                         />
                     </View>
                 </View>
-
             )
         } else {
             return (<ActivityIndicator animating={true} color={Colors.red800} />)
         }
     }
 
-    if (product.length > 1) {
-        if (leftSelected && rightSelected) {
-            return (
-                <>
-                    <ScrollView>
-                        <View>
-                            <CalResult item={leftSelected} />
-                            <CalResult item={rightSelected} />
-                        </View>
-                    </ScrollView>
-                </>
-            );
-        } else {
-            return (<>
-                <ActivityIndicator animating={true} color={Colors.blue800} />
-            </>)
-        }
-    } else {
-        return (
-            <CalResult item={product[0]} />
-        )
-    }
+    return (
+        <>
+            <CalResult items={props.product} nutrient={props.nutrientSelected} />
+        </>
+    )
 };
 
 
