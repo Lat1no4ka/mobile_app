@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Text, View, StyleSheet} from 'react-native'
+import {Text, View, StyleSheet, Alert} from 'react-native'
 import { TextInput, List, Button } from 'react-native-paper';
 import SqlClient from '../../../CommonClient/SqlClient/SqlClient';
 
@@ -16,6 +16,20 @@ const ValueNutricial = ({navigation}) => {
                                  SELECT * from PRODUCTBACKUP;`);
                               // console.log("insert")
     }
+
+    const buttonAlert = () =>
+    Alert.alert(
+      "ВНИМАНИЕ",
+      "Вы уверены, что хотите сбросить все табличные значения до заводских?",
+      [
+        {
+          text: "Отмена",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        { text: "Подтвердить", onPress: () => refreshData() }
+      ]
+    );
 
   
   return(
@@ -35,7 +49,7 @@ const ValueNutricial = ({navigation}) => {
                 mode="contained"
                 
                 style={styles.Buttons}
-                onPress={() => refreshData()}>
+                onPress={() => buttonAlert()}>
                 Сброс
             </Button>
         </View>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { SafeAreaView, View, Text, StyleSheet, Dimensions, FlatList,ScrollView } from 'react-native';
+import { SafeAreaView, View, Text, StyleSheet, Dimensions, FlatList,ScrollView, Alert } from 'react-native';
 import { TextInput, List, Button } from 'react-native-paper';
 import SqlClient from '../../../CommonClient/SqlClient/SqlClient';
 
@@ -70,52 +70,29 @@ const ChangeValue = ({route, navigation}) => {
 
 
 
-
-
   
 const updateData = async () => {
+    if ((protein || fats || carbohydrates || alimentaryfiber || potassium || calcium || magnesium || phosphorus || iron || vitamina || vitaminbone ||
+        vitaminbtwo || vitaminpp || vitaminc || vitamine || energyvalue) != null) {
+
+        
   await client.ExecuteQuery(`UPDATE PRODUCT
-  SET protein = '%${protein}%', fats = '%${fats}%', carbohydrates = '%${carbohydrates}%', 
-  alimentary_fiber = '%${alimentaryfiber}%', potassium =  '%${potassium}%', 
-  calcium = '%${calcium}%', magnesium = '%${magnesium}%', phosphorus = '%${phosphorus}%',
-  iron = '%${iron}%', vitamin_a = '%${vitamina}%', vitamin_b1 = '%${vitaminbone}%', 
-  vitamin_b2 = '%${vitaminbtwo}%', vitamin_pp = '%${vitaminpp}%', vitamin_c = '%${vitaminc}%', 
-  vitamin_e = '%${vitamine}%', energy_value = '%${energyvalue}%'
-  WHERE id LIKE '%${id}%';`)
+  SET protein = '${Number (protein)}', fats = '${Number (fats)}', carbohydrates = '${Number (carbohydrates)}', 
+  alimentary_fiber = '${Number (alimentaryfiber)}', potassium =  '${Number (potassium)}', 
+  calcium = '${Number (calcium)}', magnesium = '${Number (magnesium)}', phosphorus = '${Number (phosphorus)}',
+  iron = '${Number (iron)}', vitamin_a = '${Number (vitamina)}', vitamin_b1 = '${Number (vitaminbone)}', 
+  vitamin_b2 = '${Number (vitaminbtwo)}', vitamin_pp = '${Number (vitaminpp)}', vitamin_c = '${Number (vitaminc)}', 
+  vitamin_e = '${Number (vitamine)}', energy_value = '${Number (energyvalue)}'
+  WHERE id = '${id}';`)
 // product.push(data);
 //console.log(protein, fats, carbohydrates, alimentaryfiber, potassium, calcium, magnesium, phosphorus, iron, vitamina, vitaminbone, vitaminbtwo, vitaminpp, vitaminc, vitamine, energyvalue);
+    }
+    else {
+        Alert.alert("Ошибка",
+        "Введите все значения!")
+    }
 }
-  
 
-
-
-  const sendAllData = async (param) => {
-
-      let data = {
-          "id": id,
-          "name": text,
-          /*"protein": protein,
-          "fats": fats,
-          "carbohydrates": carbohydrates,
-          "alimentaryfiber": alimentaryfiber,
-          "potassium": potassium,
-          "calcium": calcium,
-          "magnesium": magnesium,
-          "phosphorus": phosphorus,
-          "iron": iron,
-          "vitamina": vitamina,
-          "vitaminbone": vitaminbone,
-          "vitaminbtwo": vitaminbtwo,
-          "vitaminpp": vitaminpp,
-          "vitaminc": vitaminc,
-          "vitamine": vitamine,
-          "energyvalue": energyvalue
-          */
-      };
-
-      console.log(data);
-      
-  }
 
   const onItemHendler = (id, name) => {
       setId(id);
@@ -147,6 +124,8 @@ const updateData = async () => {
                   value={text}
                   theme={{ colors: { primary: 'blue' } }}
               />
+
+
               <SafeAreaView style={styles.serachView} >
                   <FlatList
                       keyboardShouldPersistTaps='handled'
@@ -316,18 +295,20 @@ const updateData = async () => {
                       theme={{ colors: { primary: 'blue' } }}
                   />
                   <View style={styles.containerWithBtn}>
-                      <Button
+                        <Button
                           mode="contained"
                           style={styles.button}
                           onPress={() => updateData()}>
                           Применить
-              </Button>
+                        </Button>
+                        
                   </View>
               </ScrollView>
           </>
       )
   } else if (data.length <= 0 || !focus) {
       return (
+        <ScrollView>
           <TextInput
               label="Введите название продукта"
               value={text}
@@ -337,7 +318,15 @@ const updateData = async () => {
               onFocus={() => setFocus(true)}
               theme={{ colors: { primary: 'blue' } }}
           />
-
+          <View style={styles.containerWithBtn}>
+          <Button
+          mode="contained"
+          style={styles.button}
+          onPress={() => navigation.navigate('Новый продукт',{})}>
+          Новый продукт 
+          </Button>
+          </View>
+      </ScrollView>
       )
 
   }
@@ -368,7 +357,7 @@ const styles = StyleSheet.create({
       padding: 10,
   },
   button: {
-      width: 155,
+      width: 190,
       height: 40,
       margin: 20,
 
