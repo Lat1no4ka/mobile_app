@@ -40,8 +40,7 @@ const DropdownCharts = (props) => {
                 </List.Accordion>
                 <List.Accordion
                     style={styles.selected}
-                    title={checkCalc[0].name}
-
+                    title={props.resCalc.name}
                     expanded={focusR}
                     onPress={() => setFocusR(!focusR)}
                 >

@@ -6,7 +6,8 @@ import { IconButton } from 'react-native-paper';
 import { StyleSheet } from "react-native";
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
-const Tab = createMaterialTopTabNavigator();
+const Tab = createMaterialTopTabNavigator(
+);
 
 const Result = ({ route, navigation }) => {
     const [visible, setVisible] = useState(false);
@@ -15,7 +16,7 @@ const Result = ({ route, navigation }) => {
     const [rightSelected, setRightSelected] = useState(null);
     const [nutrientSelected, setNutrientSelected] = useState(null);
     const [screen, setScreen] = useState("calc");
-    const [resCalc, setResCalc] = useState({ "key": "qb" });
+    const [resCalc, setResCalc] = useState({ "name": "Содержание от суточной потребности в 100г, %", "key": "qb" });
 
     route.params.checkedItem = route.params.checkedItem.filter((check) => {
         return check != null ? check : null;
@@ -54,6 +55,9 @@ const Result = ({ route, navigation }) => {
                 <Tab.Navigator>
                     <Tab.Screen name="Расчет"
                         listeners={{
+                            swipeEnd: e => {
+                                setScreen("calc")
+                            },
                             tabPress: e => {
                                 setScreen("calc")
                             },
@@ -69,6 +73,9 @@ const Result = ({ route, navigation }) => {
                         />} />
                     <Tab.Screen name="График"
                         listeners={{
+                            swipeEnd: e => {
+                                setScreen("charts")
+                            },
                             tabPress: e => {
                                 setScreen("charts")
                             },
@@ -106,6 +113,9 @@ const Result = ({ route, navigation }) => {
                 <Tab.Navigator>
                     <Tab.Screen name="Расчет"
                         listeners={{
+                            swipeEnd: e => {
+                                setScreen("calc")
+                            },
                             tabPress: e => {
                                 setScreen("calc")
                             },
@@ -116,6 +126,9 @@ const Result = ({ route, navigation }) => {
                             resCalc={resCalc} />} />
                     {<Tab.Screen name="График"
                         listeners={{
+                            swipeEnd: e => {
+                                setScreen("charts")
+                            },
                             tabPress: e => {
                                 setScreen("charts")
                             },
