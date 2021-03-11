@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { SafeAreaView, View, Text, StyleSheet, Dimensions, FlatList } from 'react-native';
-import { TextInput, List, Button } from 'react-native-paper';
+import React from 'react';
+import { View, StyleSheet } from 'react-native';
+import { Button } from 'react-native-paper';
 
 
 

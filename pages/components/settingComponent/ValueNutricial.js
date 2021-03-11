@@ -14,7 +14,7 @@ const ValueNutricial = ({navigation}) => {
       //console.log("delete");
       await client.ExecuteQuery(`INSERT INTO PRODUCT
                                  SELECT * from PRODUCTBACKUP;`);
-                              // console.log("insert")
+                               //console.log("insert")
     }
 
     const buttonAlert = () =>
@@ -24,7 +24,7 @@ const ValueNutricial = ({navigation}) => {
       [
         {
           text: "Отмена",
-          onPress: () => console.log("Cancel Pressed"),
+          //onPress: () => console.log("Cancel Pressed"),
           style: "cancel"
         },
         { text: "Подтвердить", onPress: () => refreshData() }

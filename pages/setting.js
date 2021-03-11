@@ -6,6 +6,7 @@ import ValueNutricial from './components/settingComponent/ValueNutricial';
 import ConsumptionRates from './components/settingComponent/ConsumptionRates';
 import ChangeValue from './components/settingComponent/ChangeValue';
 import NewProduct from './components/settingComponent/NewProduct';
+import ChangeRates from './components/settingComponent/ChangeRates';
 
 
 
@@ -23,6 +24,7 @@ const SettingScreen = () => {
                 <Stack.Screen name="Нормы суточного потребления" component={ConsumptionRates} />
                 <Stack.Screen name="Изменение содержимого" component={ChangeValue} />
                 <Stack.Screen name="Новый продукт" component={NewProduct} />
+                <Stack.Screen name="Изменение норм" component={ChangeRates} />
             </Stack.Navigator>
         );
     };
