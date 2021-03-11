@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import * as calculation from "../../../services/calculation/Calcualtion";
-import { List, ActivityIndicator, Colors } from 'react-native-paper';
 import { StyleSheet, Dimensions, View, Text, processColor } from 'react-native';
+import { List, ActivityIndicator, Colors } from 'react-native-paper';
+import * as calculation from "../../../services/calculation/Calcualtion";
 import { BarChart } from 'react-native-charts-wrapper';
 
 const ChartsWrapper = (props) => {
-    const color = ['#EF6A2A', //Red
-        '#EF6A2A', //Orange
+    const color = ['#800000', //Red
+        '#ED6A2A', //Orange
         '#1BD170', //Green
         '#22D2E6', //Aqua
         '#2A3BEF', //Blue

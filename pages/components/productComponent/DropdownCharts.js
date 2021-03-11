@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import ListItem from "./ListItem";
-import { List, ActivityIndicator, Colors } from 'react-native-paper';
 import { StyleSheet, Dimensions } from 'react-native';
+import { List, ActivityIndicator, Colors } from 'react-native-paper';
+import ListItem from "./ListItem";
+
+
 
 const DropdownCharts = (props) => {
     const [focusR, setFocusR] = useState(false);

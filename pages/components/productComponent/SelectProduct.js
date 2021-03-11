@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { IconButton, Colors, Card, Title, Paragraph, Button } from 'react-native-paper';
 import { SafeAreaView, View, Text, StyleSheet, ScrollView } from 'react-native';
+import { IconButton, Colors, Card, Title, Paragraph, Button } from 'react-native-paper';
 import CardItem from "./CardItem";
 
 
@@ -9,14 +9,10 @@ const SelectProduct = ({ route, navigation }) => {
     const [product, setProduct] = useState([]);
 
     useEffect(() => {
-
-        if (route.params) {
-            setProduct(route.params.product)
-        }
     }, []);
 
     const removeItem = (id) => {
-        filtered = (product.filter((item) => {
+       let filtered = (product.filter((item) => {
             return (item ? item.id !== id : null)
         }));
         setProduct(filtered)

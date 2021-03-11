@@ -1,6 +1,6 @@
 import React from 'react';
-import { Card, DataTable, Button } from 'react-native-paper';
 import { SafeAreaView, View, Text, StyleSheet, Dimensions, FlatList } from 'react-native';
+import { Card, DataTable, Button } from 'react-native-paper';
 const CardItem = (props) => {
 
     return (

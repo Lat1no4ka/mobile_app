@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { List } from 'react-native-paper';
-import { Text } from 'react-native';
 
 const ListItem = (params) => {
     const name = params.item.name
