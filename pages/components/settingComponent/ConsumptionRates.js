@@ -39,7 +39,7 @@ return(
               icon="create"
               mode="contained"
               style={styles.Buttons}
-              onPress={() => navigation.navigate('Изменение норм',{})}>
+              onPress={() => navigation.navigate('Рекомендуемый уровень',{})}>
               Изменение содержимого
           </Button>
           
@@ -57,10 +57,12 @@ return(
 }
 const styles = StyleSheet.create({
   Container: {
-      flex: 0.13,
-      flexDirection: 'column',
-      justifyContent: 'space-between',
-      
+    flex: 0.15,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    marginLeft:20,
+    marginRight: 20,
+    marginTop: 10
     },
     Buttons: {
   
