@@ -8,7 +8,7 @@ const ModalWindow = (props) => {
     const [leftSelected, setLeftSelected] = useState(props.leftSelected);
     const [rightSelected, setRightSelected] = useState(props.rightSelected);
     const [nutrientSelected, setNutrientSelected] = useState(props.nutrientSelected);
-    const [resCalc, setResCalc] = useState({"key":"qb"});
+    const [resCalc, setResCalc] = useState({ "name": "Содержание от суточной потребности в 100г, %", "key": "qb" });
     const closeModal = () => {
         props.setLeftSelected(leftSelected);
         props.setRightSelected(rightSelected);
@@ -31,7 +31,7 @@ const ModalWindow = (props) => {
                     <TouchableOpacity
                         style={styles.centeredView}
                         activeOpacity={1}
-                        onPressOut={() => { props.setV(false) }}
+                        onPressOut={() => closeModal()}
                     >
                         <TouchableWithoutFeedback>
                             <View style={styles.modalView}>
@@ -41,6 +41,7 @@ const ModalWindow = (props) => {
                                     leftSelected={leftSelected}
                                     rightSelected={rightSelected}
                                     nutrientSelected={nutrientSelected}
+                                    resCalc={resCalc}
                                     setRightSelected={setRightSelected}
                                     setLeftSelected={setLeftSelected}
                                     setNutrientSelected={setNutrientSelected}
@@ -72,7 +73,7 @@ const ModalWindow = (props) => {
                     <TouchableOpacity
                         style={styles.centeredView}
                         activeOpacity={1}
-                        onPressOut={() => { props.setV(false) }}
+                        onPressOut={() => { closeModal() }}
                     >
                         <TouchableWithoutFeedback>
                             <View style={styles.modalView}>
@@ -82,6 +83,7 @@ const ModalWindow = (props) => {
                                     leftSelected={leftSelected}
                                     rightSelected={rightSelected}
                                     nutrientSelected={nutrientSelected}
+                                    resCalc={resCalc}
                                     setRightSelected={setRightSelected}
                                     setLeftSelected={setLeftSelected}
                                     setNutrientSelected={setNutrientSelected}

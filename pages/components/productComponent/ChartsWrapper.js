@@ -1,12 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import * as calculation from "../../../services/calculation/Calcualtion";
-import { List, ActivityIndicator, Colors } from 'react-native-paper';
 import { StyleSheet, Dimensions, View, Text, processColor } from 'react-native';
+import { List, ActivityIndicator, Colors } from 'react-native-paper';
+import * as calculation from "../../../services/calculation/Calcualtion";
 import { BarChart } from 'react-native-charts-wrapper';
 
 const ChartsWrapper = (props) => {
+    const color = ['#800000', //Red
+        '#ED6A2A', //Orange
+        '#1BD170', //Green
+        '#22D2E6', //Aqua
+        '#2A3BEF', //Blue
+        '#EF2AD2', //Purple 
+        '#EF2A2A'] //Pink
     useEffect(() => {
     }, []);
+
 
 
     const calcOneItem = (params) => {
@@ -38,40 +46,70 @@ const ChartsWrapper = (props) => {
 
 
     const CalResult = (params) => {
-        console.log(params)
+        let name = params.items.map((item) => {
+            return item.name;
+        })
+
         let items = params.items.map((item) => {
             return calcOneItem({ "item": item, "nutrient": params.nutrient });
         })
+
+
+
         if (items.every(item => item)) {
             let res = items.map((item) => {
                 return item[props.resCalc.key]
             })
+            let dataSet = res.map((item, index) => {
+                return ({
+                    values: [item],
+                    label: name[index],
+                    config: {
+                        color: processColor(color[index]),
+                        valueTextSize: 14
+                    }
+                });
+            })
+            let config = null;
+            if (dataSet.length > 1) {
+                config = {
+                    barWidth: 0.1,
+                    group: {
+                        fromX: 0,
+                        groupSpace: 0,
+                        barSpace: 0.9,
+                    },
+                }
+            } else {
+                config = {
+                    barWidth: 0.3,
+                }
+            }
             return (
-                <View style={{ flex: 1 }}>
+                <View style={{ flex: 1, margin: 10 }}>
                     <View style={styles.container}>
                         <BarChart style={styles.chart}
+                            drawValueAboveBar={true}
+                            drawHighlightArrow={true}
+                            drawBarShadow={false}
                             legend={{
                                 enabled: true,
-                                textSize: 14,
+                                textSize: 16,
                                 form: "SQUARE",
-                                formSize: 20,
-                                xEntrySpace: 1,
-                                yEntrySpace: 1,
-                                wordWrapEnabled: true
+                                formSize: 10,
+                                wordWrapEnabled: true,
                             }}
 
                             data={{
-                                dataSets: [{
-                                    values: res,
-                                    label: props.resCalc.name,
-                                    config: {
-                                        drawValues: false,
-                                        colors: [processColor('blue')],
-                                    }
-                                }],
-                                config: {
-                                    barWidth: 0.3,
-                                }
+                                dataSets: dataSet,
+                                config: config
+                            }}
+                            xAxis={{
+                                granularityEnabled: true,
+                                granularity: 1,
+                                axisMaximum: name.length,
+                                axisMinimum: name.length > 1 ? 0 : -1,
+                                centerAxisLabels: true,
                             }}
                         />
                     </View>
@@ -115,6 +153,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#F5FCFF'
     },
     chart: {
-        flex: 1
+        flex: 1,
+        maxWidth: width,
     }
 });

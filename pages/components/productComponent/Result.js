@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { StyleSheet } from "react-native";
+import { IconButton } from 'react-native-paper';
 import ModalWindow from "./ModalWindow";
 import Calcualtions from "./Calculations";
 import ChartsWrapper from "./ChartsWrapper";
-import { IconButton } from 'react-native-paper';
-import { StyleSheet } from "react-native";
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 const Tab = createMaterialTopTabNavigator();
@@ -15,7 +15,7 @@ const Result = ({ route, navigation }) => {
     const [rightSelected, setRightSelected] = useState(null);
     const [nutrientSelected, setNutrientSelected] = useState(null);
     const [screen, setScreen] = useState("calc");
-    const [resCalc, setResCalc] = useState({ "key": "qb" });
+    const [resCalc, setResCalc] = useState({ "name": "Содержание от суточной потребности в 100г, %", "key": "qb" });
 
     route.params.checkedItem = route.params.checkedItem.filter((check) => {
         return check != null ? check : null;
@@ -32,6 +32,48 @@ const Result = ({ route, navigation }) => {
             ),
         });
     }, [navigation]);
+
+
+    const calculationComponentForOne = () => {
+        return (<Calcualtions
+            product={product}
+            nutrientSelected={nutrientSelected ?? route.params.checkedItem[0]}
+            resCalc={resCalc} />
+        )
+    }
+
+    const calculationComponentForTwo = () => {
+        return (<Calcualtions
+            product={product}
+            setLeftSelected={setLeftSelected}
+            setRightSelected={setRightSelected}
+            setNutrientSelected={setNutrientSelected}
+            leftSelected={leftSelected ?? product[0]}
+            rightSelected={rightSelected ?? product[1]}
+            nutrientSelected={nutrientSelected ?? route.params.checkedItem[0]}
+        />)
+    }
+
+    const ChartsWrapperComponentForOne = () => {
+        return (<ChartsWrapper
+            product={product}
+            nutrientSelected={nutrientSelected ?? route.params.checkedItem[0]}
+            resCalc={resCalc}
+        />)
+    }
+
+    const ChartsWrapperComponentForTwo = () => {
+        return (<ChartsWrapper
+            product={product}
+            setLeftSelected={setLeftSelected}
+            setRightSelected={setRightSelected}
+            setNutrientSelected={setNutrientSelected}
+            leftSelected={leftSelected ?? product[0]}
+            rightSelected={rightSelected ?? product[1]}
+            nutrientSelected={nutrientSelected ?? route.params.checkedItem[0]}
+            resCalc={resCalc}
+        />)
+    }
 
     if (product.length > 1) {
         return (
@@ -57,32 +99,22 @@ const Result = ({ route, navigation }) => {
                             tabPress: e => {
                                 setScreen("calc")
                             },
+                            swipeEnd: e => {
+                                setScreen("calc")
+                            },
+
                         }}
-                        component={() => <Calcualtions
-                            product={product}
-                            setLeftSelected={setLeftSelected}
-                            setRightSelected={setRightSelected}
-                            setNutrientSelected={setNutrientSelected}
-                            leftSelected={leftSelected ?? product[0]}
-                            rightSelected={rightSelected ?? product[1]}
-                            nutrientSelected={nutrientSelected ?? route.params.checkedItem[0]}
-                        />} />
+                        component={calculationComponentForTwo} />
                     <Tab.Screen name="График"
                         listeners={{
                             tabPress: e => {
                                 setScreen("charts")
                             },
+                            swipeEnd: e => {
+                                setScreen("charts")
+                            },
                         }}
-                        component={() => <ChartsWrapper
-                            product={product}
-                            setLeftSelected={setLeftSelected}
-                            setRightSelected={setRightSelected}
-                            setNutrientSelected={setNutrientSelected}
-                            leftSelected={leftSelected ?? product[0]}
-                            rightSelected={rightSelected ?? product[1]}
-                            nutrientSelected={nutrientSelected ?? route.params.checkedItem[0]}
-                            resCalc={resCalc}
-                        />} />
+                        component={ChartsWrapperComponentForTwo} />
                 </Tab.Navigator>
             </>
         )
@@ -106,25 +138,24 @@ const Result = ({ route, navigation }) => {
                 <Tab.Navigator>
                     <Tab.Screen name="Расчет"
                         listeners={{
+                            swipeEnd: e => {
+                                setScreen("calc")
+                            },
                             tabPress: e => {
                                 setScreen("calc")
                             },
                         }}
-                        component={() => <Calcualtions
-                            product={product}
-                            nutrientSelected={nutrientSelected ?? route.params.checkedItem[0]}
-                            resCalc={resCalc} />} />
+                        component={calculationComponentForOne} />
                     {<Tab.Screen name="График"
                         listeners={{
+                            swipeEnd: e => {
+                                setScreen("charts")
+                            },
                             tabPress: e => {
                                 setScreen("charts")
                             },
                         }}
-                        component={() => <ChartsWrapper
-                            product={product}
-                            nutrientSelected={nutrientSelected ?? route.params.checkedItem[0]}
-                            resCalc={resCalc}
-                        />} />}
+                        component={ChartsWrapperComponentForOne} />}
                 </Tab.Navigator>
             </>
         )
