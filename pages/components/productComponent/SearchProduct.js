@@ -38,12 +38,14 @@ const SearchProduct = ({ route, navigation }) => {
         let product = [];
         let selectQuery = await client.ExecuteQuery(`SELECT id,product_name FROM PRODUCT 
                                                     WHERE product_name LIKE '%${param}%' LIMIT 10`, []);
+                                                    console.log("test");
         var rows = selectQuery.rows;
         for (let i = 0; i < rows.length; i++) {
             let value = rows.item(i).product_name;
             let id = rows.item(i).id;
             product.push({ "id": id.toString(), 'name': value });
         }
+        console.log(product);
         setData(product);
     }
 
@@ -116,7 +118,7 @@ const SearchProduct = ({ route, navigation }) => {
                         theme={{ colors: { primary: 'blue' } }}
                     />
                     <TextInput
-                        label="Введите цену продукта"
+                        label="Введите цену продукта, руб."
                         value={price}
                         keyboardType='numeric'
                         mode='outlined'
@@ -125,7 +127,7 @@ const SearchProduct = ({ route, navigation }) => {
                         theme={{ colors: { primary: 'blue' } }}
                     />
                     <TextInput
-                        label="Введите вес продукта"
+                        label="Введите вес продукта, г."
                         value={weight}
                         keyboardType='numeric'
                         mode='outlined'
@@ -134,7 +136,7 @@ const SearchProduct = ({ route, navigation }) => {
                         theme={{ colors: { primary: 'blue' } }}
                     />
                     <TextInput
-                        label="Введите массу одной порции"
+                        label="Введите массу одной порции, г."
                         value={onePortion}
                         keyboardType='numeric'
                         mode='outlined'

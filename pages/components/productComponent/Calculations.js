@@ -84,6 +84,7 @@ const Calculations = (props) => {
                     [<Text style={styles.textInTable}>Кол-во порций, шт</Text>, <Text style={styles.textInTable}> {result.sp.toFixed(2)}</Text>],
                     [<Text style={styles.textInTable}>Стоимость порций, руб.</Text>, <Text style={styles.textInTable}> {result.scp.toFixed(2)}</Text>]
                 ];
+                
                 return (
                     <Table borderStyle={{ borderWidth: 1, borderColor: '#0000ff' }} style={{margin:10}}>
                         <Row data={tableHead} flexArr={[2, 1]} textStyle={styles.text} />
