@@ -2,13 +2,15 @@ import React, { useState, useEffect } from 'react';
 import * as calculation from "../../../services/calculation/Calcualtion";
 import { Table, Row, Rows } from 'react-native-table-component';
 import { ActivityIndicator } from "react-native";
-import { StyleSheet, Dimensions, View, Text, ScrollView } from 'react-native';
+import { StyleSheet, Dimensions, View, Text, ScrollView, Alert } from 'react-native';
+import { IconButton } from 'react-native-paper';
 
 
 const Calculations = (props) => {
 
     useEffect(() => {
     }, []);
+
 
 
     const calcOneItem = (params) => {
@@ -46,6 +48,42 @@ const Calculations = (props) => {
         }
     }
 
+    const createButtonAlert = (messages) => {
+        Alert.alert(
+            "",
+            messages,
+            [
+                { text: "OK", onPress: () => console.log("OK Pressed") }
+            ]
+        );
+    }
+
+
+    const DescButton = (props) => {
+        let key = props.btn;
+        const messages = { "qb": "qb", "pqb": "pqb", "ccu": "ccu", "ucc": "ucc", "sp": "sp", "scp": "scp" }
+        return (<IconButton
+            icon="help-circle-outline"
+            size={25}
+            color="blue"
+            onPress={() => createButtonAlert(messages[key])}
+        />)
+    }
+
+    const DescForTable = (props) => {
+        return (
+            <>
+                <View style={[styles.btnInTable,styles.textInTable]}>
+                    <View style={styles.text}>
+                        <Text>{props.name}</Text>
+                    </View>
+                    <View style={styles.icon}>
+                        <DescButton btn={props.btn} />
+                    </View>
+                </View>
+            </>
+        )
+    }
     const CalResult = (params) => {
         if (Object.keys(params).length > 2) {
             let Litem = { "item": params.Litem, "nutrient": params.nutrient };
@@ -55,17 +93,17 @@ const Calculations = (props) => {
             if (Rresult && Lresult) {
                 let tableHead = [<Text style={styles.textInTable}>{params.Litem.name}</Text>, <Text style={styles.textInTable}> {Lresult.nutrient_name}</Text>, <Text style={styles.textInTable}> {params.Ritem.name}</Text>];
                 let tableData = [
-                    [<Text style={[styles.textInTable, resColor(Lresult.qb, Rresult.qb)]}>{Lresult.qb.toFixed(2)}</Text>, <Text style={styles.textInTable}>Содержание нутриента в продукции от суточной потребности в 100г, %</Text>, <Text style={[styles.textInTable, resColor(Rresult.qb, Lresult.qb)]}>{Rresult.qb.toFixed(2)}</Text>],
-                    [<Text style={[styles.textInTable, resColor(Lresult.pqb, Rresult.pqb)]}>{Lresult.pqb.toFixed(2)}</Text>, <Text style={styles.textInTable}>Содержание нутриента в продукции от суточной потребности в порции, %</Text>, <Text style={[styles.textInTable, resColor(Rresult.pqb, Lresult.pqb)]}>{Rresult.pqb.toFixed(2)}</Text>],
-                    [<Text style={[styles.textInTable, resColor(Lresult.ccu, Rresult.ccu)]}>{Lresult.ccu.toFixed(2)}</Text>, <Text style={styles.textInTable}>Ценовой коэффициент полезности, руб/%</Text>, <Text style={[styles.textInTable, resColor(Rresult.ccu, Lresult.ccu)]}>{Rresult.ccu.toFixed(2)}</Text>],
-                    [<Text style={[styles.textInTable, resColor(Lresult.ucc, Rresult.ucc)]}>{Lresult.ucc.toFixed(2)}</Text>, <Text style={styles.textInTable}>Обратный коэффициент, %/руб</Text>, <Text style={[styles.textInTable, resColor(Rresult.ucc, Lresult.ucc)]}>{Rresult.ucc.toFixed(2)}</Text>],
-                    [<Text style={[styles.textInTable, resColor(Lresult.sp, Rresult.sp)]}>{Lresult.sp.toFixed(2)}</Text>, <Text style={styles.textInTable}>Кол-во порций, шт</Text>, <Text style={[styles.textInTable, resColor(Rresult.sp, Lresult.sp)]}>{Rresult.sp.toFixed(2)}</Text>],
-                    [<Text style={[styles.textInTable, resColor(Lresult.scp, Rresult.scp)]}>{Lresult.scp.toFixed(2)}</Text>, <Text style={styles.textInTable}>Стоимость порций, руб.</Text>, <Text style={[styles.textInTable, resColor(Rresult.scp, Lresult.scp)]}>{Rresult.scp.toFixed(2)}</Text>]
+                    [<Text style={[styles.textInTable, resColor(Lresult.qb, Rresult.qb)]}>{Lresult.qb.toFixed(2)}</Text>, <DescForTable name={"Содержание нутриента от суточной потребности в 100\u00A0г."} btn={"qb"} />, <Text style={[styles.textInTable, resColor(Rresult.qb, Lresult.qb)]}>{Rresult.qb.toFixed(2)}</Text>],
+                    [<Text style={[styles.textInTable, resColor(Lresult.pqb, Rresult.pqb)]}>{Lresult.pqb.toFixed(2)}</Text>, <DescForTable name={"Содержание нутриента от суточной потребности в порции"} btn={"pqb"} />, <Text style={[styles.textInTable, resColor(Rresult.pqb, Lresult.pqb)]}>{Rresult.pqb.toFixed(2)}</Text>],
+                    [<Text style={[styles.textInTable, resColor(Lresult.ccu, Rresult.ccu)]}>{Lresult.ccu.toFixed(2)}</Text>, <DescForTable name={"Ценовой коэффициент полезности"} btn={"ccu"} />, <Text style={[styles.textInTable, resColor(Rresult.ccu, Lresult.ccu)]}>{Rresult.ccu.toFixed(2)}</Text>],
+                    [<Text style={[styles.textInTable, resColor(Lresult.ucc, Rresult.ucc)]}>{Lresult.ucc.toFixed(2)}</Text>, <DescForTable name={"Обратный коэффициент"} btn={"ucc"} />, <Text style={[styles.textInTable, resColor(Rresult.ucc, Lresult.ucc)]}>{Rresult.ucc.toFixed(2)}</Text>],
+                    [<Text style={[styles.textInTable, resColor(Lresult.sp, Rresult.sp)]}>{Lresult.sp.toFixed(2)}</Text>, <DescForTable name={"Кол-во порций"} btn={"sp"} />, <Text style={[styles.textInTable, resColor(Rresult.sp, Lresult.sp)]}>{Rresult.sp.toFixed(2)}</Text>],
+                    [<Text style={[styles.textInTable, resColor(Lresult.scp, Rresult.scp)]}>{Lresult.scp.toFixed(2)}</Text>, <DescForTable name={"Стоимость порций"} btn={"scp"} />, <Text style={[styles.textInTable, resColor(Rresult.scp, Lresult.scp)]}>{Rresult.scp.toFixed(2)}</Text>]
                 ];
                 return (
                     <Table borderStyle={{ borderWidth: 1, borderColor: '#0000ff' }}>
-                        <Row data={tableHead} flexArr={[1, 2, 1]} textStyle={styles.text} />
-                        <Rows data={tableData} flexArr={[1, 2, 1]} textStyle={styles.text} />
+                        <Row data={tableHead} flexArr={[1, 3, 1]} textStyle={styles.text} />
+                        <Rows data={tableData} flexArr={[1, 3, 1]} textStyle={styles.text} />
                     </Table>
                 )
             } else {
@@ -77,16 +115,16 @@ const Calculations = (props) => {
             if (result) {
                 let tableHead = [<Text style={styles.textInTable}>{result.nutrient_name}</Text>, <Text style={styles.textInTable}> {params.item.name}</Text>];
                 let tableData = [
-                    [<Text style={styles.textInTable}>Содержание нутриента в продукции от суточной потребности в 100г, %</Text>, <Text style={styles.textInTable}> {result.qb.toFixed(2)}</Text>],
-                    [<Text style={styles.textInTable}>Содержание нутриента в продукции от суточной потребности в порции, %</Text>, <Text style={styles.textInTable}> {result.pqb.toFixed(2)}</Text>],
-                    [<Text style={styles.textInTable}>Ценовой коэффициент полезности, руб/%</Text>, <Text style={styles.textInTable}> {result.ccu.toFixed(2)}</Text>],
-                    [<Text style={styles.textInTable}>Обратный коэффициент, %/руб</Text>, <Text style={styles.textInTable}> {result.ucc.toFixed(2)}</Text>],
-                    [<Text style={styles.textInTable}>Кол-во порций, шт</Text>, <Text style={styles.textInTable}> {result.sp.toFixed(2)}</Text>],
-                    [<Text style={styles.textInTable}>Стоимость порций, руб.</Text>, <Text style={styles.textInTable}> {result.scp.toFixed(2)}</Text>]
+                    [<DescForTable name={"Содержание нутриента от суточной потребности в 100\u00A0г."} btn={"qb"} />, <Text style={styles.textInTable}> {result.qb.toFixed(2)}</Text>],
+                    [<DescForTable name={"Содержание нутриента от суточной потребности в порции"} btn={"pqb"} />, <Text style={styles.textInTable}> {result.pqb.toFixed(2)}</Text>],
+                    [<DescForTable name={"Ценовой коэффициент полезности"} btn={"ccu"} />, <Text style={styles.textInTable}> {result.ccu.toFixed(2)}</Text>],
+                    [<DescForTable name={"Обратный коэффициент"} btn={"ucc"} />, <Text style={styles.textInTable}> {result.ucc.toFixed(2)}</Text>],
+                    [<DescForTable name={"Кол-во порций"} btn={"sp"} />, <Text style={styles.textInTable}> {result.sp.toFixed(2)}</Text>],
+                    [<DescForTable name={"Стоимость порций"} btn={"scp"} />, <Text style={styles.textInTable}> {result.scp.toFixed(2)}</Text>]
                 ];
-                
+
                 return (
-                    <Table borderStyle={{ borderWidth: 1, borderColor: '#0000ff' }} style={{margin:10}}>
+                    <Table borderStyle={{ borderWidth: 1, borderColor: '#0000ff' }} style={{ margin: 10 }}>
                         <Row data={tableHead} flexArr={[2, 1]} textStyle={styles.text} />
                         <Rows data={tableData} flexArr={[2, 1]} textStyle={styles.text} />
                     </Table>
@@ -142,14 +180,33 @@ const styles = StyleSheet.create({
         paddingTop: 5,
         paddingBottom: 5
     },
-    text: { textAlign: 'center' },
     textInTable: {
         textAlign: "center",
         height: "auto",
-        minHeight: 30,
+        minHeight: 40,
         textAlignVertical: "center",
         fontSize: 14,
         padding: 5
+    },
+    btnInTable: {
+        textAlign: "center",
+        height: "auto",
+        display:"flex",
+        textAlignVertical: "center",
+        fontSize: 14,
+        padding: 5,
+        
+    },
+    icon:{
+        position:"absolute",
+        top:-5,
+        right:0,
+        width:40
+    },
+    text:{
+        width:"100%",
+        textAlign:"center",
+        paddingRight:20
     },
     resColor: {
         color: "red"
