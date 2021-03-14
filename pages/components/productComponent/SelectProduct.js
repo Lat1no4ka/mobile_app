@@ -11,7 +11,7 @@ const SelectProduct = ({ route, navigation }) => {
     useEffect(() => {
 
         if (route.params) {
-            setProduct(route.params.product)
+            setProduct(route.params.product);
         }
     }, []);
 

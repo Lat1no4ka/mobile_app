@@ -53,11 +53,15 @@ function Composition({ route, navigation }) {
        let client = SqlClient();
        let selectQuery = await client.ExecuteQuery(`INSERT INTO HISTORY ( products, nutrient ) 
                                                    VALUES ('${JSON.stringify(data)}','${JSON.stringify(checkedItem)}')`, []);
-        // selectQuery = await client.ExecuteQuery(`select * from HISTORY`, []);  
-        // var rows = selectQuery.rows;                                          
-        // for (let i = 0; i < rows.length; i++) {
-        //     console.log(JSON.parse(rows.item(i).products));
-        // }                                          
+
+        //selectQuery = await client.ExecuteQuery(`select * from HISTORY`, []);
+        //var rows = selectQuery.rows;
+        //for (let i = 0; i < rows.length; i++) {
+        //console.log('-------------');
+        //console.log(JSON.parse(rows.item(i).products));
+        //console.log(JSON.parse(rows.item(i).nutrient));
+        //console.log('-------------');
+        //}
     }
 
     return (
