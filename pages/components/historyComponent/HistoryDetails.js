@@ -17,15 +17,15 @@ const HistoryDetails = (props) => {
 
     return (
         <View>
-                    <Card.Content>
-                    <DataTable>
+            <Card.Content>
+                <DataTable>
                     <DataTable.Row>
                         <DataTable.Cell >{props.item.name}</DataTable.Cell>
                     </DataTable.Row>
                 </DataTable>
-                </Card.Content>
+            </Card.Content>
         </View>
     )
 
-
+}
 export default HistoryDetails;
