@@ -14,6 +14,7 @@ const ConsumptionRates = ({navigation}) => {
     await client.ExecuteQuery(`INSERT INTO DAILY_RATE
                                SELECT * from DAILY_RATE_BACKUP;`);
                             //console.log("insert")
+                            navigation.navigate('Настройки', {})
   }
 
   const buttonAlert = () =>

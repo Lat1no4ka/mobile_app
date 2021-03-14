@@ -3,7 +3,7 @@ import { SafeAreaView, View, StyleSheet, Dimensions, FlatList,ScrollView, Alert 
 import { TextInput, List, Button } from 'react-native-paper';
 import SqlClient from '../../../CommonClient/SqlClient/SqlClient';
 
-const NewProduct = () => {
+const NewProduct = ({navigation}) => {
 
 
   const [client, setClient] = useState(SqlClient());
@@ -42,7 +42,7 @@ const NewProduct = () => {
   '${Number (vitaminbtwo)}', '${Number (vitaminpp)}', '${Number (vitaminc)}', '${Number (vitamine)}', '${Number (energyvalue)}'  );`)
 //console.log("insert into");
 // product.push(data);
-
+ navigation.navigate('Настройки',{});
     }
     else {
         Alert.alert("Ошибка",

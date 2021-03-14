@@ -15,6 +15,7 @@ const ValueNutricial = ({navigation}) => {
       await client.ExecuteQuery(`INSERT INTO PRODUCT
                                  SELECT * from PRODUCTBACKUP;`);
                                //console.log("insert")
+                               navigation.navigate('Настройки', {})
     }
 
     const buttonAlert = () =>

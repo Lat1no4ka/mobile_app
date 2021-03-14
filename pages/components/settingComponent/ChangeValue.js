@@ -83,7 +83,8 @@ const updateData = async () => {
   iron = '${Number (iron)}', vitamin_a = '${Number (vitamina)}', vitamin_b1 = '${Number (vitaminbone)}', 
   vitamin_b2 = '${Number (vitaminbtwo)}', vitamin_pp = '${Number (vitaminpp)}', vitamin_c = '${Number (vitaminc)}', 
   vitamin_e = '${Number (vitamine)}', energy_value = '${Number (energyvalue)}'
-  WHERE id = '${id}';`)
+  WHERE id = '${id}';`);
+  navigation.navigate('Настройки', {})
 // product.push(data);
 //console.log(protein, fats, carbohydrates, alimentaryfiber, potassium, calcium, magnesium, phosphorus, iron, vitamina, vitaminbone, vitaminbtwo, vitaminpp, vitaminc, vitamine, energyvalue);
     }

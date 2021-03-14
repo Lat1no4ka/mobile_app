@@ -1,11 +1,67 @@
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, StyleSheet, Text } from 'react-native';
 import { Button } from 'react-native-paper';
+import SqlClient from '../../../CommonClient/SqlClient/SqlClient';
+
+    
+
+
+
+export const GetSettings = ({ navigation }) => {
+
+
+    const [client, setClient] = useState(SqlClient());
+
+
+
+useEffect(( )=> {
+    
+        getCounts();
+        getCount();
+    
+    
+},[{navigation}]);
+
+
+    const [data, setCounts] = useState();
+    const [datas, setCount] = useState();
+
+    const getCounts = async () => {
+        let cntsbckp = 0;
+        let selectQuery = await client.ExecuteQuery(`SELECT count(*) as seq FROM PRODUCTBACKUP;`,[]);
+                                                    console.log("test");
+        var rows = selectQuery.rows;
+        for (let i = 0; i < rows.length; i++) {
+            let value = rows.item(i).seq;
+            cntsbckp = Number( value );
+        }
+       // console.log(rows);
+        console.log(cntsbckp);
+        setCounts(cntsbckp);
+
+
+        
+
+    }
+ 
+
+    const getCount = async () => {
+    
+    let cnts = 0;
+    let selectQuery = await client.ExecuteQuery(`SELECT count(*) as seq FROM PRODUCT;`, []);
+                                                console.log("test");
+    var rows = selectQuery.rows;
+    for (let i = 0; i < rows.length; i++) {
+        let value = rows.item(i).seq;
+        cnts = Number( value );
+    }
+    console.log(cnts);
+    setCount(cnts);
+    }
 
 
 
 
-const GetSettings = ({ navigation }) => {
     return(
 
     <View style={styles.Container}>
@@ -17,7 +73,17 @@ const GetSettings = ({ navigation }) => {
                 onPress={() => navigation.navigate('Пищевая ценность продуктов',{})}>
                 Пищевая ценность продуктов
             </Button>
-            
+
+
+            <Text style={styles.baseText}>
+      Всего продуктов
+      <Text style={styles.innerText}> {Number(datas)}</Text>
+    </Text>
+
+            <Text style={styles.baseText}>
+      Введено пользователем
+      <Text style={styles.innerText}> {Number(datas - data)}</Text>
+    </Text>
             <Button
                 icon="open"
                 mode="contained"
@@ -32,15 +98,20 @@ const GetSettings = ({ navigation }) => {
 }
 const styles = StyleSheet.create({
     Container: {
-        flex: 0.15,
+        flex: 0.22,
         flexDirection: 'column',
         justifyContent: 'space-between',
         marginLeft:20,
         marginRight: 20,
-        marginTop: 10
+        marginTop: 20
       },
-      Buttons: {
-    
+      baseText: {
+        fontWeight: 'bold',
+        color: 'gray'
+      },
+      innerText: {
+        fontWeight: 'bold',
+        color: 'gray'
       }
 });
 
