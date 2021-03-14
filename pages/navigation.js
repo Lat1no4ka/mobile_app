@@ -5,7 +5,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import ProducScreen from './Product';
-import CompareScreen from './Compare';
 import HistoryScreen from './History';
 import SettingScreen from './Setting';
 
@@ -49,7 +48,6 @@ const Navigation = () => {
         }}
       >
         <Tab.Screen name="Product" component={ProducScreen} />
-        <Tab.Screen name="Compare" component={CompareScreen} />
         <Tab.Screen name="History" component={HistoryScreen} />
         <Tab.Screen name="Settings" component={SettingScreen} />
       </Tab.Navigator>
