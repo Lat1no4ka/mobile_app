@@ -28,7 +28,7 @@ const Navigation = () => {
               iconName = focused ?
                 'stats-chart'
                 : 'stats-chart-outline';
-            } else if (route.name === 'Hisroty') {
+            } else if (route.name === 'History') {
               iconName = focused ?
                 'time'
                 : 'time-outline';
@@ -50,7 +50,7 @@ const Navigation = () => {
       >
         <Tab.Screen name="Product" component={ProducScreen} />
         <Tab.Screen name="Compare" component={CompareScreen} />
-        <Tab.Screen name="Hisroty" component={HistoryScreen} />
+        <Tab.Screen name="History" component={HistoryScreen} />
         <Tab.Screen name="Settings" component={SettingScreen} />
       </Tab.Navigator>
     </NavigationContainer>
