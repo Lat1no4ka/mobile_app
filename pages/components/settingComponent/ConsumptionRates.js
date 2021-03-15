@@ -40,7 +40,7 @@ return(
               icon="create"
               mode="contained"
               style={styles.Buttons}
-              onPress={() => navigation.navigate('Рекомендуемый уровень',{})}>
+              onPress={() => navigation.navigate('Норма суточного потребления',{})}>
               Изменение содержимого
           </Button>
           

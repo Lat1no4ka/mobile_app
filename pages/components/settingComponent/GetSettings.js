@@ -18,6 +18,15 @@ useEffect(( )=> {
     
         getCounts();
         getCount();
+        getString();
+    const unsubscribe = navigation.addListener("focus", () =>{
+        getCounts();
+        getCount();
+        getString();
+    })
+
+return unsubscribe;
+        
     
     
 },[{navigation}]);
@@ -25,22 +34,36 @@ useEffect(( )=> {
 
     const [data, setCounts] = useState();
     const [datas, setCount] = useState();
+    const [str, setString] = useState([]);
+    const [out, setOut] = useState('')
+
+    const getOut = async () => {
+    if (str == 0){
+
+        setOut("Используются нормы по умолчанию");
+
+
+    }
+    else {
+        setOut("Используются нормы введённые пользователем");
+    }
+}
 
     const getCounts = async () => {
         let cntsbckp = 0;
         let selectQuery = await client.ExecuteQuery(`SELECT count(*) as seq FROM PRODUCTBACKUP;`,[]);
-                                                    console.log("test");
+                                                    //console.log("test");
         var rows = selectQuery.rows;
         for (let i = 0; i < rows.length; i++) {
             let value = rows.item(i).seq;
             cntsbckp = Number( value );
         }
        // console.log(rows);
-        console.log(cntsbckp);
+        //console.log(cntsbckp);
         setCounts(cntsbckp);
 
 
-        
+        getOut();
 
     }
  
@@ -49,7 +72,7 @@ useEffect(( )=> {
     
     let cnts = 0;
     let selectQuery = await client.ExecuteQuery(`SELECT count(*) as seq FROM PRODUCT;`, []);
-                                                console.log("test");
+                                               // console.log("test");
     var rows = selectQuery.rows;
     for (let i = 0; i < rows.length; i++) {
         let value = rows.item(i).seq;
@@ -57,7 +80,29 @@ useEffect(( )=> {
     }
     console.log(cnts);
     setCount(cnts);
+
     }
+    
+
+
+    const getString = async () => {
+    
+        let strng = 0;
+        
+        let selectQuery = await client.ExecuteQuery(`SELECT * FROM DAILY_RATE
+                                                     EXCEPT
+                                                     SELECT * FROM DAILY_RATE_BACKUP;`, []);
+                                                     console.log("test");
+        var rows = selectQuery.rows;
+        for (let i = 0; i < rows.length; i++) {
+            let value = rows.item(i).protein;
+            
+            strng = Number(value) ;
+        }
+        console.log(str);
+        setString(strng);
+        
+        }
 
 
 
@@ -92,9 +137,11 @@ useEffect(( )=> {
                 onPress={() => navigation.navigate('Нормы суточного потребления',{})}>
                 Нормы суточного потребления
             </Button>
+            <Text style={styles.innerText}> {out}</Text>
         </View>
         
     )
+
 }
 const styles = StyleSheet.create({
     Container: {

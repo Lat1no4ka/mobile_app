@@ -45,6 +45,7 @@ const SearchProduct = ({ route, navigation }) => {
             let id = rows.item(i).id;
             product.push({ "id": id.toString(), 'name': value });
         }
+        
         console.log(product);
         setData(product);
     }

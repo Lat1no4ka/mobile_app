@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { SafeAreaView, View, StyleSheet, Dimensions, FlatList,ScrollView, Alert } from 'react-native';
+import { SafeAreaView, View, StyleSheet, Dimensions, FlatList,ScrollView, Alert, Text } from 'react-native';
 import { TextInput, List, Button } from 'react-native-paper';
 import SqlClient from '../../../CommonClient/SqlClient/SqlClient';
 
@@ -142,6 +142,8 @@ const updateData = async () => {
       return (
           <>
               <ScrollView>
+              <Text style={styles.innerText}> Вводится содержание пищевых веществ в 100 граммах продукта</Text>
+
                   <TextInput
                       label="Введите название продукта"
                       value={text}
@@ -152,7 +154,7 @@ const updateData = async () => {
                       theme={{ colors: { primary: 'blue' } }}
                   />
                   <TextInput
-                      label="Введите массу белков, г."
+                      label="Введите массу белков, г"
                       value={protein}
                       keyboardType='numeric'
                       mode='outlined'
@@ -161,7 +163,7 @@ const updateData = async () => {
                       theme={{ colors: { primary: 'blue' } }}
                   />
                   <TextInput
-                      label="Введите массу жиров, г."
+                      label="Введите массу жиров, г"
                       value={fats}
                       keyboardType='numeric'
                       mode='outlined'
@@ -170,7 +172,7 @@ const updateData = async () => {
                       theme={{ colors: { primary: 'blue' } }}
                   />
                   <TextInput
-                      label="Введите массу углеводов, г."
+                      label="Введите массу углеводов, г"
                       value={carbohydrates}
                       keyboardType='numeric'
                       mode='outlined'
@@ -179,7 +181,7 @@ const updateData = async () => {
                       theme={{ colors: { primary: 'blue' } }}
                   />
                   <TextInput
-                      label="Введите массу пищевых волокон, г."
+                      label="Введите массу пищевых волокон, г"
                       value={alimentaryfiber}
                       keyboardType='numeric'
                       mode='outlined'
@@ -188,7 +190,7 @@ const updateData = async () => {
                       theme={{ colors: { primary: 'blue' } }}
                   />
                   <TextInput
-                      label="Введите массу калия, мг."
+                      label="Введите массу калия, мг"
                       value={potassium}
                       keyboardType='numeric'
                       mode='outlined'
@@ -197,7 +199,7 @@ const updateData = async () => {
                       theme={{ colors: { primary: 'blue' } }}
                   />
                   <TextInput
-                      label="Введите массу кальция, мг."
+                      label="Введите массу кальция, мг"
                       value={calcium}
                       keyboardType='numeric'
                       mode='outlined'
@@ -206,7 +208,7 @@ const updateData = async () => {
                       theme={{ colors: { primary: 'blue' } }}
                   />
                   <TextInput
-                      label="Введите массу магния, мг."
+                      label="Введите массу магния, мг"
                       value={magnesium}
                       keyboardType='numeric'
                       mode='outlined'
@@ -215,7 +217,7 @@ const updateData = async () => {
                       theme={{ colors: { primary: 'blue' } }}
                   />
                   <TextInput
-                      label="Введите массу фосфора, мг."
+                      label="Введите массу фосфора, мг"
                       value={phosphorus}
                       keyboardType='numeric'
                       mode='outlined'
@@ -224,7 +226,7 @@ const updateData = async () => {
                       theme={{ colors: { primary: 'blue' } }}
                   />
                   <TextInput
-                      label="Введите массу железа, мг."
+                      label="Введите массу железа, мг"
                       value={iron}
                       keyboardType='numeric'
                       mode='outlined'
@@ -233,7 +235,7 @@ const updateData = async () => {
                       theme={{ colors: { primary: 'blue' } }}
                   />
                   <TextInput
-                      label="Введите массу витамина А, мкг."
+                      label="Введите массу витамина А, мкг"
                       value={vitamina}
                       keyboardType='numeric'
                       mode='outlined'
@@ -242,7 +244,7 @@ const updateData = async () => {
                       theme={{ colors: { primary: 'blue' } }}
                   />
                   <TextInput
-                      label="Введите массу витамина В1, мг."
+                      label="Введите массу витамина В1, мг"
                       value={vitaminbone}
                       keyboardType='numeric'
                       mode='outlined'
@@ -251,7 +253,7 @@ const updateData = async () => {
                       theme={{ colors: { primary: 'blue' } }}
                   />
                   <TextInput
-                      label="Введите массу витамина В2, мг."
+                      label="Введите массу витамина В2, мг"
                       value={vitaminbtwo}
                       keyboardType='numeric'
                       mode='outlined'
@@ -260,7 +262,7 @@ const updateData = async () => {
                       theme={{ colors: { primary: 'blue' } }}
                   />
                   <TextInput
-                      label="Введите массу витамина РР, мг."
+                      label="Введите массу витамина РР, мг"
                       value={vitaminpp}
                       keyboardType='numeric'
                       mode='outlined'
@@ -269,7 +271,7 @@ const updateData = async () => {
                       theme={{ colors: { primary: 'blue' } }}
                   />
                   <TextInput
-                      label="Введите массу витамина С, мг."
+                      label="Введите массу витамина С, мг"
                       value={vitaminc}
                       keyboardType='numeric'
                       mode='outlined'
@@ -278,7 +280,7 @@ const updateData = async () => {
                       theme={{ colors: { primary: 'blue' } }}
                   />
                   <TextInput
-                      label="Введите массу витамина Е, мг."
+                      label="Введите массу витамина Е, мг"
                       value={vitamine}
                       keyboardType='numeric'
                       mode='outlined'
@@ -287,7 +289,7 @@ const updateData = async () => {
                       theme={{ colors: { primary: 'blue' } }}
                   />
                   <TextInput
-                      label="Введите колличество килокалорий, ккал."
+                      label="Введите колличество килокалорий, ккал"
                       value={energyvalue}
                       keyboardType='numeric'
                       mode='outlined'
@@ -310,6 +312,7 @@ const updateData = async () => {
   } else if (data.length <= 0 || !focus) {
       return (
         <ScrollView>
+
           <TextInput
               label="Введите название продукта"
               value={text}
@@ -327,6 +330,8 @@ const updateData = async () => {
           Новый продукт 
           </Button>
           </View>
+
+    
       </ScrollView>
       )
 
@@ -338,7 +343,7 @@ const styles = StyleSheet.create({
   container: {
       marginRight: 20,
       marginLeft: 20,
-      marginTop: height * 0.15
+      marginTop: height * 0.05
   },
   textInput: {
       marginRight: 20,
@@ -366,7 +371,17 @@ const styles = StyleSheet.create({
   containerWithBtn: {
       justifyContent: 'center',
       alignItems: 'center'
+  },
+
+  innerText: {
+    fontWeight: 'bold',
+    color: 'gray',
+    fontSize: 22,
+    textAlign: 'center',
+    marginTop: 22
   }
+
+
 
 
 });

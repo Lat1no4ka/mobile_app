@@ -24,7 +24,7 @@ const SettingScreen = () => {
                 <Stack.Screen name="Нормы суточного потребления" component={ConsumptionRates} />
                 <Stack.Screen name="Изменение содержимого" component={ChangeValue} />
                 <Stack.Screen name="Новый продукт" component={NewProduct} />
-                <Stack.Screen name="Рекомендуемый уровень" component={ChangeRates} />
+                <Stack.Screen name="Норма суточного потребления" component={ChangeRates} />
             </Stack.Navigator>
         );
     };

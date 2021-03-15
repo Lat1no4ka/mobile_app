@@ -31,7 +31,7 @@ const ChangeRates = () => {
         
   await client.ExecuteQuery(`UPDATE DAILY_RATE
   SET '${table}' = '${Number (param)}';`)
-  console.log("update");
+  //console.log("update");
  }
     else {
         Alert.alert("Ошибка",
@@ -45,7 +45,7 @@ const ChangeRates = () => {
               <ScrollView>
               
                   <TextInput
-                      label="Белки, г."
+                      label="Белки, г"
                       value={protein}
                       keyboardType='numeric'
                       mode='outlined'
@@ -62,7 +62,7 @@ const ChangeRates = () => {
                         </Button>
               </View>
                   <TextInput
-                      label="Жиры, г."
+                      label="Жиры, г"
                       value={fats}
                       keyboardType='numeric'
                       mode='outlined'
@@ -79,7 +79,7 @@ const ChangeRates = () => {
                         </Button>
               </View>
                   <TextInput
-                      label="Углеводы, г."
+                      label="Углеводы, г"
                       value={carbohydrates}
                       keyboardType='numeric'
                       mode='outlined'
@@ -96,7 +96,7 @@ const ChangeRates = () => {
                   </Button>
         </View>
                   <TextInput
-                      label="Пищевые волокна, г."
+                      label="Пищевые волокна, г"
                       value={alimentaryfiber}
                       keyboardType='numeric'
                       mode='outlined'
@@ -113,7 +113,7 @@ const ChangeRates = () => {
                         </Button>
               </View>
                   <TextInput
-                      label="Калий, мг."
+                      label="Калий, мг"
                       value={potassium}
                       keyboardType='numeric'
                       mode='outlined'
@@ -130,7 +130,7 @@ const ChangeRates = () => {
                   </Button>
         </View>
                   <TextInput
-                      label="Кальций, мг."
+                      label="Кальций, мг"
                       value={calcium}
                       keyboardType='numeric'
                       mode='outlined'
@@ -147,7 +147,7 @@ const ChangeRates = () => {
                         </Button>
               </View>
                   <TextInput
-                      label="Магний, мг."
+                      label="Магний, мг"
                       value={magnesium}
                       keyboardType='numeric'
                       mode='outlined'
@@ -164,7 +164,7 @@ const ChangeRates = () => {
                         </Button>
               </View>
                   <TextInput
-                      label="Фосфор, мг."
+                      label="Фосфор, мг"
                       value={phosphorus}
                       keyboardType='numeric'
                       mode='outlined'
@@ -181,7 +181,7 @@ const ChangeRates = () => {
                         </Button>
               </View>
                   <TextInput
-                      label="Железо, мг."
+                      label="Железо, мг"
                       value={iron}
                       keyboardType='numeric'
                       mode='outlined'
@@ -198,7 +198,7 @@ const ChangeRates = () => {
                         </Button>
               </View>
                   <TextInput
-                      label="Витамин А, мкг."
+                      label="Витамин А, мкг"
                       value={vitamina}
                       keyboardType='numeric'
                       mode='outlined'
@@ -215,7 +215,7 @@ const ChangeRates = () => {
                         </Button>
               </View>
                   <TextInput
-                      label="Витамин В1, мг."
+                      label="Витамин В1, мг"
                       value={vitaminbone}
                       keyboardType='numeric'
                       mode='outlined'
@@ -232,7 +232,7 @@ const ChangeRates = () => {
                         </Button>
               </View>
                   <TextInput
-                      label="Витамин В2, мг."
+                      label="Витамин В2, мг"
                       value={vitaminbtwo}
                       keyboardType='numeric'
                       mode='outlined'
@@ -249,7 +249,7 @@ const ChangeRates = () => {
                         </Button>
               </View>
                   <TextInput
-                      label="Витамин РР, мг."
+                      label="Витамин РР, мг"
                       value={vitaminpp}
                       keyboardType='numeric'
                       mode='outlined'
@@ -266,7 +266,7 @@ const ChangeRates = () => {
                   </Button>
         </View>
                   <TextInput
-                      label="Витамин С, мг."
+                      label="Витамин С, мг"
                       value={vitaminc}
                       keyboardType='numeric'
                       mode='outlined'
@@ -283,7 +283,7 @@ const ChangeRates = () => {
                         </Button>
               </View>
                   <TextInput
-                      label="Витамин Е, мг."
+                      label="Витамин Е, мг"
                       value={vitamine}
                       keyboardType='numeric'
                       mode='outlined'
@@ -300,7 +300,7 @@ const ChangeRates = () => {
                         </Button>
               </View>
                   <TextInput
-                      label="Килокалории, ккал."
+                      label="Килокалории, ккал"
                       value={energyvalue}
                       keyboardType='numeric'
                       mode='outlined'
