@@ -24,7 +24,7 @@ const CardItem = (props) => {
                 <Button
                     onPress={() => props.removeItem(props.item.id)}
                 >
-                    Удалить
+                  <Text style={{color:"blue"}}>Удалить</Text>
             </Button>
             </Card.Actions>
         </Card>
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     },
     delBtn: {
         alignSelf: 'flex-end',
-        marginRight: 20
+        marginRight: 20,
     },
 });
 

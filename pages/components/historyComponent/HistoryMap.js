@@ -7,7 +7,6 @@ import HistoryDetails from "./HistoryDetails";
 const HistoryMap = (props) => {
 
         const Test = () => {
-            console.log("test");
         }
     return (
         <View>

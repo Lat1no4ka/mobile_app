@@ -1,74 +1,51 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { SafeAreaView, View, Text, StyleSheet, Dimensions, FlatList,ScrollView } from 'react-native';
+import { SafeAreaView, View, Text, StyleSheet, Dimensions, FlatList, ScrollView } from 'react-native';
 import { TextInput, List, Button } from 'react-native-paper';
 import SqlClient from '../../../CommonClient/SqlClient/SqlClient';
 
 const SearchProduct = ({ route, navigation }) => {
-    const [id, setId] = useState('');
-    const [text, setSearch] = useState('');
-    const [data, setData] = useState([]);
     const [client, setClient] = useState(SqlClient());
-    const [focus, setFocus] = useState(false);
-    const [price, setPrice] = useState();
-    const [weight, setWeight] = useState();
-    const [onePortion, setOnePortion] = useState();
+    const [id, setId] = useState('');
+    const [text, setText] = useState('');
+    const [data, setData] = useState([]);
     const [searchReady, setSearchReady] = useState(false);
-
     const product = route.params.product;
-
-    const inputEl = useRef(null);
-
+    
+    const productName = product.map(item => {
+        return item.name;
+    })
     //const name = () => { client.getProduct('name', 'PRODUCT').finally((res)=>{console.log(res)}) };
-
     useEffect(() => {
-        searchList(text);
-    }, [text]);
-
-    const searchList = (search) => {
-
-        if (search.length > 0) {
-            getData(search);
-        } else {
-            setSearch('');
+        if (text.length == 0) {
+            setSearchReady(false);
+            setText('');
             setData([]);
+        } else if (text.length > 0) {
+            
+            getData(text);
         }
-    }
+    }, [text]);
 
     const getData = async (param) => {
         let product = [];
         let selectQuery = await client.ExecuteQuery(`SELECT id,product_name FROM PRODUCT 
-                                                    WHERE product_name LIKE '%${param}%' LIMIT 10`, []);
-                                                    console.log("test");
+                                                    WHERE product_name LIKE ? LIMIT 10`, ["%"+param+"%"]);
         var rows = selectQuery.rows;
         for (let i = 0; i < rows.length; i++) {
             let value = rows.item(i).product_name;
             let id = rows.item(i).id;
             product.push({ "id": id.toString(), 'name': value });
         }
-        console.log(product);
         setData(product);
     }
 
-    const sendAllData = () => {
 
-        let data = {
-            "id": id,
-            "name": text,
-            "price": price,
-            "weight": weight,
-            "onePortion": onePortion
-        };
-
-        product.push(data);
-        navigation.navigate('Продукты', { product });
-    }
 
     const onItemHendler = (id, name) => {
         setId(id);
-        setSearch(name);
-        setFocus(false);
+        setText(name);
+        setData([]);
         setSearchReady(true);
-        inputEl.current.blur();
     }
 
     const renderItem = ({ item }) => (
@@ -80,90 +57,118 @@ const SearchProduct = ({ route, navigation }) => {
 
     )
 
-    if (data.length > 0 && focus) {
+    const SearchR = () => {
+        let formatData = data.filter(item => {
+            if(!productName.includes(item.name)){
+                return item;
+            }
+        })
         return (
-            <>
+            <SafeAreaView style={styles.serachView} >
+                <FlatList
+                    keyboardShouldPersistTaps='handled'
+                    data={formatData}
+                    renderItem={renderItem}
+                />
+            </SafeAreaView>
+        )
+    }
+
+    const SearchF = () => {
+        const [price, setPrice] = useState();
+        const [weight, setWeight] = useState();
+        const [onePortion, setOnePortion] = useState();
+        const [messages, setMessages] = useState("");
+        useEffect(() => {
+        }, [messages]);
+
+        const sendAllData = () => {
+
+            if (onePortion > weight) {
+                setMessages("Масса одной порции не может быть больше массы продукта")
+            } else if (text && price && weight && onePortion && messages == "") {
+                let data = {
+                    "id": id,
+                    "name": text,
+                    "price": price.replaceAll(",","."),
+                    "weight": weight.replaceAll(",","."),
+                    "onePortion": onePortion.replaceAll(",",".")
+                };
+                product.push(data);
+                navigation.navigate('Продукты', { product });
+            } else {
+                setMessages("Должны быть заполнены все поля")
+            }
+        }
+        return (
+            <View>
                 <TextInput
-                    label="Введите название продукта"
+                    label="Введите цену продукта, руб."
+                    value={price}
+                    keyboardType='numeric'
                     mode='outlined'
-                    ref={inputEl}
-                    style={styles.container}
-                    onChangeText={text => setSearch(text)}
-                    onFocus={() => setFocus(true)}
-                    value={text}
+                    style={styles.textInput}
+                    onChangeText={price => { setPrice(price); setMessages(""); }}
                     theme={{ colors: { primary: 'blue' } }}
                 />
-                <SafeAreaView style={styles.serachView} >
-                    <FlatList
-                        keyboardShouldPersistTaps='handled'
-                        data={data}
-                        renderItem={renderItem}
-                    />
+                <TextInput
+                    label="Введите вес продукта, г."
+                    value={weight}
+                    keyboardType='numeric'
+                    mode='outlined'
+                    style={styles.textInput}
+                    onChangeText={weight => { setWeight(weight); setMessages(""); }}
+                    theme={{ colors: { primary: 'blue' } }}
+                />
+                <TextInput
+                    label="Введите массу одной порции, г."
+                    value={onePortion}
+                    keyboardType='numeric'
+                    mode='outlined'
+                    style={styles.textInput}
+                    onChangeText={onePortion => { setOnePortion(onePortion); setMessages(""); }}
+                    theme={{ colors: { primary: 'blue' } }}
+                />
+                <Text style={{ textAlign: "center", marginTop: 10, color: "red" }}>{messages}</Text>
+                <View style={styles.containerWithBtn}>
+                    <Button
+                        mode="contained"
+                        style={styles.button}
+                        onPress={() => sendAllData()}>
+                        Добавить
+                </Button>
+                </View>
+            </View>
+        )
+    }
 
+
+
+    if (data.length > 0 || !searchReady ) {
+        return (
+            <>
+                <SafeAreaView>
+                    <TextInput
+                        label="Введите название продукта"
+                        mode='outlined'
+                        style={styles.container}
+                        onChangeText={text => { setText(text); setSearchReady(false) }}
+                        value={text}
+                        theme={{ colors: { primary: 'blue' } }}
+                    />
+                    {searchReady ? <SearchF /> : <SearchR />}
                 </SafeAreaView>
 
             </>
         );
-    } else if (searchReady) {
-        return (
-            <>
-                <ScrollView>
-                    <TextInput
-                        label="Введите название продукта"
-                        value={text}
-                        mode='outlined'
-                        style={styles.container}
-                        onChangeText={text => setSearch(text)}
-                        onFocus={() => setFocus(true)}
-                        theme={{ colors: { primary: 'blue' } }}
-                    />
-                    <TextInput
-                        label="Введите цену продукта, руб."
-                        value={price}
-                        keyboardType='numeric'
-                        mode='outlined'
-                        style={styles.textInput}
-                        onChangeText={price => setPrice(price)}
-                        theme={{ colors: { primary: 'blue' } }}
-                    />
-                    <TextInput
-                        label="Введите вес продукта, г."
-                        value={weight}
-                        keyboardType='numeric'
-                        mode='outlined'
-                        style={styles.textInput}
-                        onChangeText={weight => setWeight(weight)}
-                        theme={{ colors: { primary: 'blue' } }}
-                    />
-                    <TextInput
-                        label="Введите массу одной порции, г."
-                        value={onePortion}
-                        keyboardType='numeric'
-                        mode='outlined'
-                        style={styles.textInput}
-                        onChangeText={onePortion => setOnePortion(onePortion)}
-                        theme={{ colors: { primary: 'blue' } }}
-                    />
-                    <View style={styles.containerWithBtn}>
-                        <Button
-                            mode="contained"
-                            style={styles.button}
-                            onPress={() => sendAllData()}>
-                            Дальше
-                </Button>
-                    </View>
-                </ScrollView>
-            </>
-        )
-    } else if (data.length <= 0 || !focus) {
+    } else if (data.length <= 0) {
         return (
             <TextInput
                 label="Введите название продукта"
                 value={text}
                 mode='outlined'
                 style={styles.container}
-                onChangeText={text => setSearch(text)}
-                onFocus={() => setFocus(true)}
+                onChangeText={text => setText(text)}
                 theme={{ colors: { primary: 'blue' } }}
             />
 

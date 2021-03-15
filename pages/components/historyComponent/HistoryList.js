@@ -38,7 +38,6 @@ function HistoryList({ navigation }) {
     }
 
     const removeItem = (id) => {
-        console.log(id);
         //let filtered = (hprod.filter((item) => {
         //return (item ? item.id !== id : null)
         //}));
