@@ -1,23 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Card, DataTable, Button } from 'react-native-paper';
 import { SafeAreaView, View, Text, StyleSheet, Dimensions, FlatList, ScrollView } from 'react-native';
-import SqlClient from '../../../CommonClient/SqlClient/SqlClient';
-import { useNavigation } from '@react-navigation/native';
 import HistoryDetails from "./HistoryDetails";
 
 
 const HistoryMap = (props) => {
 
         const Test = () => {
-            console.log("test");
         }
-
     return (
         <View>
         <Card style={styles.container}>
                  {
                  props.data.map((item) => {
-                          return <HistoryDetails item={item} key={item.id} removeItem={props.removeItem}/>
+                    return <HistoryDetails item={item} key={item.id} removeItem={props.removeItem}/>
                 })}
 
                 <View style={{ flexDirection: 'row' }}>
