@@ -14,6 +14,7 @@ const ConsumptionRates = ({navigation}) => {
     await client.ExecuteQuery(`INSERT INTO DAILY_RATE
                                SELECT * from DAILY_RATE_BACKUP;`);
                             //console.log("insert")
+                            navigation.navigate('Настройки', {})
   }
 
   const buttonAlert = () =>
@@ -39,7 +40,7 @@ return(
               icon="create"
               mode="contained"
               style={styles.Buttons}
-              onPress={() => navigation.navigate('Рекомендуемый уровень',{})}>
+              onPress={() => navigation.navigate('Норма суточного потребления',{})}>
               Изменение содержимого
           </Button>
           
