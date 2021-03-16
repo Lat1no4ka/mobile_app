@@ -83,16 +83,16 @@ const SearchProduct = ({ route, navigation }) => {
         }, [messages]);
 
         const sendAllData = () => {
-
-            if (onePortion > weight) {
+            console.log(Number(onePortion))
+            if (Number(onePortion) > Number(weight)) {
                 setMessages("Масса одной порции не может быть больше массы продукта")
             } else if (text && price && weight && onePortion && messages == "") {
                 let data = {
                     "id": id,
                     "name": text,
-                    "price":  price.replaceAll(',','.'),
-                    "weight": weight.replaceAll(',','.'),
-                    "onePortion": onePortion.replaceAll(',','.')
+                    "price":  price,
+                    "weight": weight,
+                    "onePortion": onePortion
                 };
                 product.push(data);
                 navigation.navigate('Продукты', { product });
