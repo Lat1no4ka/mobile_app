@@ -8,7 +8,7 @@ import { useIsFocused } from '@react-navigation/native'
 import HistoryMap from "./HistoryMap";
 
 
-function HistoryList({ navigation }) {
+function HistoryList({ route , navigation }) {
     const [hist, setHist] = useState([]);
     const [hprod, setHprod] = useState([]);//продукт
     const [hnut, setHnut] = useState([]);//компонент
@@ -19,7 +19,7 @@ function HistoryList({ navigation }) {
         getrow();
     }, [isFocused]);
 
-    async function getrow() {
+   async function getrow() {
         const prodarr = [];
         const nutarr = [];
         const idlist = [];
@@ -27,32 +27,50 @@ function HistoryList({ navigation }) {
         let selectQuery = await client.ExecuteQuery(`select * from HISTORY`, []);
         var selq = selectQuery.rows;
         for (let i = 0; i < selq.length; i++) {
-            //console.log(id)
-            prodarr.push(JSON.parse(selq.item(i).products));
-            nutarr.push(JSON.parse(selq.item(i).nutrient));
-            idlist.push(JSON.parse(selq.item(i).id));
+            prodarr.push({"id":selq.item(i).id, "product":(JSON.parse(selq.item(i).products)), "nutrient":(JSON.parse(selq.item(i).nutrient))})
         }
-        setHnut(nutarr)
         setHprod(prodarr);
-        setHid(idlist);
     }
 
-    const removeItem = (id) => {
-        //let filtered = (hprod.filter((item) => {
-        //return (item ? item.id !== id : null)
-        //}));
-        //setHprod(filtered)
+    async function removeItem (id) {
+        let client = SqlClient();
+        await client.ExecuteQuery(`DELETE FROM HISTORY
+                                   WHERE id=?`,[id]);
+        getrow();
     }
-    if (hprod && hnut && hid) {
+
+    async function clearHist () {
+        let client = SqlClient();
+        await client.ExecuteQuery(`DELETE FROM HISTORY;`);
+        getrow();
+    }
+
+     function recount (item){
+        let data = item.product;
+        let checkedItem = item.nutrient;
+        navigation.navigate('Перерасчет', {
+            data, checkedItem
+            })
+     }
+
+
+    if (hprod) {
         return (
 
             <ScrollView>
+                <Button
+                    mode="contained"
+                    onPress={() => clearHist()}>
+                    Очистить историю
+                </Button>
 
                 {
-                    hprod.map((data, index) => {
-                        return <HistoryMap data={data} key={index} removeItem={removeItem} itemid={hid} />
+                    hprod.map((data) => {
+                        return <HistoryMap data={data} key={data.id} removeItem={removeItem} recount={recount}/>
                     })
                 }
+
+
 
             </ScrollView>
 

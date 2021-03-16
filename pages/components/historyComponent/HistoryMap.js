@@ -4,16 +4,15 @@ import { SafeAreaView, View, Text, StyleSheet, Dimensions, FlatList, ScrollView 
 import HistoryDetails from "./HistoryDetails";
 
 
-const HistoryMap = (props) => {
+function HistoryMap(props,{navigation}) {
 
-        const Test = () => {
-        }
+
     return (
         <View>
         <Card style={styles.container}>
                  {
-                 props.data.map((item) => {
-                    return <HistoryDetails item={item} key={item.id} removeItem={props.removeItem}/>
+                 props.data.product.map((item) => {
+                    return <HistoryDetails item={item} key={item.id}/>
                 })}
 
                 <View style={{ flexDirection: 'row' }}>
@@ -21,7 +20,7 @@ const HistoryMap = (props) => {
                     mode="contained"
                     icon="repeat-outline"
                     style={styles.statbutton}
-                    onPress={() => Test()}>
+                    onPress={() => props.recount(props.data)}>
                     Результат
                 </Button>
 
@@ -29,7 +28,7 @@ const HistoryMap = (props) => {
                     mode="contained"
                     icon="trash-outline"
                     style={styles.delbutton}
-                    onPress={() => Test()}>
+                    onPress={() => props.removeItem(props.data.id)}>
                     Удалить
                 </Button>
 

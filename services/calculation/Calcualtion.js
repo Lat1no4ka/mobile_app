@@ -30,7 +30,6 @@ export const dataFromDB = (item) => {
         return { dayliRateFromDB, productFromDB }
     }
     if (data) {
-        console.log(data)
         return data;
     }
 }

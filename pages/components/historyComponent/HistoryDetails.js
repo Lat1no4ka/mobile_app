@@ -7,14 +7,6 @@ import SqlClient from '../../../CommonClient/SqlClient/SqlClient';
 const HistoryDetails = (props) => {
 
 
-    const Recount = () => {
-        navigation.navigate('Расчет', {
-            data, checkedItem
-        })
-    };
-
-
-
     return (
         <View>
             <Card.Content>
