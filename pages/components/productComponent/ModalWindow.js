@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     button: {
         padding: 10,
         backgroundColor:"blue",
-        width:100,
+        width:200,
         borderRadius: 10
     },
     textStyle: {

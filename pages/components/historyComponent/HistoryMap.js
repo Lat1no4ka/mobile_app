@@ -63,7 +63,7 @@ const { width } = Dimensions.get('window');
           width: (width - 20)/2,
           height: 40,
           alignSelf: 'flex-end',
-          backgroundColor: 'red'
+          backgroundColor: '#d60000'
       },
      db:{
           backgroundColor: '#ebebeb',
