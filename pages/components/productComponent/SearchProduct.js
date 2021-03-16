@@ -202,6 +202,7 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     button: {
+        backgroundColor:"blue",
         width: 120,
         height: 40,
         margin: 20,

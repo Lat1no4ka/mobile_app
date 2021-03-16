@@ -27,7 +27,7 @@ const DropdownCharts = (props) => {
                     <List.Accordion
                         style={styles.selected}
                         title={props.nutrientSelected.name}
-
+                        theme={{ colors: { primary: 'blue' }}}
                         expanded={focusN}
                         onPress={() => setFocusN(!focusN)}
                     >
@@ -45,6 +45,7 @@ const DropdownCharts = (props) => {
                     <List.Accordion
                         style={styles.selected}
                         title={props.resCalc.name}
+                        theme={{ colors: { primary: 'blue' }}}
                         expanded={focusR}
                         onPress={() => setFocusR(!focusR)}
                     >

@@ -159,6 +159,9 @@ const styles = StyleSheet.create({
       innerText: {
         fontWeight: 'bold',
         color: 'gray'
+      },
+      Buttons:{
+          backgroundColor:"blue"
       }
 });
 

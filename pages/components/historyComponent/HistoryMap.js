@@ -55,7 +55,7 @@ const { width } = Dimensions.get('window');
         elevation: 14,
     },
     statbutton:{
-        backgroundColor:"#3fd449",
+        backgroundColor:"blue",
         width: (width - 20)/2,
         height: 40,
       },
@@ -63,7 +63,7 @@ const { width } = Dimensions.get('window');
           width: (width - 20)/2,
           height: 40,
           alignSelf: 'flex-end',
-          backgroundColor: '#fc4949'
+          backgroundColor: 'red'
       },
      db:{
           backgroundColor: '#ebebeb',

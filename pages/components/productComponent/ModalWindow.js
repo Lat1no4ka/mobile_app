@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Alert, Modal, StyleSheet, Text, View, TouchableOpacity, TouchableWithoutFeedback, Pressable, ScrollView } from "react-native";
+import { Alert, Modal, StyleSheet, Text, View, TouchableOpacity, TouchableWithoutFeedback, Pressable, Button } from "react-native";
 import Dropdown from "./Dropdown";
 import DropdownCharts from "./DropdownCharts";
 
@@ -130,15 +130,10 @@ const styles = StyleSheet.create({
         bottom: 0
     },
     button: {
-        borderRadius: 20,
         padding: 10,
-        elevation: 2
-    },
-    buttonOpen: {
-        backgroundColor: "#F194FF",
-    },
-    buttonClose: {
-        backgroundColor: "#2196F3",
+        backgroundColor:"blue",
+        width:100,
+        borderRadius: 10
     },
     textStyle: {
         color: "white",

@@ -59,6 +59,7 @@ function HistoryList({ route , navigation }) {
 
             <ScrollView>
                 <Button
+                    style={{backgroundColor:"blue"}}
                     mode="contained"
                     onPress={() => clearHist()}>
                     Очистить историю

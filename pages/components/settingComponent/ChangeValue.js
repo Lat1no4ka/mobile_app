@@ -363,6 +363,7 @@ const styles = StyleSheet.create({
       padding: 10,
   },
   button: {
+      backgroundColor:"blue",
       width: 190,
       height: 40,
       margin: 20,
@@ -380,10 +381,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 22
   }
-
-
-
-
 });
 
   
