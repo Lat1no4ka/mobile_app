@@ -90,9 +90,9 @@ const SearchProduct = ({ route, navigation }) => {
                 let data = {
                     "id": id,
                     "name": text,
-                    "price": price.replaceAll(",","."),
-                    "weight": weight.replaceAll(",","."),
-                    "onePortion": onePortion.replaceAll(",",".")
+                    "price":  price.replaceAll(',','.'),
+                    "weight": weight.replaceAll(',','.'),
+                    "onePortion": onePortion.replaceAll(',','.')
                 };
                 product.push(data);
                 navigation.navigate('Продукты', { product });
