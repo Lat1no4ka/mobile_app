@@ -114,7 +114,8 @@ const styles = StyleSheet.create({
     button: {
         margin: 20,
         marginTop: 0,
-        backgroundColor: "blue"
+        backgroundColor: "blue",
+        width:250
     },
     lable: {
         fontSize: 16,
