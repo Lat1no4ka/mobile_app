@@ -61,7 +61,15 @@ const Calculations = (props) => {
 
     const DescButton = (props) => {
         let key = props.btn;
-        const messages = { "qb": "qb", "pqb": "pqb", "ccu": "ccu", "ucc": "ucc", "sp": "sp", "scp": "scp" }
+        
+        const messages = {
+            "qb": "Содержание нутриента в 100\u00A0г продукции,\u00A0% от суточной потребности нутриента - На сколько процентов возможно удовлетворить суточную потребность в выбранном пищевом веществе (нутриенте), если употребить 100\u00A0грамм продукции.",
+            "pqb": "Содержание нутриента в указанной Вами массе продукции,\u00A0% от суточной потребности нутриента - На сколько процентов возможно удовлетворить суточную потребность в выбранном пищевом веществе (нутриенте), если употребить указанную Вами массу продукции",
+            "ccu": "Ценовой коэффициент полезности,\u00A0руб\u00A0/\u00A0% - Коэффициент, который показывает, сколько необходимо заплатить за то количество продукции, которое удовлетворит суточную потребность в выбранном пищевом веществе (нутриенте) на\u00A01\u00A0%",
+            "ucc": "Обратный коэффициент,\u00A0%\u00A0/\u00A0руб – Коэффициент, который показывает, на сколько процентов возможно удовлетворить суточную потребность в выбранном пищевом веществе (нутриенте), если заплатить за продукцию\u00A01\u00A0рубль.",
+            "sp": "Количество порций,\u00A0шт – То количество порций (указанной Вами массы продукции), которое полностью удовлетворит суточную потребность в выбранном пищевом веществе (нутриенте).",
+            "scp": "Стоимость порций,\u00A0руб – Стоимость того количества порций (указанной Вами массы продукции), которое полностью удовлетворит суточную потребность в выбранном пищевом веществе (нутриенте)."
+        }
         return (<IconButton
             icon="help-circle-outline"
             size={25}
@@ -73,7 +81,7 @@ const Calculations = (props) => {
     const DescForTable = (props) => {
         return (
             <>
-                <View style={[styles.btnInTable,styles.textInTable]}>
+                <View style={[styles.btnInTable, styles.textInTable]}>
                     <View style={styles.text}>
                         <Text>{props.name}</Text>
                     </View>
@@ -191,22 +199,22 @@ const styles = StyleSheet.create({
     btnInTable: {
         textAlign: "center",
         height: "auto",
-        display:"flex",
+        display: "flex",
         textAlignVertical: "center",
         fontSize: 14,
         padding: 5,
-        
+
     },
-    icon:{
-        position:"absolute",
-        top:-5,
-        right:0,
-        width:40
+    icon: {
+        position: "absolute",
+        top: -5,
+        right: 0,
+        width: 40
     },
-    text:{
-        width:"100%",
-        textAlign:"center",
-        paddingRight:20
+    text: {
+        width: "100%",
+        textAlign: "center",
+        paddingRight: 25,
     },
     resColor: {
         color: "red"
