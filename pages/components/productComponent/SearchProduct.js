@@ -83,7 +83,6 @@ const SearchProduct = ({ route, navigation }) => {
         }, [messages]);
 
         const sendAllData = () => {
-            console.log(Number(onePortion))
             if (Number(onePortion) > Number(weight)) {
                 setMessages("Масса одной порции не может быть больше массы продукта")
             } else if (text && price && weight && onePortion && messages == "") {
@@ -147,7 +146,7 @@ const SearchProduct = ({ route, navigation }) => {
     if (data.length > 0 || !searchReady ) {
         return (
             <>
-                <SafeAreaView>
+                <ScrollView>
                     <TextInput
                         label="Введите название продукта"
                         mode='outlined'
@@ -157,7 +156,7 @@ const SearchProduct = ({ route, navigation }) => {
                         theme={{ colors: { primary: 'blue' } }}
                     />
                     {searchReady ? <SearchF /> : <SearchR />}
-                </SafeAreaView>
+                </ScrollView>
 
             </>
         );

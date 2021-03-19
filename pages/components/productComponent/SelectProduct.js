@@ -51,13 +51,14 @@ const SelectProduct = ({ route, navigation }) => {
             <View>
                 <IconButton
                     icon="add-circle-outline"
-                    color={Colors.blue800}
+                    color={"blue"}
                     size={50}
                     onPress={() => navigation.navigate('Поиск', { product })}
                     style={styles.AddBtn}
                 />
                 <View>
-                    <Text style={styles.text} >Для продолжения выберите хотя бы один продукт!</Text>
+                   
+                    <Text style={styles.text} >Нажмите для выбора продукта</Text>
                 </View>
             </View>
 
@@ -80,12 +81,18 @@ const styles = StyleSheet.create({
         width: 250,
         height: 40,
         margin: 20,
-        backgroundColor:"blue"
+        backgroundColor: "blue"
 
     },
     containerWithBtn: {
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    arrow: {
+        position: "absolute",
+        transform: [{ rotate: "95deg" }],
+        top: -40,
+        right: -35,
     }
 });
 export default SelectProduct;
