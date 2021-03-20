@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import * as calculation from "../../../services/calculation/Calcualtion";
 import { Table, Row, Rows } from 'react-native-table-component';
 import { ActivityIndicator } from "react-native";
-import { StyleSheet, Dimensions, View, Text, ScrollView, Alert } from 'react-native';
+import { StyleSheet, Dimensions, View, Text, ScrollView, Alert, Modal, Pressable } from 'react-native';
 import { IconButton } from 'react-native-paper';
 
 
 const Calculations = (props) => {
-
+    const [modalVisible, setModalVisible] = useState(false);
+    const [message, setMessage] = useState("");
     useEffect(() => {
     }, []);
 
@@ -41,40 +42,200 @@ const Calculations = (props) => {
     }
 
     const resColor = (res1, res2) => {
-        if (res1 < res2) {
+        if (Number(res1) == Number(res2)) {
+            return ("");
+        } else if (Number(res1) < Number(res2)) {
             return (styles.resColor)
         } else {
             return ("");
         }
     }
 
-    const createButtonAlert = (messages) => {
-        Alert.alert(
-            "",
-            messages,
-            [
-                { text: "OK", onPress: () => console.log("OK Pressed") }
-            ]
+    const CustomModal = () => {
+        let Messages = () => {
+            return (
+                <>
+                </>
+            )
+        }
+        if (message == 'qb') {
+            Messages = () => {
+                if (props.product.length > 1) {
+                    return (
+                        <>
+
+                            <Text style={{fontSize:17}}>
+                                <Text style={{ fontWeight: "bold" }}>Содержание нутриента в{"\u00A0"}100{"\u00A0"}г. продукции,{"\u00A0"} от суточной потребности нутриента{"\u00A0"}- </Text>
+                                На сколько процентов возможно удовлетворить суточную потребность в выбранном пищевом веществе (нутриенте), если употребить <Text style={{ fontWeight: "bold" }}>100{"\u00A0"}грамм</Text> продукции.
+                            </Text>
+                            <Text style={{fontSize:17}}>{"\n"}Наиболее низкий результат подсвечен красным цветом.</Text>
+                        </>
+                    )
+                } else {
+                    return (
+                        <>
+
+                            <Text style={{fontSize:17}}>
+                                <Text style={{ fontWeight: "bold" }}>Содержание нутриента в 100{"\u00A0"}г продукции,{"\u00A0"} от суточной потребности нутриента{"\u00A0"}- </Text>
+                                 На сколько процентов возможно удовлетворить суточную потребность в выбранном пищевом веществе (нутриенте), если употребить <Text style={{ fontWeight: "bold" }}>100{"\u00A0"}грамм</Text> продукции.
+                            </Text>
+                        </>
+                    )
+                }
+            }
+        } else if (message == 'pqb') {
+            Messages = () => {
+                if (props.product.length > 1) {
+                    return (
+                        <>
+                            <Text style={{fontSize:17}}>
+                                <Text style={{ fontWeight: "bold" }}>Содержание нутриента в указанной Вами массе продукции,{"\u00A0"}% от суточной потребности нутриента{"\u00A0"}- </Text>
+                             На сколько процентов возможно удовлетворить суточную потребность в выбранном пищевом веществе (нутриенте), если употребить указанную Вами массу продукции.
+                            </Text>
+                            <Text style={{fontSize:17}}>{"\n"}Наиболее низкий результат подсвечен красным цветом.</Text>
+                        </>
+                    )
+                } else {
+                    return (
+                        <>
+                            <Text style={{fontSize:17}}>
+                                <Text style={{ fontWeight: "bold" }}>Содержание нутриента в указанной Вами массе продукции,{"\u00A0"}% от суточной потребности нутриента{"\u00A0"}- </Text>
+                                 На сколько процентов возможно удовлетворить суточную потребность в выбранном пищевом веществе (нутриенте), если употребить указанную Вами массу продукции.
+                                </Text>
+                        </>
+                    )
+                }
+            }
+        } else if (message == 'ccu') {
+            Messages = () => {
+                if (props.product.length > 1) {
+                    return (
+                        <>
+                            <Text style={{fontSize:17}}>
+                                <Text style={{ fontWeight: "bold" }}>Ценовой коэффициент полезности,{"\u00A0"}руб{"\u00A0"}/{"\u00A0"}%{"\u00A0"}- </Text>
+                            Коэффициент, который показывает,<Text style={{ fontWeight: "bold" }}> сколько необходимо заплатить </Text> за то количество продукции, которое удовлетворит суточную потребность в выбранном пищевом веществе (нутриенте) на{"\u00A0"}1%.
+                            </Text>
+                            <Text style={{fontSize:17}}>{"\n"}Наиболее низкий результат подсвечен красным цветом.</Text>
+                        </>
+                    )
+                } else {
+                    return (
+                        <>
+                            <Text style={{fontSize:17}}>
+                                <Text style={{ fontWeight: "bold" }}>Ценовой коэффициент полезности,{"\u00A0"}руб{"\u00A0"}/{"\u00A0"}%{"\u00A0"}- </Text>
+                                Коэффициент, который показывает,<Text style={{ fontWeight: "bold" }}> сколько необходимо заплатить </Text> за то количество продукции, которое удовлетворит суточную потребность в выбранном пищевом веществе (нутриенте) на{"\u00A0"}1%.
+                                </Text>
+                        </>
+                    )
+                }
+            }
+        } else if (message == 'ucc') {
+            Messages = () => {
+                if (props.product.length > 1) {
+                    return (
+                        <>
+                            <Text style={{fontSize:17}}>
+                                <Text style={{ fontWeight: "bold" }}>Обратный коэффициент,{"\u00A0"}%{"\u00A0"}/{"\u00A0"}руб - </Text>
+                            Коэффициент, который показывает,<Text style={{ fontWeight: "bold" }}> на сколько процентов возможно удовлетворить </Text>суточную потребность в выбранном пищевом веществе (нутриенте), если заплатить за продукцию{"\u00A0"}<Text style={{ fontWeight: "bold" }}>1{"\u00A0"}рубль</Text>.
+                            </Text>
+                            <Text style={{fontSize:17}}>{"\n"}Наиболее низкий результат подсвечен красным цветом.</Text>
+                        </>
+                    )
+                } else {
+                    return (
+                        <>
+                            <Text style={{fontSize:17}}>
+                                <Text style={{ fontWeight: "bold" }}>Обратный коэффициент,{"\u00A0"}%{"\u00A0"}/{"\u00A0"}руб - </Text>
+                                Коэффициент, который показывает,<Text style={{ fontWeight: "bold" }}> на сколько процентов возможно удовлетворить </Text>суточную потребность в выбранном пищевом веществе (нутриенте), если заплатить за продукцию{"\u00A0"}<Text style={{ fontWeight: "bold" }}>1{"\u00A0"}рубль</Text>.
+                                </Text>
+                        </>
+                    )
+                }
+            }
+        } else if (message == 'sp') {
+            Messages = () => {
+                if (props.product.length > 1) {
+                    return (
+                        <>
+                            <Text style={{fontSize:17}}>
+                                <Text style={{ fontWeight: "bold" }}>Количество порций,{"\u00A0"}шт – </Text>
+                             То количество порций (указанной Вами массы продукции), которое<Text style={{ fontWeight: "bold" }}> полностью удовлетворит</Text> суточную потребность в выбранном пищевом веществе (нутриенте).
+                             </Text>
+                            <Text style={{fontSize:17}}>{"\n"}Наиболее низкий результат подсвечен красным цветом.</Text>
+                        </>
+                    )
+                } else {
+                    return (
+                        <>
+                            <Text style={{fontSize:17}}>
+                                <Text style={{ fontWeight: "bold" }}>Количество порций,{"\u00A0"}шт – </Text>
+                                 То количество порций (указанной Вами массы продукции), которое<Text style={{ fontWeight: "bold" }}> полностью удовлетворит</Text> суточную потребность в выбранном пищевом веществе (нутриенте).
+                                 </Text>
+                        </>
+                    )
+                }
+            }
+        } else if (message == 'scp') {
+            Messages = () => {
+                if (props.product.length > 1) {
+                    return (
+                        <>
+                            <Text style={{fontSize:17}}>
+                                <Text style={{ fontWeight: "bold" }}>Стоимость порций,{"\u00A0"}руб – </Text>
+                            Стоимость того количества порций (указанной Вами массы продукции), которое<Text style={{ fontWeight: "bold" }}> полностью удовлетворит суточную потребность</Text> в выбранном пищевом веществе (нутриенте).
+                            </Text>
+                            <Text style={{fontSize:17}}>{"\n"}Наиболее низкий результат подсвечен красным цветом.</Text>
+                        </>
+                    )
+                } else {
+                    return (
+                        <>
+                            <Text style={{fontSize:17}}>
+                                <Text style={{ fontWeight: "bold" }}>Стоимость порций,{"\u00A0"}руб – </Text>
+                            Стоимость того количества порций (указанной Вами массы продукции), которое<Text style={{ fontWeight: "bold" }}> полностью удовлетворит суточную потребность</Text> в выбранном пищевом веществе (нутриенте).
+                            </Text>
+                        </>
+                    )
+                }
+            }
+        }
+
+        return (
+            <View style={styles.centeredView}>
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={modalVisible}
+                    onRequestClose={() => {
+                        setModalVisible(!modalVisible);
+                    }}
+                >
+                    <View style={styles.modalBackgroun}></View>
+                    <View style={styles.centeredView}>
+                        <View style={styles.modalView}>
+                            <Messages />
+                            <Pressable
+                                style={styles.closeBtn}
+                                onPress={() => setModalVisible(!modalVisible)}
+                            >
+                                <Text style={[{fontSize:17},{fontWeight:"bold"}]}>Понятно</Text>
+                            </Pressable>
+                        </View>
+                    </View>
+                </Modal>
+            </View>
         );
     }
 
-
     const DescButton = (props) => {
         let key = props.btn;
-        
-        const messages = {
-            "qb": "Содержание нутриента в 100\u00A0г продукции,\u00A0% от суточной потребности нутриента - На сколько процентов возможно удовлетворить суточную потребность в выбранном пищевом веществе (нутриенте), если употребить 100\u00A0грамм продукции.",
-            "pqb": "Содержание нутриента в указанной Вами массе продукции,\u00A0% от суточной потребности нутриента - На сколько процентов возможно удовлетворить суточную потребность в выбранном пищевом веществе (нутриенте), если употребить указанную Вами массу продукции",
-            "ccu": "Ценовой коэффициент полезности,\u00A0руб\u00A0/\u00A0% - Коэффициент, который показывает, сколько необходимо заплатить за то количество продукции, которое удовлетворит суточную потребность в выбранном пищевом веществе (нутриенте) на\u00A01\u00A0%",
-            "ucc": "Обратный коэффициент,\u00A0%\u00A0/\u00A0руб – Коэффициент, который показывает, на сколько процентов возможно удовлетворить суточную потребность в выбранном пищевом веществе (нутриенте), если заплатить за продукцию\u00A01\u00A0рубль.",
-            "sp": "Количество порций,\u00A0шт – То количество порций (указанной Вами массы продукции), которое полностью удовлетворит суточную потребность в выбранном пищевом веществе (нутриенте).",
-            "scp": "Стоимость порций,\u00A0руб – Стоимость того количества порций (указанной Вами массы продукции), которое полностью удовлетворит суточную потребность в выбранном пищевом веществе (нутриенте)."
-        }
+
+
         return (<IconButton
             icon="help-circle-outline"
             size={25}
             color="blue"
-            onPress={() => createButtonAlert(messages[key])}
+            onPress={() => { setMessage(key), setModalVisible(true) }}
         />)
     }
 
@@ -92,6 +253,7 @@ const Calculations = (props) => {
             </>
         )
     }
+
     const CalResult = (params) => {
         if (Object.keys(params).length > 2) {
             let Litem = { "item": params.Litem, "nutrient": params.nutrient };
@@ -101,12 +263,12 @@ const Calculations = (props) => {
             if (Rresult && Lresult) {
                 let tableHead = [<Text style={styles.textInTable}>{params.Litem.name}</Text>, <Text style={styles.textInTable}> {Lresult.nutrient_name}</Text>, <Text style={styles.textInTable}> {params.Ritem.name}</Text>];
                 let tableData = [
-                    [<Text style={[styles.textInTable, resColor(Lresult.qb, Rresult.qb)]}>{Lresult.qb.toFixed(2)}</Text>, <DescForTable name={"Содержание нутриента от суточной потребности в 100\u00A0г."} btn={"qb"} />, <Text style={[styles.textInTable, resColor(Rresult.qb, Lresult.qb)]}>{Rresult.qb.toFixed(2)}</Text>],
-                    [<Text style={[styles.textInTable, resColor(Lresult.pqb, Rresult.pqb)]}>{Lresult.pqb.toFixed(2)}</Text>, <DescForTable name={"Содержание нутриента от суточной потребности в порции"} btn={"pqb"} />, <Text style={[styles.textInTable, resColor(Rresult.pqb, Lresult.pqb)]}>{Rresult.pqb.toFixed(2)}</Text>],
-                    [<Text style={[styles.textInTable, resColor(Lresult.ccu, Rresult.ccu)]}>{Lresult.ccu.toFixed(2)}</Text>, <DescForTable name={"Ценовой коэффициент полезности"} btn={"ccu"} />, <Text style={[styles.textInTable, resColor(Rresult.ccu, Lresult.ccu)]}>{Rresult.ccu.toFixed(2)}</Text>],
-                    [<Text style={[styles.textInTable, resColor(Lresult.ucc, Rresult.ucc)]}>{Lresult.ucc.toFixed(2)}</Text>, <DescForTable name={"Обратный коэффициент"} btn={"ucc"} />, <Text style={[styles.textInTable, resColor(Rresult.ucc, Lresult.ucc)]}>{Rresult.ucc.toFixed(2)}</Text>],
-                    [<Text style={[styles.textInTable, resColor(Lresult.sp, Rresult.sp)]}>{Lresult.sp.toFixed(2)}</Text>, <DescForTable name={"Кол-во порций"} btn={"sp"} />, <Text style={[styles.textInTable, resColor(Rresult.sp, Lresult.sp)]}>{Rresult.sp.toFixed(2)}</Text>],
-                    [<Text style={[styles.textInTable, resColor(Lresult.scp, Rresult.scp)]}>{Lresult.scp.toFixed(2)}</Text>, <DescForTable name={"Стоимость порций"} btn={"scp"} />, <Text style={[styles.textInTable, resColor(Rresult.scp, Lresult.scp)]}>{Rresult.scp.toFixed(2)}</Text>]
+                    [<Text style={[styles.textInTable, resColor(Lresult.qb.toFixed(2), Rresult.qb.toFixed(2))]}>{Lresult.qb.toFixed(2)}</Text>, <DescForTable name={"Содержание нутриента от суточной потребности в 100\u00A0г."} btn={"qb"} />, <Text style={[styles.textInTable, resColor(Rresult.qb.toFixed(2), Lresult.qb.toFixed(2))]}>{Rresult.qb.toFixed(2)}</Text>],
+                    [<Text style={[styles.textInTable, resColor(Lresult.pqb.toFixed(2), Rresult.pqb.toFixed(2))]}>{Lresult.pqb.toFixed(2)}</Text>, <DescForTable name={"Содержание нутриента от суточной потребности в порции"} btn={"pqb"} />, <Text style={[styles.textInTable, resColor(Rresult.pqb.toFixed(2), Lresult.pqb.toFixed(2))]}>{Rresult.pqb.toFixed(2)}</Text>],
+                    [<Text style={[styles.textInTable, resColor(Lresult.ccu.toFixed(2), Rresult.ccu.toFixed(2))]}>{Lresult.ccu.toFixed(2)}</Text>, <DescForTable name={"Ценовой коэффициент полезности"} btn={"ccu"} />, <Text style={[styles.textInTable, resColor(Rresult.ccu.toFixed(2), Lresult.ccu.toFixed(2))]}>{Rresult.ccu.toFixed(2)}</Text>],
+                    [<Text style={[styles.textInTable, resColor(Lresult.ucc.toFixed(2), Rresult.ucc.toFixed(2))]}>{Lresult.ucc.toFixed(2)}</Text>, <DescForTable name={"Обратный коэффициент"} btn={"ucc"} />, <Text style={[styles.textInTable, resColor(Rresult.ucc.toFixed(2), Lresult.ucc.toFixed(2))]}>{Rresult.ucc.toFixed(2)}</Text>],
+                    [<Text style={[styles.textInTable, resColor(Lresult.sp.toFixed(2), Rresult.sp.toFixed(2))]}>{Lresult.sp.toFixed(2)}</Text>, <DescForTable name={"Кол-во порций"} btn={"sp"} />, <Text style={[styles.textInTable, resColor(Rresult.sp.toFixed(2), Lresult.sp.toFixed(2))]}>{Rresult.sp.toFixed(2)}</Text>],
+                    [<Text style={[styles.textInTable, resColor(Lresult.scp.toFixed(2), Rresult.scp.toFixed(2))]}>{Lresult.scp.toFixed(2)}</Text>, <DescForTable name={"Стоимость порций"} btn={"scp"} />, <Text style={[styles.textInTable, resColor(Rresult.scp.toFixed(2), Lresult.scp.toFixed(2))]}>{Rresult.scp.toFixed(2)}</Text>]
                 ];
                 return (
                     <Table borderStyle={{ borderWidth: 1, borderColor: '#0000ff' }}>
@@ -147,6 +309,7 @@ const Calculations = (props) => {
         return (
             <>
                 <ScrollView>
+                    <CustomModal />
                     <View style={styles.container}>
                         <CalResult Litem={props.leftSelected} Ritem={props.rightSelected} nutrient={props.nutrientSelected} />
                     </View>
@@ -156,6 +319,7 @@ const Calculations = (props) => {
     } else {
         return (
             <ScrollView>
+                <CustomModal />
                 <CalResult item={props.product[0]} nutrient={props.nutrientSelected} />
             </ScrollView>
         )
@@ -165,7 +329,7 @@ const Calculations = (props) => {
 
 export default Calculations;
 
-const { width } = Dimensions.get('window');
+const { height, width } = Dimensions.get('window');
 const styles = StyleSheet.create({
     container: { padding: 5, paddingTop: 30 },
     accord: {
@@ -218,5 +382,38 @@ const styles = StyleSheet.create({
     },
     resColor: {
         color: "red"
+    },
+    centeredView: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    modalView: {
+        backgroundColor: "white",
+        alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 2,
+            height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+        width: width * 0.9,
+        height: height * 0.8,
+        padding:40,
+    },
+    modalBackgroun: {
+        backgroundColor: "black",
+        opacity: 0.5,
+        position: "absolute",
+        width: "100%",
+        height: "100%"
+    },
+    closeBtn: {
+        position:"absolute",
+        bottom:0,
+        right:0,
+        margin:20,
     }
 });
