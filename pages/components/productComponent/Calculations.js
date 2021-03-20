@@ -135,7 +135,7 @@ const Calculations = (props) => {
                     return (
                         <>
                             <Text style={{fontSize:17}}>
-                                <Text style={{ fontWeight: "bold" }}>Обратный коэффициент,{"\u00A0"}%{"\u00A0"}/{"\u00A0"}руб - </Text>
+                                <Text style={{ fontWeight: "bold" }}>Обратный коэффициент,{"\u00A0"}%{"\u00A0"}/{"\u00A0"}руб{"\u00A0"}- </Text>
                             Коэффициент, который показывает,<Text style={{ fontWeight: "bold" }}> на сколько процентов возможно удовлетворить </Text>суточную потребность в выбранном пищевом веществе (нутриенте), если заплатить за продукцию{"\u00A0"}<Text style={{ fontWeight: "bold" }}>1{"\u00A0"}рубль</Text>.
                             </Text>
                             <Text style={{fontSize:17}}>{"\n"}Наиболее низкий результат подсвечен красным цветом.</Text>
@@ -145,7 +145,7 @@ const Calculations = (props) => {
                     return (
                         <>
                             <Text style={{fontSize:17}}>
-                                <Text style={{ fontWeight: "bold" }}>Обратный коэффициент,{"\u00A0"}%{"\u00A0"}/{"\u00A0"}руб - </Text>
+                                <Text style={{ fontWeight: "bold" }}>Обратный коэффициент,{"\u00A0"}%{"\u00A0"}/{"\u00A0"}руб{"\u00A0"}- </Text>
                                 Коэффициент, который показывает,<Text style={{ fontWeight: "bold" }}> на сколько процентов возможно удовлетворить </Text>суточную потребность в выбранном пищевом веществе (нутриенте), если заплатить за продукцию{"\u00A0"}<Text style={{ fontWeight: "bold" }}>1{"\u00A0"}рубль</Text>.
                                 </Text>
                         </>
@@ -158,7 +158,7 @@ const Calculations = (props) => {
                     return (
                         <>
                             <Text style={{fontSize:17}}>
-                                <Text style={{ fontWeight: "bold" }}>Количество порций,{"\u00A0"}шт – </Text>
+                                <Text style={{ fontWeight: "bold" }}>Количество порций,{"\u00A0"}шт{"\u00A0"}– </Text>
                              То количество порций (указанной Вами массы продукции), которое<Text style={{ fontWeight: "bold" }}> полностью удовлетворит</Text> суточную потребность в выбранном пищевом веществе (нутриенте).
                              </Text>
                             <Text style={{fontSize:17}}>{"\n"}Наиболее низкий результат подсвечен красным цветом.</Text>
@@ -168,7 +168,7 @@ const Calculations = (props) => {
                     return (
                         <>
                             <Text style={{fontSize:17}}>
-                                <Text style={{ fontWeight: "bold" }}>Количество порций,{"\u00A0"}шт – </Text>
+                                <Text style={{ fontWeight: "bold" }}>Количество порций,{"\u00A0"}шт{"\u00A0"}– </Text>
                                  То количество порций (указанной Вами массы продукции), которое<Text style={{ fontWeight: "bold" }}> полностью удовлетворит</Text> суточную потребность в выбранном пищевом веществе (нутриенте).
                                  </Text>
                         </>
@@ -181,7 +181,7 @@ const Calculations = (props) => {
                     return (
                         <>
                             <Text style={{fontSize:17}}>
-                                <Text style={{ fontWeight: "bold" }}>Стоимость порций,{"\u00A0"}руб – </Text>
+                                <Text style={{ fontWeight: "bold" }}>Стоимость порций,{"\u00A0"}руб{"\u00A0"}– </Text>
                             Стоимость того количества порций (указанной Вами массы продукции), которое<Text style={{ fontWeight: "bold" }}> полностью удовлетворит суточную потребность</Text> в выбранном пищевом веществе (нутриенте).
                             </Text>
                             <Text style={{fontSize:17}}>{"\n"}Наиболее низкий результат подсвечен красным цветом.</Text>
@@ -191,7 +191,7 @@ const Calculations = (props) => {
                     return (
                         <>
                             <Text style={{fontSize:17}}>
-                                <Text style={{ fontWeight: "bold" }}>Стоимость порций,{"\u00A0"}руб – </Text>
+                                <Text style={{ fontWeight: "bold" }}>Стоимость порций,{"\u00A0"}руб{"\u00A0"}– </Text>
                             Стоимость того количества порций (указанной Вами массы продукции), которое<Text style={{ fontWeight: "bold" }}> полностью удовлетворит суточную потребность</Text> в выбранном пищевом веществе (нутриенте).
                             </Text>
                         </>
