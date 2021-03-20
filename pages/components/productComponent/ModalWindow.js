@@ -50,7 +50,7 @@ const ModalWindow = (props) => {
                                         style={[styles.button, styles.buttonClose]}
                                         onPress={() => closeModal()}
                                     >
-                                        <Text style={styles.textStyle}>Расчет</Text>
+                                        <Text style={styles.textStyle}>Рассчет</Text>
                                     </Pressable>
                                 </View>
                             </TouchableWithoutFeedback>
@@ -93,7 +93,7 @@ const ModalWindow = (props) => {
                                     style={[styles.button, styles.buttonClose]}
                                     onPress={() => closeModal()}
                                 >
-                                    <Text style={styles.textStyle}>Расчет</Text>
+                                    <Text style={styles.textStyle}>Рассчет</Text>
                                 </Pressable>
                             </View>
                         </TouchableWithoutFeedback>

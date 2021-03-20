@@ -36,7 +36,7 @@ const SearchProduct = ({ route, navigation }) => {
     const getData = async (param) => {
         let product = [];
         let selectQuery = await client.ExecuteQuery(`SELECT id,product_name FROM PRODUCT 
-                                                    WHERE product_name LIKE '%${param}%' LIMIT 10`, []);
+                                                    WHERE product_name LIKE '%${param}%' LIMIT 20`, []);
         var rows = selectQuery.rows;
         for (let i = 0; i < rows.length; i++) {
             let value = rows.item(i).product_name;

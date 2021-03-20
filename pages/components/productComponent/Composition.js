@@ -52,7 +52,7 @@ function Composition({ route, navigation }) {
         } else {
             addIntoHystory();
             setMessages("")
-            navigation.navigate('Расчет', {
+            navigation.navigate('Рассчет', {
                 data, checkedItem
             })
         }
@@ -90,7 +90,7 @@ function Composition({ route, navigation }) {
                     mode="contained"
                     style={styles.button}
                     onPress={() => nextPage()}>
-                    Расчитать
+                    Рассчитать
                 </Button>
             </View>
 

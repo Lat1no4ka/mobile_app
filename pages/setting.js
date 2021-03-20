@@ -7,6 +7,7 @@ import ConsumptionRates from './components/settingComponent/ConsumptionRates';
 import ChangeValue from './components/settingComponent/ChangeValue';
 import NewProduct from './components/settingComponent/NewProduct';
 import ChangeRates from './components/settingComponent/ChangeRates';
+import AboutApp from './components/settingComponent/AboutApp';
 
 
 
@@ -25,6 +26,7 @@ const SettingScreen = () => {
                 <Stack.Screen name="Изменение содержимого" component={ChangeValue} />
                 <Stack.Screen name="Новый продукт" component={NewProduct} />
                 <Stack.Screen name="Норма суточного потребления" component={ChangeRates} />
+                <Stack.Screen name="О приложении" component={AboutApp} />
             </Stack.Navigator>
         );
     };

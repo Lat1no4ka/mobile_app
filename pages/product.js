@@ -14,7 +14,7 @@ const CompareScreen = () => {
             <Stack.Screen name="Продукты" component={SelectProduct} />
             <Stack.Screen name="Поиск" component={SearchProduct} />
             <Stack.Screen name="Нутриенты" component={Composition} />
-            <Stack.Screen name="Расчет" component={Result} />
+            <Stack.Screen name="Рассчет" component={Result} />
         </Stack.Navigator>
     );
 };

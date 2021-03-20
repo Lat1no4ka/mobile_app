@@ -78,7 +78,7 @@ return unsubscribe;
         let value = rows.item(i).seq;
         cnts = Number( value );
     }
-    console.log(cnts);
+    //console.log(cnts);
     setCount(cnts);
 
     }
@@ -92,14 +92,14 @@ return unsubscribe;
         let selectQuery = await client.ExecuteQuery(`SELECT * FROM DAILY_RATE
                                                      EXCEPT
                                                      SELECT * FROM DAILY_RATE_BACKUP;`, []);
-                                                     console.log("test");
+                                                     //console.log("test");
         var rows = selectQuery.rows;
         for (let i = 0; i < rows.length; i++) {
             let value = rows.item(i).protein;
             
             strng = Number(value) ;
         }
-        console.log(str);
+        //console.log(str);
         setString(strng);
         
         }
@@ -138,6 +138,16 @@ return unsubscribe;
                 Нормы суточного потребления
             </Button>
             <Text style={styles.innerText}> {out}</Text>
+            <Button
+                icon="open"
+                mode="contained"
+                
+                style={styles.Buttons}
+                onPress={() => navigation.navigate('О приложении',{})}>
+                О приложении
+            </Button>
+
+
         </View>
         
     )

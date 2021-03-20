@@ -57,8 +57,24 @@ const SelectProduct = ({ route, navigation }) => {
                     style={styles.AddBtn}
                 />
                 <View>
-                   
-                    <Text style={styles.text} >Нажмите для выбора продукта</Text>
+                
+                    
+                    <Text style={styles.head} >HATHELNUT {'\n'}
+                    HAve THE Living NUTrient</Text>
+                    <Text style={styles.text} >
+                    {'\n'}
+                    
+                    {'\n'}
+                    Приложение позволяет вам рассчитать стоимость пищевых веществ, содержащихся в разных видах продукции.
+                    {'\n'}
+                    Например: вы хотите узнать, где дешевле получить витамин С, из яблока или из апельсина?
+                    {'\n'}
+                    Ответ на этот и подобные вопросы даст вам приложение.
+                    {'\n'}
+                    
+                    </Text>
+                    <Text style={styles.cont} >Для продолжения нажмите на плюсик
+                    </Text>
                 </View>
             </View>
 
@@ -71,11 +87,22 @@ const styles = StyleSheet.create({
     AddBtn: {
         alignSelf: 'flex-end',
     },
-    text: {
+    cont: {
         textAlign: "center",
-        fontSize: 24,
+        fontWeight: 'bold',
+        fontSize: 18,
+    },
+    text: {
+        textAlign: "justify",
+        fontSize: 22,
         padding: 20,
-        marginTop: 100
+        //marginTop: 100
+    },
+    head: {
+        textAlign: "center",
+        fontWeight: 'bold',
+        fontSize: 24,
+        //marginTop: 100
     },
     button: {
         width: 250,
