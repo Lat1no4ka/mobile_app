@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
         color: 'gray'
       },
       Buttons:{
-          backgroundColor:"blue"
+          backgroundColor:"#0000FF"
       }
 });
 

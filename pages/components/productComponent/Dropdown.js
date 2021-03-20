@@ -15,7 +15,7 @@ const Dropdown = (props) => {
                     <List.Accordion
                         style={styles.selected}
                         title={props.leftSelected.name}
-                        theme={{ colors: { primary: 'blue' }}}
+                        theme={{ colors: { primary: '#0000FF' }}}
                         expanded={focusL}
                         onPress={() => setFocusL(!focusL)}
                     >
@@ -34,7 +34,7 @@ const Dropdown = (props) => {
                     <List.Accordion
                         style={styles.selected}
                         title={props.rightSelected.name}
-                        theme={{ colors: { primary: 'blue' }}}
+                        theme={{ colors: { primary: '#0000FF' }}}
                         expanded={focusR}
                         onPress={() => setFocusR(!focusR)}
                     >
@@ -52,7 +52,7 @@ const Dropdown = (props) => {
                     <List.Accordion
                         style={styles.selected}
                         title={props.nutrientSelected.name}
-                        theme={{ colors: { primary: 'blue' }}}
+                        theme={{ colors: { primary: '#0000FF' }}}
                         expanded={focusN}
                         onPress={() => setFocusN(!focusN)}
                     >
@@ -79,7 +79,7 @@ const Dropdown = (props) => {
                         <List.Accordion
                             style={styles.selected}
                             title={props.nutrientSelected.name}
-                            theme={{ colors: { primary: 'blue' }}}
+                            theme={{ colors: { primary: '#0000FF' }}}
                             expanded={focusN}
                             onPress={() => setFocusN(!focusN)}
                         >

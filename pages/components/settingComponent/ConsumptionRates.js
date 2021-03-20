@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     marginTop: 10
     },
     Buttons: {
-      backgroundColor:"blue"
+      backgroundColor:"#0000FF"
     }
 });
   export default ConsumptionRates;

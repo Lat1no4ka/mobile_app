@@ -41,7 +41,7 @@ const Navigation = () => {
           },
         })}
         tabBarOptions={{
-          activeTintColor: 'blue',
+          activeTintColor: '#0000FF',
           inactiveTintColor: 'black',
           showLabel: false,
           keyboardHidesTabBar: true

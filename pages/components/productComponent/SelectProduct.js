@@ -23,7 +23,7 @@ const SelectProduct = ({ route, navigation }) => {
             <ScrollView>
                 <IconButton
                     icon="add-circle-outline"
-                    color="blue"
+                    color="#0000FF"
                     size={50}
                     onPress={() => navigation.navigate('Поиск', { product })}
                     style={styles.AddBtn}
@@ -51,7 +51,7 @@ const SelectProduct = ({ route, navigation }) => {
             <View>
                 <IconButton
                     icon="add-circle-outline"
-                    color={"blue"}
+                    color={"#0000FF"}
                     size={50}
                     onPress={() => navigation.navigate('Поиск', { product })}
                     style={styles.AddBtn}
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
         width: 250,
         height: 40,
         margin: 20,
-        backgroundColor: "blue"
+        backgroundColor: "#0000FF"
 
     },
     containerWithBtn: {

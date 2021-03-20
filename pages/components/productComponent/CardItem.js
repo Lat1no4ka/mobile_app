@@ -24,7 +24,7 @@ const CardItem = (props) => {
                 <Button
                     onPress={() => props.removeItem(props.item.id)}
                 >
-                  <Text style={{color:"blue"}}>Удалить</Text>
+                  <Text style={{color:"#0000FF"}}>Удалить</Text>
             </Button>
             </Card.Actions>
         </Card>

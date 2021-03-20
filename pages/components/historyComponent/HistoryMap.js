@@ -55,7 +55,7 @@ const { width } = Dimensions.get('window');
         elevation: 14,
     },
     statbutton:{
-        backgroundColor:"blue",
+        backgroundColor:"#0000FF",
         width: (width - 20)/2,
         height: 40,
       },

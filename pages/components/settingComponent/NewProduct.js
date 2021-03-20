@@ -62,7 +62,7 @@ const NewProduct = ({navigation}) => {
                 mode='outlined'
                 style={styles.textInput}
                 onChangeText={text => setSearch(text)}
-                theme={{ colors: { primary: 'blue' } }}
+                theme={{ colors: { primary: '#0000FF' } }}
             />
             <TextInput
                 label="Введите массу белков, г"
@@ -71,7 +71,7 @@ const NewProduct = ({navigation}) => {
                 mode='outlined'
                 style={styles.textInput}
                 onChangeText={protein => setProtein(protein)}
-                theme={{ colors: { primary: 'blue' } }}
+                theme={{ colors: { primary: '#0000FF' } }}
             />
             <TextInput
                 label="Введите массу жиров, г"
@@ -80,7 +80,7 @@ const NewProduct = ({navigation}) => {
                 mode='outlined'
                 style={styles.textInput}
                 onChangeText={fats => setFats(fats)}
-                theme={{ colors: { primary: 'blue' } }}
+                theme={{ colors: { primary: '#0000FF' } }}
             />
             <TextInput
                 label="Введите массу углеводов, г"
@@ -89,7 +89,7 @@ const NewProduct = ({navigation}) => {
                 mode='outlined'
                 style={styles.textInput}
                 onChangeText={carbohydrates => setСarbohydrates(carbohydrates)}
-                theme={{ colors: { primary: 'blue' } }}
+                theme={{ colors: { primary: '#0000FF' } }}
             />
             <TextInput
                 label="Введите массу пищевых волокон, г"
@@ -98,7 +98,7 @@ const NewProduct = ({navigation}) => {
                 mode='outlined'
                 style={styles.textInput}
                 onChangeText={alimentaryfiber => setAlimentaryFiber(alimentaryfiber)}
-                theme={{ colors: { primary: 'blue' } }}
+                theme={{ colors: { primary: '#0000FF' } }}
             />
             <TextInput
                 label="Введите массу калия, мг"
@@ -107,7 +107,7 @@ const NewProduct = ({navigation}) => {
                 mode='outlined'
                 style={styles.textInput}
                 onChangeText={potassium => setPotassium(potassium)}
-                theme={{ colors: { primary: 'blue' } }}
+                theme={{ colors: { primary: '#0000FF' } }}
             />
             <TextInput
                 label="Введите массу кальция, мг"
@@ -116,7 +116,7 @@ const NewProduct = ({navigation}) => {
                 mode='outlined'
                 style={styles.textInput}
                 onChangeText={calcium => setCalcium(calcium)}
-                theme={{ colors: { primary: 'blue' } }}
+                theme={{ colors: { primary: '#0000FF' } }}
             />
             <TextInput
                 label="Введите массу магния, мг"
@@ -125,7 +125,7 @@ const NewProduct = ({navigation}) => {
                 mode='outlined'
                 style={styles.textInput}
                 onChangeText={magnesium => setMagnesium(magnesium)}
-                theme={{ colors: { primary: 'blue' } }}
+                theme={{ colors: { primary: '#0000FF' } }}
             />
             <TextInput
                 label="Введите массу фосфора, мг"
@@ -134,7 +134,7 @@ const NewProduct = ({navigation}) => {
                 mode='outlined'
                 style={styles.textInput}
                 onChangeText={phosphorus => setPhosphorus(phosphorus)}
-                theme={{ colors: { primary: 'blue' } }}
+                theme={{ colors: { primary: '#0000FF' } }}
             />
             <TextInput
                 label="Введите массу железа, мг"
@@ -143,7 +143,7 @@ const NewProduct = ({navigation}) => {
                 mode='outlined'
                 style={styles.textInput}
                 onChangeText={iron => setIron(iron)}
-                theme={{ colors: { primary: 'blue' } }}
+                theme={{ colors: { primary: '#0000FF' } }}
             />
             <TextInput
                 label="Введите массу витамина А, мкг"
@@ -152,7 +152,7 @@ const NewProduct = ({navigation}) => {
                 mode='outlined'
                 style={styles.textInput}
                 onChangeText={vitamina => setVitaminA(vitamina)}
-                theme={{ colors: { primary: 'blue' } }}
+                theme={{ colors: { primary: '#0000FF' } }}
             />
             <TextInput
                 label="Введите массу витамина В1, мг"
@@ -161,7 +161,7 @@ const NewProduct = ({navigation}) => {
                 mode='outlined'
                 style={styles.textInput}
                 onChangeText={vitaminbone => setVitaminBone(vitaminbone)}
-                theme={{ colors: { primary: 'blue' } }}
+                theme={{ colors: { primary: '#0000FF' } }}
             />
             <TextInput
                 label="Введите массу витамина В2, мг"
@@ -170,7 +170,7 @@ const NewProduct = ({navigation}) => {
                 mode='outlined'
                 style={styles.textInput}
                 onChangeText={vitaminbtwo => setVitaminBtwo(vitaminbtwo)}
-                theme={{ colors: { primary: 'blue' } }}
+                theme={{ colors: { primary: '#0000FF' } }}
             />
             <TextInput
                 label="Введите массу витамина РР, мг"
@@ -179,7 +179,7 @@ const NewProduct = ({navigation}) => {
                 mode='outlined'
                 style={styles.textInput}
                 onChangeText={vitaminpp => setVitaminPP(vitaminpp)}
-                theme={{ colors: { primary: 'blue' } }}
+                theme={{ colors: { primary: '#0000FF' } }}
             />
             <TextInput
                 label="Введите массу витамина С, мг"
@@ -188,7 +188,7 @@ const NewProduct = ({navigation}) => {
                 mode='outlined'
                 style={styles.textInput}
                 onChangeText={vitaminc => setVitaminC(vitaminc)}
-                theme={{ colors: { primary: 'blue' } }}
+                theme={{ colors: { primary: '#0000FF' } }}
             />
             <TextInput
                 label="Введите массу витамина Е, мг"
@@ -197,7 +197,7 @@ const NewProduct = ({navigation}) => {
                 mode='outlined'
                 style={styles.textInput}
                 onChangeText={vitamine => setVitaminE(vitamine)}
-                theme={{ colors: { primary: 'blue' } }}
+                theme={{ colors: { primary: '#0000FF' } }}
             />
             <TextInput
                 label="Введите колличество килокалорий, ккал"
@@ -206,7 +206,7 @@ const NewProduct = ({navigation}) => {
                 mode='outlined'
                 style={styles.textInput}
                 onChangeText={energyvalue => setEnergyvalue(energyvalue)}
-                theme={{ colors: { primary: 'blue' } }}
+                theme={{ colors: { primary: '#0000FF' } }}
             />
             <View style={styles.containerWithBtn}>
                   <Button
@@ -247,7 +247,7 @@ const styles = StyleSheet.create({
       padding: 10,
   },
   button: {
-      backgroundColor:"blue",
+      backgroundColor:"#0000FF",
       width: 190,
       height: 40,
       margin: 20,

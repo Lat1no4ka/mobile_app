@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
         color: 'black'
       },
       Buttons:{
-          backgroundColor:"blue"
+          backgroundColor:"#0000FF"
       }
 });
 

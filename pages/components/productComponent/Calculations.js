@@ -234,7 +234,7 @@ const Calculations = (props) => {
         return (<IconButton
             icon="help-circle-outline"
             size={25}
-            color="blue"
+            color="#0000FF"
             onPress={() => { setMessage(key), setModalVisible(true) }}
         />)
     }

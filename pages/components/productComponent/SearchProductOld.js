@@ -87,7 +87,7 @@ const SearchProduct = ({ route, navigation }) => {
                     style={styles.container}
                     onChangeText={text => setText(text)}
                     value={text}
-                    theme={{ colors: { primary: 'blue' } }}
+                    theme={{ colors: { primary: '#0000FF' } }}
                 />
                 <SafeAreaView style={styles.serachView} >
                     <FlatList
@@ -111,7 +111,7 @@ const SearchProduct = ({ route, navigation }) => {
                         style={styles.container}
                         onChangeText={text => setText(text)}
                         onFocus={() => setFocus(true)}
-                        theme={{ colors: { primary: 'blue' } }}
+                        theme={{ colors: { primary: '#0000FF' } }}
                     />
                     <TextInput
                         label="Введите цену продукта, руб."
@@ -120,7 +120,7 @@ const SearchProduct = ({ route, navigation }) => {
                         mode='outlined'
                         style={styles.textInput}
                         onChangeText={price => setPrice(price)}
-                        theme={{ colors: { primary: 'blue' } }}
+                        theme={{ colors: { primary: '#0000FF' } }}
                     />
                     <TextInput
                         label="Введите вес продукта, г."
@@ -129,7 +129,7 @@ const SearchProduct = ({ route, navigation }) => {
                         mode='outlined'
                         style={styles.textInput}
                         onChangeText={weight => setWeight(weight)}
-                        theme={{ colors: { primary: 'blue' } }}
+                        theme={{ colors: { primary: '#0000FF' } }}
                     />
                     <TextInput
                         label="Введите массу одной порции, г."
@@ -138,7 +138,7 @@ const SearchProduct = ({ route, navigation }) => {
                         mode='outlined'
                         style={styles.textInput}
                         onChangeText={onePortion => setOnePortion(onePortion)}
-                        theme={{ colors: { primary: 'blue' } }}
+                        theme={{ colors: { primary: '#0000FF' } }}
                     />
                     <View style={styles.containerWithBtn}>
                         <Button
@@ -160,7 +160,7 @@ const SearchProduct = ({ route, navigation }) => {
                 style={styles.container}
                 onChangeText={text => setText(text)}
                 onFocus={() => setFocus(true)}
-                theme={{ colors: { primary: 'blue' } }}
+                theme={{ colors: { primary: '#0000FF' } }}
             />
 
         )

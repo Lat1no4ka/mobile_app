@@ -67,22 +67,22 @@ function Composition({ route, navigation }) {
     return (
         <ScrollView>
             <View style={styles.container}>
-                <Checkbox.Item theme={{ colors: { primary: 'black' } }} labelStyle={{ fontSize: 17 }} color={"blue"} label="Белки, г" status={protein ? 'checked' : 'unchecked'} onPress={() => setProtein(!protein)} style={styles.checkBox} />
-                <Checkbox.Item theme={{ colors: { primary: 'black' } }} labelStyle={{ fontSize: 17 }} color={"blue"} label="Жиры, г" status={fat ? 'checked' : 'unchecked'} onPress={() => setFat(!fat)} style={styles.checkBox} />
-                <Checkbox.Item theme={{ colors: { primary: 'black' } }} labelStyle={{ fontSize: 17 }} color={"blue"} label="Углеводы, г" status={carbohydrates ? 'checked' : 'unchecked'} onPress={() => setCarbohydrates(!carbohydrates)} style={styles.checkBox} />
-                <Checkbox.Item theme={{ colors: { primary: 'black' } }} labelStyle={{ fontSize: 17 }} color={"blue"} label="Пищевые волокна, г" status={alimentaryFiber ? 'checked' : 'unchecked'} onPress={() => setFiber(!alimentaryFiber)} style={styles.checkBox} />
-                <Checkbox.Item theme={{ colors: { primary: 'black' } }} labelStyle={{ fontSize: 17 }} color={"blue"} label="Калий, мг" status={potassium ? 'checked' : 'unchecked'} onPress={() => setPotassium(!potassium)} style={styles.checkBox} />
-                <Checkbox.Item theme={{ colors: { primary: 'black' } }} labelStyle={{ fontSize: 17 }} color={"blue"} label="Кальций, мг" status={calcium ? 'checked' : 'unchecked'} onPress={() => setCalcium(!calcium)} style={styles.checkBox} />
-                <Checkbox.Item theme={{ colors: { primary: 'black' } }} labelStyle={{ fontSize: 17 }} color={"blue"} label="Магний, мг" status={magnesium ? 'checked' : 'unchecked'} onPress={() => setMagnesium(!magnesium)} style={styles.checkBox} />
-                <Checkbox.Item theme={{ colors: { primary: 'black' } }} labelStyle={{ fontSize: 17 }} color={"blue"} label="Фосфор, мг" status={phosphorus ? 'checked' : 'unchecked'} onPress={() => setPhosphorus(!phosphorus)} style={styles.checkBox} />
-                <Checkbox.Item theme={{ colors: { primary: 'black' } }} labelStyle={{ fontSize: 17 }} color={"blue"} label="Железо, мг" status={iron ? 'checked' : 'unchecked'} onPress={() => setIron(!iron)} style={styles.checkBox} />
-                <Checkbox.Item theme={{ colors: { primary: 'black' } }} labelStyle={{ fontSize: 17 }} color={"blue"} label="Витамин A, мкг" status={vitaminA ? 'checked' : 'unchecked'} onPress={() => setVitaminA(!vitaminA)} style={styles.checkBox} />
-                <Checkbox.Item theme={{ colors: { primary: 'black' } }} labelStyle={{ fontSize: 17 }} color={"blue"} label="Витамин B1, мг" status={vitaminB1 ? 'checked' : 'unchecked'} onPress={() => setVitaminB1(!vitaminB1)} style={styles.checkBox} />
-                <Checkbox.Item theme={{ colors: { primary: 'black' } }} labelStyle={{ fontSize: 17 }} color={"blue"} label="Витамин B2, мг" status={vitaminB2 ? 'checked' : 'unchecked'} onPress={() => setVitaminB2(!vitaminB2)} style={styles.checkBox} />
-                <Checkbox.Item theme={{ colors: { primary: 'black' } }} labelStyle={{ fontSize: 17 }} color={"blue"} label="Витамин PP, мг" status={vitaminPP ? 'checked' : 'unchecked'} onPress={() => setVitaminPP(!vitaminPP)} style={styles.checkBox} />
-                <Checkbox.Item theme={{ colors: { primary: 'black' } }} labelStyle={{ fontSize: 17 }} color={"blue"} label="Витамин C, мг" status={vitaminC ? 'checked' : 'unchecked'} onPress={() => setVitaminC(!vitaminC)} style={styles.checkBox} />
-                <Checkbox.Item theme={{ colors: { primary: 'black' } }} labelStyle={{ fontSize: 17 }} color={"blue"} label="Витамин Е, мг" status={vitaminE ? 'checked' : 'unchecked'} onPress={() => setVitaminE(!vitaminE)} style={styles.checkBox} />
-                <Checkbox.Item theme={{ colors: { primary: 'black' } }} labelStyle={{ fontSize: 17 }} color={"blue"} label="Энергетическая ценность, ккал" status={energyValue ? 'checked' : 'unchecked'} onPress={() => setEnergy(!energyValue)} style={styles.checkBox} />
+                <Checkbox.Item theme={{ colors: { primary: 'black' } }} labelStyle={{ fontSize: 17 }} color={"#0000FF"} label="Белки, г" status={protein ? 'checked' : 'unchecked'} onPress={() => setProtein(!protein)} style={styles.checkBox} />
+                <Checkbox.Item theme={{ colors: { primary: 'black' } }} labelStyle={{ fontSize: 17 }} color={"#0000FF"} label="Жиры, г" status={fat ? 'checked' : 'unchecked'} onPress={() => setFat(!fat)} style={styles.checkBox} />
+                <Checkbox.Item theme={{ colors: { primary: 'black' } }} labelStyle={{ fontSize: 17 }} color={"#0000FF"} label="Углеводы, г" status={carbohydrates ? 'checked' : 'unchecked'} onPress={() => setCarbohydrates(!carbohydrates)} style={styles.checkBox} />
+                <Checkbox.Item theme={{ colors: { primary: 'black' } }} labelStyle={{ fontSize: 17 }} color={"#0000FF"} label="Пищевые волокна, г" status={alimentaryFiber ? 'checked' : 'unchecked'} onPress={() => setFiber(!alimentaryFiber)} style={styles.checkBox} />
+                <Checkbox.Item theme={{ colors: { primary: 'black' } }} labelStyle={{ fontSize: 17 }} color={"#0000FF"} label="Калий, мг" status={potassium ? 'checked' : 'unchecked'} onPress={() => setPotassium(!potassium)} style={styles.checkBox} />
+                <Checkbox.Item theme={{ colors: { primary: 'black' } }} labelStyle={{ fontSize: 17 }} color={"#0000FF"} label="Кальций, мг" status={calcium ? 'checked' : 'unchecked'} onPress={() => setCalcium(!calcium)} style={styles.checkBox} />
+                <Checkbox.Item theme={{ colors: { primary: 'black' } }} labelStyle={{ fontSize: 17 }} color={"#0000FF"} label="Магний, мг" status={magnesium ? 'checked' : 'unchecked'} onPress={() => setMagnesium(!magnesium)} style={styles.checkBox} />
+                <Checkbox.Item theme={{ colors: { primary: 'black' } }} labelStyle={{ fontSize: 17 }} color={"#0000FF"} label="Фосфор, мг" status={phosphorus ? 'checked' : 'unchecked'} onPress={() => setPhosphorus(!phosphorus)} style={styles.checkBox} />
+                <Checkbox.Item theme={{ colors: { primary: 'black' } }} labelStyle={{ fontSize: 17 }} color={"#0000FF"} label="Железо, мг" status={iron ? 'checked' : 'unchecked'} onPress={() => setIron(!iron)} style={styles.checkBox} />
+                <Checkbox.Item theme={{ colors: { primary: 'black' } }} labelStyle={{ fontSize: 17 }} color={"#0000FF"} label="Витамин A, мкг" status={vitaminA ? 'checked' : 'unchecked'} onPress={() => setVitaminA(!vitaminA)} style={styles.checkBox} />
+                <Checkbox.Item theme={{ colors: { primary: 'black' } }} labelStyle={{ fontSize: 17 }} color={"#0000FF"} label="Витамин B1, мг" status={vitaminB1 ? 'checked' : 'unchecked'} onPress={() => setVitaminB1(!vitaminB1)} style={styles.checkBox} />
+                <Checkbox.Item theme={{ colors: { primary: 'black' } }} labelStyle={{ fontSize: 17 }} color={"#0000FF"} label="Витамин B2, мг" status={vitaminB2 ? 'checked' : 'unchecked'} onPress={() => setVitaminB2(!vitaminB2)} style={styles.checkBox} />
+                <Checkbox.Item theme={{ colors: { primary: 'black' } }} labelStyle={{ fontSize: 17 }} color={"#0000FF"} label="Витамин PP, мг" status={vitaminPP ? 'checked' : 'unchecked'} onPress={() => setVitaminPP(!vitaminPP)} style={styles.checkBox} />
+                <Checkbox.Item theme={{ colors: { primary: 'black' } }} labelStyle={{ fontSize: 17 }} color={"#0000FF"} label="Витамин C, мг" status={vitaminC ? 'checked' : 'unchecked'} onPress={() => setVitaminC(!vitaminC)} style={styles.checkBox} />
+                <Checkbox.Item theme={{ colors: { primary: 'black' } }} labelStyle={{ fontSize: 17 }} color={"#0000FF"} label="Витамин Е, мг" status={vitaminE ? 'checked' : 'unchecked'} onPress={() => setVitaminE(!vitaminE)} style={styles.checkBox} />
+                <Checkbox.Item theme={{ colors: { primary: 'black' } }} labelStyle={{ fontSize: 17 }} color={"#0000FF"} label="Энергетическая ценность, ккал" status={energyValue ? 'checked' : 'unchecked'} onPress={() => setEnergy(!energyValue)} style={styles.checkBox} />
             </View>
             <Text style={{ textAlign: "center", margin: 10, color: "red" }}>{messages}</Text>
             <View style={styles.containerWithBtn}>
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
     button: {
         margin: 20,
         marginTop: 0,
-        backgroundColor: "blue",
+        backgroundColor: "#0000FF",
         width:250
     },
     lable: {

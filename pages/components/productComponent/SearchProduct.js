@@ -108,7 +108,7 @@ const SearchProduct = ({ route, navigation }) => {
                     mode='outlined'
                     style={styles.textInput}
                     onChangeText={price => { setPrice(price); setMessages(""); }}
-                    theme={{ colors: { primary: 'blue' } }}
+                    theme={{ colors: { primary: '#0000FF' } }}
                 />
                 <TextInput
                     label="Введите вес продукта, г."
@@ -117,7 +117,7 @@ const SearchProduct = ({ route, navigation }) => {
                     mode='outlined'
                     style={styles.textInput}
                     onChangeText={weight => { setWeight(weight); setMessages(""); }}
-                    theme={{ colors: { primary: 'blue' } }}
+                    theme={{ colors: { primary: '#0000FF' } }}
                 />
                 <TextInput
                     label="Введите массу одной порции, г."
@@ -126,7 +126,7 @@ const SearchProduct = ({ route, navigation }) => {
                     mode='outlined'
                     style={styles.textInput}
                     onChangeText={onePortion => { setOnePortion(onePortion); setMessages(""); }}
-                    theme={{ colors: { primary: 'blue' } }}
+                    theme={{ colors: { primary: '#0000FF' } }}
                 />
                 <Text style={{ textAlign: "center", marginTop: 10, color: "red" }}>{messages}</Text>
                 <View style={styles.containerWithBtn}>
@@ -153,7 +153,7 @@ const SearchProduct = ({ route, navigation }) => {
                         style={styles.container}
                         onChangeText={text => { setText(text); setSearchReady(false) }}
                         value={text}
-                        theme={{ colors: { primary: 'blue' } }}
+                        theme={{ colors: { primary: '#0000FF' } }}
                     />
                     {searchReady ? <SearchF /> : <SearchR />}
                 </ScrollView>
@@ -168,7 +168,7 @@ const SearchProduct = ({ route, navigation }) => {
                 mode='outlined'
                 style={styles.container}
                 onChangeText={text => setText(text)}
-                theme={{ colors: { primary: 'blue' } }}
+                theme={{ colors: { primary: '#0000FF' } }}
             />
 
         )
@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     button: {
-        backgroundColor:"blue",
+        backgroundColor:"#0000FF",
         width: 250,
         height: 40,
         margin: 20,
