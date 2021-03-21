@@ -107,7 +107,7 @@ const SearchProduct = ({ route, navigation }) => {
                     keyboardType='numeric'
                     mode='outlined'
                     style={styles.textInput}
-                    onChangeText={price => { setPrice(price); setMessages(""); }}
+                    onChangeText={price => {setPrice(price.replace(",",".")); setMessages("") }}
                     theme={{ colors: { primary: '#0000FF' } }}
                 />
                 <TextInput
@@ -116,7 +116,7 @@ const SearchProduct = ({ route, navigation }) => {
                     keyboardType='numeric'
                     mode='outlined'
                     style={styles.textInput}
-                    onChangeText={weight => { setWeight(weight); setMessages(""); }}
+                    onChangeText={weight => { setWeight(weight.replace(",",".")); setMessages(""); }}
                     theme={{ colors: { primary: '#0000FF' } }}
                 />
                 <TextInput
@@ -125,7 +125,7 @@ const SearchProduct = ({ route, navigation }) => {
                     keyboardType='numeric'
                     mode='outlined'
                     style={styles.textInput}
-                    onChangeText={onePortion => { setOnePortion(onePortion); setMessages(""); }}
+                    onChangeText={onePortion => { setOnePortion(onePortion.replace(",",".")); setMessages(""); }}
                     theme={{ colors: { primary: '#0000FF' } }}
                 />
                 <Text style={{ textAlign: "center", marginTop: 10, color: "red" }}>{messages}</Text>
