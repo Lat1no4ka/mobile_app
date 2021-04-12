@@ -101,17 +101,9 @@ const SearchProduct = ({ route, navigation }) => {
         }
         return (
             <View>
+                
                 <TextInput
-                    label="Введите цену продукта, руб."
-                    value={price}
-                    keyboardType='numeric'
-                    mode='outlined'
-                    style={styles.textInput}
-                    onChangeText={price => {setPrice(price.replace(",",".")); setMessages("") }}
-                    theme={{ colors: { primary: '#0000FF' } }}
-                />
-                <TextInput
-                    label="Введите вес продукта, г."
+                    label="Масса продукта в граммах"
                     value={weight}
                     keyboardType='numeric'
                     mode='outlined'
@@ -120,7 +112,16 @@ const SearchProduct = ({ route, navigation }) => {
                     theme={{ colors: { primary: '#0000FF' } }}
                 />
                 <TextInput
-                    label="Введите массу одной порции, г."
+                    label="Цена за указанную массу, руб."
+                    value={price}
+                    keyboardType='numeric'
+                    mode='outlined'
+                    style={styles.textInput}
+                    onChangeText={price => {setPrice(price.replace(",",".")); setMessages("") }}
+                    theme={{ colors: { primary: '#0000FF' } }}
+                />
+                <TextInput
+                    label="Введите массу одной порции, г"
                     value={onePortion}
                     keyboardType='numeric'
                     mode='outlined'

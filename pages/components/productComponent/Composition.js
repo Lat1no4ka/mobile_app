@@ -52,7 +52,7 @@ function Composition({ route, navigation }) {
         } else {
             addIntoHystory();
             setMessages("")
-            navigation.navigate('Рассчет', {
+            navigation.navigate('Расчет', {
                 data, checkedItem
             })
         }
