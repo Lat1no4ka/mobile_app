@@ -44,7 +44,12 @@ export const qb = (dayliRate, item, nutrient) => {
     let nutKey = nutrient.key;
     let mass = item[nutKey];
     let dayliMass = dayliRate[nutKey];
-    return ((mass * 100) / dayliMass);
+    let res = ((mass * 100) / dayliMass)
+    if(!isFinite(res) || isNaN(res)){
+        return 0;
+    }else{
+        return res;
+    }
 
 }
 
@@ -54,7 +59,12 @@ export const qb = (dayliRate, item, nutrient) => {
  * @param {*} item информация о выбранном продукте
  */
 export const pqb = (nutrientFDR, item) => {
-    return (item.onePortion * nutrientFDR / 100);
+    let res = (item.onePortion * nutrientFDR / 100)
+    if(!isFinite(res) || isNaN(res)){
+        return 0;
+    }else{
+        return res;
+    }
 }
 
 /**
@@ -64,7 +74,12 @@ export const pqb = (nutrientFDR, item) => {
  */
 export const ccu = (nutrientFDRinPortion, item) => {
     let portionsPrice = item.price * item.onePortion / item.weight;
-    return (portionsPrice / nutrientFDRinPortion);
+    let res = (portionsPrice / nutrientFDRinPortion);
+    if(!isFinite(res) || isNaN(res)){
+        return 0;
+    }else{
+        return res;
+    }
 }
 
 /**
@@ -74,7 +89,12 @@ export const ccu = (nutrientFDRinPortion, item) => {
  */
 export const ucc = (nutrientFDRinPortion, item) => {
     let portionsPrice = item.price * item.onePortion / item.weight;
-    return (nutrientFDRinPortion / portionsPrice);
+    let res = (nutrientFDRinPortion / portionsPrice);
+    if(!isFinite(res) || isNaN(res)){
+        return 0;
+    }else{
+        return res;
+    }
 }
 
 /**
@@ -82,7 +102,12 @@ export const ucc = (nutrientFDRinPortion, item) => {
  * @param {*} nutrientFDRinPortion  Содержание нутриента в продукции от суточной потребности в порции, % (pqb)
  */
 export const sp = (nutrientFDRinPortion) => {
-    return 100 / nutrientFDRinPortion;
+    let res = ( 100 / nutrientFDRinPortion);
+    if(!isFinite(res) || isNaN(res)){
+        return 0;
+    }else{
+        return res;
+    }
 }
 
 /**
@@ -92,5 +117,10 @@ export const sp = (nutrientFDRinPortion) => {
  */
 export const scp = (portionsCount, item) => {
     let portionsPrice = (item.price * item.onePortion) / item.weight;
-    return portionsCount * portionsPrice;
+    let res =  portionsCount * portionsPrice;
+    if(!isFinite(res) || isNaN(res)){
+        return 0;
+    }else{
+        return res;
+    }
 }

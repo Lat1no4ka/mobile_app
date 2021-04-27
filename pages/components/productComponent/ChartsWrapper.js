@@ -11,7 +11,22 @@ const ChartsWrapper = (props) => {
         '#22D2E6', //Aqua
         '#2A3BEF', //Blue
         '#EF2AD2', //Purple 
-        '#EF2A2A'] //Pink
+        '#EF2A2A',
+        '#ED6A2A', //Orange
+        '#1BD170', //Green
+        '#22D2E6', //Aqua
+        '#2A3BEF', //Blue
+        '#EF2AD2',
+        '#ED6A2A', //Orange
+        '#1BD170', //Green
+        '#22D2E6', //Aqua
+        '#2A3BEF', //Blue
+        '#EF2AD2',
+        '#ED6A2A', //Orange
+        '#1BD170', //Green
+        '#22D2E6', //Aqua
+        '#2A3BEF', //Blue
+        '#EF2AD2',] //Pink
     useEffect(() => {
     }, []);
 
@@ -89,6 +104,8 @@ const ChartsWrapper = (props) => {
                 <View style={{ flex: 1, margin: 10 }}>
                     <View style={styles.container}>
                         <BarChart style={styles.chart}
+                            chartDescription={{ text: '' }}
+                            legend={{ enabled: false }}
                             drawValueAboveBar={true}
                             drawHighlightArrow={true}
                             drawBarShadow={false}

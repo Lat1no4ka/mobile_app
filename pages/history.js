@@ -1,15 +1,25 @@
 import React from 'react';
-import {Text} from 'react-native'
+import { createStackNavigator } from '@react-navigation/stack';
 
-const HisrotyScreen = () => {
+import HistoryDetails from "./components/historyComponent/HistoryDetails";
+import HistoryList from "./components/historyComponent/HistoryList";
+import Result from "./components/productComponent/Result";
 
-  
-    return (
-      <>
-        <Text>Hisroty</Text>
-     </>
-    );
-  };
-  
-  
-  export default HisrotyScreen;
+const Stack = createStackNavigator();
+
+const HistoryScreen = () => {
+
+  return (
+    <>
+
+      <Stack.Navigator initialRouteName="История">
+        <Stack.Screen name="История" component={HistoryList} />
+        <Stack.Screen name="Элемент" component={HistoryDetails} />
+        <Stack.Screen name="Перерасчет" component={Result} />
+      </Stack.Navigator>
+
+    </>
+  );
+};
+
+export default HistoryScreen;

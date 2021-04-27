@@ -5,7 +5,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import ProducScreen from './Product';
-import CompareScreen from './Compare';
 import HistoryScreen from './History';
 import SettingScreen from './Setting';
 
@@ -28,7 +27,7 @@ const Navigation = () => {
               iconName = focused ?
                 'stats-chart'
                 : 'stats-chart-outline';
-            } else if (route.name === 'Hisroty') {
+            } else if (route.name === 'History') {
               iconName = focused ?
                 'time'
                 : 'time-outline';
@@ -42,15 +41,14 @@ const Navigation = () => {
           },
         })}
         tabBarOptions={{
-          activeTintColor: 'blue',
+          activeTintColor: '#0000FF',
           inactiveTintColor: 'black',
           showLabel: false,
           keyboardHidesTabBar: true
         }}
       >
         <Tab.Screen name="Product" component={ProducScreen} />
-        <Tab.Screen name="Compare" component={CompareScreen} />
-        <Tab.Screen name="Hisroty" component={HistoryScreen} />
+        <Tab.Screen name="History" component={HistoryScreen} />
         <Tab.Screen name="Settings" component={SettingScreen} />
       </Tab.Navigator>
     </NavigationContainer>

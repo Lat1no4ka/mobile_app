@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Alert, Modal, StyleSheet, Text, View, TouchableOpacity, TouchableWithoutFeedback, Pressable } from "react-native";
+import { Alert, Modal, StyleSheet, Text, View, TouchableOpacity, TouchableWithoutFeedback, Pressable, Button } from "react-native";
 import Dropdown from "./Dropdown";
 import DropdownCharts from "./DropdownCharts";
 
@@ -33,27 +33,27 @@ const ModalWindow = (props) => {
                         activeOpacity={1}
                         onPressOut={() => closeModal()}
                     >
-                        <TouchableWithoutFeedback>
-                            <View style={styles.modalView}>
-                                <Dropdown
-                                    product={props.params.data}
-                                    checkedItem={props.params.checkedItem}
-                                    leftSelected={leftSelected}
-                                    rightSelected={rightSelected}
-                                    nutrientSelected={nutrientSelected}
-                                    resCalc={resCalc}
-                                    setRightSelected={setRightSelected}
-                                    setLeftSelected={setLeftSelected}
-                                    setNutrientSelected={setNutrientSelected}
-                                />
-                                <Pressable
-                                    style={[styles.button, styles.buttonClose]}
-                                    onPress={() => closeModal()}
-                                >
-                                    <Text style={styles.textStyle}>Расчет</Text>
-                                </Pressable>
-                            </View>
-                        </TouchableWithoutFeedback>
+                            <TouchableWithoutFeedback>
+                                <View style={styles.modalView}>
+                                    <Dropdown
+                                        product={props.params.data}
+                                        checkedItem={props.params.checkedItem}
+                                        leftSelected={leftSelected}
+                                        rightSelected={rightSelected}
+                                        nutrientSelected={nutrientSelected}
+                                        resCalc={resCalc}
+                                        setRightSelected={setRightSelected}
+                                        setLeftSelected={setLeftSelected}
+                                        setNutrientSelected={setNutrientSelected}
+                                    />
+                                    <Pressable
+                                        style={[styles.button, styles.buttonClose]}
+                                        onPress={() => closeModal()}
+                                    >
+                                        <Text style={styles.textStyle}>Расчет</Text>
+                                    </Pressable>
+                                </View>
+                            </TouchableWithoutFeedback>
                     </TouchableOpacity>
                 </Modal>
             </View>
@@ -130,15 +130,10 @@ const styles = StyleSheet.create({
         bottom: 0
     },
     button: {
-        borderRadius: 20,
         padding: 10,
-        elevation: 2
-    },
-    buttonOpen: {
-        backgroundColor: "#F194FF",
-    },
-    buttonClose: {
-        backgroundColor: "#2196F3",
+        backgroundColor:"#0000FF",
+        width:200,
+        borderRadius: 10
     },
     textStyle: {
         color: "white",

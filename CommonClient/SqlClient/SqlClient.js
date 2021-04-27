@@ -19,7 +19,7 @@ const SqlClient = () => {
     }, success, error);
 
 
-    // SQLite.deleteDatabase({ name: 'DATA.db', location: 'default' });
+    //SQLite.deleteDatabase({ name: 'DATA.db', location: 'default' });
 
     const ExecuteQuery = (sql, params = []) => new Promise((resolve, reject) => {
         db.transaction((trans) => {
