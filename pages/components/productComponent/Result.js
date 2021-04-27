@@ -94,7 +94,7 @@ const Result = ({ route, navigation }) => {
                 />
 
                 <Tab.Navigator>
-                    <Tab.Screen name="Рассчет"
+                    <Tab.Screen name="Расчет"
                         listeners={{
                             tabPress: e => {
                                 setScreen("calc")
@@ -136,7 +136,7 @@ const Result = ({ route, navigation }) => {
                     screen={screen}
                 />
                 <Tab.Navigator>
-                    <Tab.Screen name="Рассчет"
+                    <Tab.Screen name="Расчет"
                         listeners={{
                             swipeEnd: e => {
                                 setScreen("calc")

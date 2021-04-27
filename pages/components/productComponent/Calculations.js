@@ -50,6 +50,15 @@ const Calculations = (props) => {
             return ("");
         }
     }
+    const resColorOther = (res1, res2) => {
+        if (Number(res1) == Number(res2)) {
+            return ("");
+        } else if (Number(res2) < Number(res1)) {
+            return (styles.resColor)
+        } else {
+            return ("");
+        }
+    }
 
     const CustomModal = () => {
         let Messages = () => {
@@ -68,7 +77,7 @@ const Calculations = (props) => {
                                 <Text style={{ fontWeight: "bold" }}>Содержание нутриента в{"\u00A0"}100{"\u00A0"}г. продукции,{"\u00A0"} от суточной потребности нутриента{"\u00A0"}- </Text>
                                 На сколько процентов возможно удовлетворить суточную потребность в выбранном пищевом веществе (нутриенте), если употребить <Text style={{ fontWeight: "bold" }}>100{"\u00A0"}грамм</Text> продукции.
                             </Text>
-                            <Text style={{fontSize:17}}>{"\n"}Наиболее низкий результат подсвечен красным цветом.</Text>
+                            <Text style={{fontSize:17}}>{"\n"}Чем выше значение, тем больше пользы принесёт продукт.</Text>
                         </>
                     )
                 } else {
@@ -92,7 +101,7 @@ const Calculations = (props) => {
                                 <Text style={{ fontWeight: "bold" }}>Содержание нутриента в указанной Вами массе продукции,{"\u00A0"}% от суточной потребности нутриента{"\u00A0"}- </Text>
                              На сколько процентов возможно удовлетворить суточную потребность в выбранном пищевом веществе (нутриенте), если употребить указанную Вами массу продукции.
                             </Text>
-                            <Text style={{fontSize:17}}>{"\n"}Наиболее низкий результат подсвечен красным цветом.</Text>
+                            <Text style={{fontSize:17}}>{"\n"}Чем выше значение, тем больше пользы принесёт продукт.</Text>
                         </>
                     )
                 } else {
@@ -115,7 +124,7 @@ const Calculations = (props) => {
                                 <Text style={{ fontWeight: "bold" }}>Ценовой коэффициент полезности,{"\u00A0"}руб{"\u00A0"}/{"\u00A0"}%{"\u00A0"}- </Text>
                             Коэффициент, который показывает,<Text style={{ fontWeight: "bold" }}> сколько необходимо заплатить </Text> за то количество продукции, которое удовлетворит суточную потребность в выбранном пищевом веществе (нутриенте) на{"\u00A0"}1%.
                             </Text>
-                            <Text style={{fontSize:17}}>{"\n"}Наиболее низкий результат подсвечен красным цветом.</Text>
+                            <Text style={{fontSize:17}}>{"\n"}Чем ниже значение, тем больше пользы принесёт продукт.</Text>
                         </>
                     )
                 } else {
@@ -138,7 +147,7 @@ const Calculations = (props) => {
                                 <Text style={{ fontWeight: "bold" }}>Обратный коэффициент,{"\u00A0"}%{"\u00A0"}/{"\u00A0"}руб{"\u00A0"}- </Text>
                             Коэффициент, который показывает,<Text style={{ fontWeight: "bold" }}> на сколько процентов возможно удовлетворить </Text>суточную потребность в выбранном пищевом веществе (нутриенте), если заплатить за продукцию{"\u00A0"}<Text style={{ fontWeight: "bold" }}>1{"\u00A0"}рубль</Text>.
                             </Text>
-                            <Text style={{fontSize:17}}>{"\n"}Наиболее низкий результат подсвечен красным цветом.</Text>
+                            <Text style={{fontSize:17}}>{"\n"}Чем выше значение, тем больше пользы принесёт продукт.</Text>
                         </>
                     )
                 } else {
@@ -161,7 +170,7 @@ const Calculations = (props) => {
                                 <Text style={{ fontWeight: "bold" }}>Количество порций,{"\u00A0"}шт{"\u00A0"}– </Text>
                              То количество порций (указанной Вами массы продукции), которое<Text style={{ fontWeight: "bold" }}> полностью удовлетворит</Text> суточную потребность в выбранном пищевом веществе (нутриенте).
                              </Text>
-                            <Text style={{fontSize:17}}>{"\n"}Наиболее низкий результат подсвечен красным цветом.</Text>
+                            <Text style={{fontSize:17}}>{"\n"}Чем ниже значение, тем больше пользы принесёт продукт.</Text>
                         </>
                     )
                 } else {
@@ -184,7 +193,7 @@ const Calculations = (props) => {
                                 <Text style={{ fontWeight: "bold" }}>Стоимость порций,{"\u00A0"}руб{"\u00A0"}– </Text>
                             Стоимость того количества порций (указанной Вами массы продукции), которое<Text style={{ fontWeight: "bold" }}> полностью удовлетворит суточную потребность</Text> в выбранном пищевом веществе (нутриенте).
                             </Text>
-                            <Text style={{fontSize:17}}>{"\n"}Наиболее низкий результат подсвечен красным цветом.</Text>
+                            <Text style={{fontSize:17}}>{"\n"}Чем ниже значение, тем больше пользы принесёт продукт.</Text>
                         </>
                     )
                 } else {
@@ -265,10 +274,10 @@ const Calculations = (props) => {
                 let tableData = [
                     [<Text style={[styles.textInTable, resColor(Lresult.qb.toFixed(2), Rresult.qb.toFixed(2))]}>{Lresult.qb.toFixed(2)}</Text>, <DescForTable name={"Содержание нутриента от суточной потребности в 100\u00A0г."} btn={"qb"} />, <Text style={[styles.textInTable, resColor(Rresult.qb.toFixed(2), Lresult.qb.toFixed(2))]}>{Rresult.qb.toFixed(2)}</Text>],
                     [<Text style={[styles.textInTable, resColor(Lresult.pqb.toFixed(2), Rresult.pqb.toFixed(2))]}>{Lresult.pqb.toFixed(2)}</Text>, <DescForTable name={"Содержание нутриента от суточной потребности в порции"} btn={"pqb"} />, <Text style={[styles.textInTable, resColor(Rresult.pqb.toFixed(2), Lresult.pqb.toFixed(2))]}>{Rresult.pqb.toFixed(2)}</Text>],
-                    [<Text style={[styles.textInTable, resColor(Lresult.ccu.toFixed(2), Rresult.ccu.toFixed(2))]}>{Lresult.ccu.toFixed(2)}</Text>, <DescForTable name={"Ценовой коэффициент полезности"} btn={"ccu"} />, <Text style={[styles.textInTable, resColor(Rresult.ccu.toFixed(2), Lresult.ccu.toFixed(2))]}>{Rresult.ccu.toFixed(2)}</Text>],
+                    [<Text style={[styles.textInTable, resColorOther(Lresult.ccu.toFixed(2), Rresult.ccu.toFixed(2))]}>{Lresult.ccu.toFixed(2)}</Text>, <DescForTable name={"Ценовой коэффициент полезности"} btn={"ccu"} />, <Text style={[styles.textInTable, resColorOther(Rresult.ccu.toFixed(2), Lresult.ccu.toFixed(2))]}>{Rresult.ccu.toFixed(2)}</Text>],
                     [<Text style={[styles.textInTable, resColor(Lresult.ucc.toFixed(2), Rresult.ucc.toFixed(2))]}>{Lresult.ucc.toFixed(2)}</Text>, <DescForTable name={"Обратный коэффициент"} btn={"ucc"} />, <Text style={[styles.textInTable, resColor(Rresult.ucc.toFixed(2), Lresult.ucc.toFixed(2))]}>{Rresult.ucc.toFixed(2)}</Text>],
-                    [<Text style={[styles.textInTable, resColor(Lresult.sp.toFixed(2), Rresult.sp.toFixed(2))]}>{Lresult.sp.toFixed(2)}</Text>, <DescForTable name={"Кол-во порций"} btn={"sp"} />, <Text style={[styles.textInTable, resColor(Rresult.sp.toFixed(2), Lresult.sp.toFixed(2))]}>{Rresult.sp.toFixed(2)}</Text>],
-                    [<Text style={[styles.textInTable, resColor(Lresult.scp.toFixed(2), Rresult.scp.toFixed(2))]}>{Lresult.scp.toFixed(2)}</Text>, <DescForTable name={"Стоимость порций"} btn={"scp"} />, <Text style={[styles.textInTable, resColor(Rresult.scp.toFixed(2), Lresult.scp.toFixed(2))]}>{Rresult.scp.toFixed(2)}</Text>]
+                    [<Text style={[styles.textInTable, resColorOther(Lresult.sp.toFixed(2), Rresult.sp.toFixed(2))]}>{Lresult.sp.toFixed(2)}</Text>, <DescForTable name={"Кол-во порций"} btn={"sp"} />, <Text style={[styles.textInTable, resColorOther(Rresult.sp.toFixed(2), Lresult.sp.toFixed(2))]}>{Rresult.sp.toFixed(2)}</Text>],
+                    [<Text style={[styles.textInTable, resColorOther(Lresult.scp.toFixed(2), Rresult.scp.toFixed(2))]}>{Lresult.scp.toFixed(2)}</Text>, <DescForTable name={"Стоимость порций"} btn={"scp"} />, <Text style={[styles.textInTable, resColorOther(Rresult.scp.toFixed(2), Lresult.scp.toFixed(2))]}>{Rresult.scp.toFixed(2)}</Text>]
                 ];
                 return (
                     <Table borderStyle={{ borderWidth: 1, borderColor: '#0000ff' }}>
