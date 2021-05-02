@@ -59,8 +59,7 @@ const SelectProduct = ({ route, navigation }) => {
                 <View>
                 
                     
-                    <Text style={styles.head} >HATHELNUT {'\n'}
-                    HAve THE Living NUTrient</Text>
+                    <Text style={styles.head} >Сравнение ценовых коэффициентов продукции </Text>
                     <Text style={styles.text} >
                     {'\n'}
                     
